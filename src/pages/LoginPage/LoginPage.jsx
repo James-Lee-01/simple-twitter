@@ -1,6 +1,7 @@
 import styles from './LoginPage.module.scss'
 import { useState } from 'react'
 import AuthInput from '../../components/AuthInput/AuthInput.jsx'
+import Button from '../../components/Button/Button.jsx'
 
 //{ labelName, type, value, placeholder, onChange, notification, lengthLimit }
 
@@ -28,6 +29,11 @@ function LoginPage() {
       notification='字數超出上限'
       lengthLimit={5}
     />
+    <Button size='extraLarge' title='登入' />
+    <div className={styles.link}>
+      <Link></Link>
+      <Link></Link>
+    </div>
     </>
   )
 }
