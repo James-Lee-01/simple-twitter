@@ -11,6 +11,8 @@ function LoginPage() {
   const [account, setAccount] = useState('')
   const [password, setPassword] = useState('')
 
+  // const handleClick = 
+
   return (
     <AuthPageContainer title='登入 Alphitter'>
       <AuthInput
@@ -31,7 +33,7 @@ function LoginPage() {
         notification='字數超出上限'
         lengthLimit={5}
       />
-      <Button size='extraLarge' title='登入' />
+      <Button size='extraLarge' title='登入' onClick={handleClick} />
 
       {/* switch link */}
       <div className={styles.linkContainer}>
