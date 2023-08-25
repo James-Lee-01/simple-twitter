@@ -25,10 +25,10 @@ function App() {
           <Routes>
             {/* <Route path='/' element={<HomePage />} /> */}
             <Route path='login' element={<LoginPage />} />
-            {/* <Route path='main' element={<MainPage />} />
+            <Route path='main' element={<MainPage />} />
             <Route path='setting' element={<SettingPage />} />
             <Route path='signup' element={<SignUpPage />} />
-            <Route path='tweet/:tweetId' element={<TweetPage />} />
+            {/* <Route path='tweet/:tweetId' element={<TweetPage />} />
             <Route
               path='user/:userId/follower'
               element={<UserFollowerPage />}
