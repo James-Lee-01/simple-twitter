@@ -1,16 +1,28 @@
 import axios from 'axios'
 
 //baseUrl
-const baseUrl = 'http://localhost:3004'
+const baseUrl = 'http://localhost:3001'
+const dummyData = [
+  {
+    account: 'user1',
+    password: '12345678',
+    role: 'admin',
+    authToken: 12345678
+  },
+]
 
 //api
 //login
 export const userLogin = async ({ account, password }) => {
   try {
-    const { data } = await axios.get(`${baseUrl}/login`, {
+    const { data } = await axios.get(dummyData, {
       account,
       password,
     })
+    // const { data } = await axios.get(`${baseUrl}/login`, {
+    //   account,
+    //   password,
+    // })
 
     //驗證角色身份
     const { authToken, role } = data 

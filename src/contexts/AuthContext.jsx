@@ -6,7 +6,7 @@ import { useLocation } from 'react-router-dom'
 //先設定default狀態
 const defaultAuthContext = {
   login: null,
-  logout: null,
+  // logout: null,
   currentUser: null,
   isAuthenticated: false,
 }
@@ -14,14 +14,14 @@ const defaultAuthContext = {
 const AuthContext = createContext(defaultAuthContext)
 export const useAuthContext = () => useContext(AuthContext)
 
-export function AuthContextProvider({ children }) {
+export function AuthProvider({ children }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [payload, setPayload] = useState(false);
   const { pathname } = useLocation();
 
   //換路由時驗證token攜帶正確與否
   useEffect(() => {
-    const checkTokenValid = async () => {
+    const checkTokenIsValid = async () => {
       const authToken = localStorage.getItem("authToken");
 
       //確認是否有token
@@ -32,6 +32,7 @@ export function AuthContextProvider({ children }) {
         return;
       }
 
+      //
       //若有，確認攜帶的token是否許可
       if (authToken) {
         const tempPayload = jwt.decode(authToken);
@@ -47,9 +48,10 @@ export function AuthContextProvider({ children }) {
           setIsAuthenticated(true);
           setPayload(tempPayload);
         }
+        //
       }
     };
-    checkTokenValid();
+    checkTokenIsValid();
   }, [pathname]);
 
   //針對登出的狀態
@@ -64,9 +66,8 @@ export function AuthContextProvider({ children }) {
   //針對登入的驗證（判斷是否為前台或後台人員）
   async function login(data) {
     // const loginRole = data.role === 'admin' ? adminLogin : userLogin
-    const loginRole = data.role === userLogin;
 
-    const { success, authToken } = await loginRole({
+    const { success, authToken } = await userLogin({
       account: data.account,
       password: data.password,
     });

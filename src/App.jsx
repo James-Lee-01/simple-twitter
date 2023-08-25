@@ -15,17 +15,17 @@ import UserTweetPage from "./pages/UserTweetPage/UserTweetPage.jsx";
 import AdminLoginPage from "./pages/AdminLoginPage/AdminLoginPage.jsx";
 import AdminTweetPage from "./pages/AdminTweetPage/AdminTweetPage.jsx";
 import AdminUserPage from "./pages/AdminUserPage/AdminUserPage.jsx";
-import { AuthContextProvider } from "./contexts/AuthContext.jsx";
+import { AuthProvider } from "./contexts/AuthContext.jsx";
 
 function App() {
   return (
     <div className='App'>
       <BrowserRouter>
-        <AuthContextProvider>
+        <AuthProvider>
           <Routes>
-            <Route path='/' element={<HomePage />} />
+            {/* <Route path='/' element={<HomePage />} /> */}
             <Route path='login' element={<LoginPage />} />
-            <Route path='main' element={<MainPage />} />
+            {/* <Route path='main' element={<MainPage />} />
             <Route path='setting' element={<SettingPage />} />
             <Route path='signup' element={<SignUpPage />} />
             <Route path='tweet/:tweetId' element={<TweetPage />} />
@@ -42,9 +42,9 @@ function App() {
             <Route path='user/:userId/tweet' element={<UserTweetPage />} />
             <Route path='admin/login' element={<AdminLoginPage />} />
             <Route path='admin/tweet' element={<AdminTweetPage />} />
-            <Route path='admin/user' element={<AdminUserPage />} />
+            <Route path='admin/user' element={<AdminUserPage />} /> */}
           </Routes>
-        </AuthContextProvider>
+        </AuthProvider>
       </BrowserRouter>
     </div>
   );

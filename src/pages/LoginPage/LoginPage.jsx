@@ -8,29 +8,33 @@ import { useAuthContext } from '../../contexts/AuthContext.jsx'
 
 //{ labelName, type, value, placeholder, onChange, notification, lengthLimit }
 
-function LoginPage() {
+export default function LoginPage() {
   const [account, setAccount] = useState('')
   const [password, setPassword] = useState('')
   const navigate = useNavigate()
   const { login, isAuthenticated } = useAuthContext()
 
   //透過useMemo來保存驗證結果與確認
-  const isValid = useMemo(() => {
-    if(!account) {
-      return false
-    }
-    if(!password) {
-      return false
-    }
-    return true
-  }, [account, password])
+  // const isValid = useMemo(() => {
+  //   if(!account) {
+  //     return false
+  //   }
+  //   if(!password) {
+  //     return false
+  //   }
+  //   return true
+  // }, [account, password])
 
   //handleClick行為
   const handleClick = async () => {
-    if(!isValid) {
-      console.log('Check your user info')
+    if (!account || !password) {
+      console.log('Check user info')
       return
     }
+    // if(!isValid) {
+    //   console.log('Check your user info')
+    //   return
+    // }
     const success = await login({ account, password })
     if(success) {
       console.log('Login success')
@@ -40,7 +44,7 @@ function LoginPage() {
     console.log('LoginError')
   }
 
-  //useEffect
+  // useEffect
   useEffect(() => {
     //確認後導向主頁面
     if(isAuthenticated) {
@@ -66,7 +70,7 @@ function LoginPage() {
         placeholder='請輸入密碼'
         onChange={(passwordInput) => setPassword(passwordInput)}
         notification='字數超出上限'
-        lengthLimit={5}
+        lengthLimit={50}
       />
       <Button size='extraLarge' title='登入' onClick={handleClick} />
 
@@ -84,4 +88,3 @@ function LoginPage() {
   );
 }
 
-export default LoginPage
