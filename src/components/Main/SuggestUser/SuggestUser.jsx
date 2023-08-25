@@ -55,7 +55,7 @@ const userList = [
 ]
 
 function SuggestUser() {
-    return <div className={style.SuggestUser}>
+    return <div className={style.suggestUser}>
         <h2>Popular</h2>
         {userList.map((user) =>
             <SuggestUserItem user={user} />
