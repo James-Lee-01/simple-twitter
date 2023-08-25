@@ -1,0 +1,19 @@
+.headerLink {
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+    color: black;
+    height: 100%;
+    font-family: 'Noto Sans TC';
+    font-size: 18px;
+
+    img {
+        height: 24px;
+        width: 24px;
+        margin: 0 20px 0 10px;
+    }
+
+    &.action {
+        color: #FF6600;
+    }
+}
