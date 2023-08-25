@@ -1,0 +1,18 @@
+.container {
+  //display
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  margin-top: 64px;
+}
+.title {
+  margin: 24px 0 40px 0;
+
+  font-size: 28px;
+  font-weight: 700;
+}
+.authInputContainer {
+  width: 356px;
+}
