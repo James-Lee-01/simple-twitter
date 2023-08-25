@@ -1,0 +1,68 @@
+.tweet {
+    height: 136px;
+    margin: 10px 0;
+    display: flex;
+    border-bottom: 1px solid #E6ECF0;
+
+    .tweetAvatar {
+        .avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #c4c4c4;
+            margin: 10px 0 0 15px;
+        }
+    }
+
+    .postInfo {
+        display: flex;
+        flex-direction: column;
+        margin-left: 10px;
+
+        .tweetPoster {
+            font-size: 15px;
+            line-height: 22px;
+            margin-bottom: 6px;
+
+            .posterName {
+                color: #1C1C1C;
+                font-weight: 700;
+                margin-right: 5px;
+            }
+            .posterAccount {
+                color: #657786;
+                font-weight: 500;
+            }
+        }
+        
+        .postContent {
+            font-size: 15px;
+            font-weight: 500;
+            line-height: 22px;
+            margin-bottom: 10px;
+        }
+
+        .postAction {
+            display: flex;
+
+            div {
+                display: flex;
+                align-items: center;
+            }
+
+            img {
+                width: 15px;
+                height: 15px;
+                margin-right: 10px;
+            }
+
+            span {
+                color: #657786;
+                font-size: 13px;
+                font-weight: 500;
+                line-height: 13px;
+                margin-right: 50px;
+            }
+        }
+    }
+}
