@@ -1,0 +1,27 @@
+.MainContainer {
+    width: calc((100vw - 1225px) / 2 + 990px);
+    height: 100vh;
+    overflow-y: scroll;
+}
+
+.Main {
+    width: 990px;
+    display: flex;
+    justify-content: space-between;
+}
+
+// 中間區塊
+
+.timeline {
+    width:600px;
+    max-width: 600px;
+    border: 1px solid #E6ECF0;
+}
+
+// 側欄
+
+.sidebarColumn {
+    height: auto;
+    margin-right: 10px;
+    margin-top: 15px;
+}
