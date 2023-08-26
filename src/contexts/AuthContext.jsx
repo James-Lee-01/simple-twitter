@@ -64,12 +64,13 @@ export function AuthProvider({ children }) {
   // }
 
   //針對登入的驗證（判斷是否為前台或後台人員）
-  async function login(data) {
+  async function login({account, password}) {
     // const loginRole = data.role === 'admin' ? adminLogin : userLogin
 
+
     const { success, authToken } = await userLogin({
-      account: data.account,
-      password: data.password,
+      account,
+      password
     });
 
     const tempPayload = jwt.decode(authToken);

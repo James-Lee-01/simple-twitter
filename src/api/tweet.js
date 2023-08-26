@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const baseUrl = "http://localhost:3001"
+export const baseUrl = "https://young-waters-15158-8b230f0b0919.herokuapp.com/api"
 
 //////////////////////////////////
 const axiosInstance = axios.create({

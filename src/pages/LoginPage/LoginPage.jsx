@@ -42,6 +42,7 @@ export default function LoginPage() {
     }
     //login failed
     console.log('LoginError')
+    // console.log(success.data)
   }
 
   // useEffect
