@@ -26,23 +26,23 @@ function App() {
             <Route path='*' element={<HomePage />} />
             <Route path='login' element={<LoginPage />} />
             <Route path='main' element={<MainPage />} />
-            <Route path='setting' element={<SettingPage />} />
+            {/* <Route path='setting' element={<SettingPage />} /> */}
             <Route path='signup' element={<SignUpPage />} />
-            {/* <Route path='tweet/:tweetId' element={<TweetPage />} />
-            <Route
+            {/* <Route path='tweet/:tweetId' element={<TweetPage />} /> */}
+            {/* <Route
               path='user/:userId/follower'
               element={<UserFollowerPage />}
-            />
-            <Route
+            /> */}
+            {/* <Route
               path='user/:userId/following'
               element={<UserFollowingPage />}
-            />
-            <Route path='user/:userId/like' element={<UserLikePage />} />
-            <Route path='user/:userId/reply' element={<UserReplyPage />} />
-            <Route path='user/:userId/tweet' element={<UserTweetPage />} />
+            /> */}
+            {/* <Route path='user/:userId/like' element={<UserLikePage />} /> */}
+            {/* <Route path='user/:userId/reply' element={<UserReplyPage />} /> */}
+            {/* <Route path='user/:userId/tweet' element={<UserTweetPage />} /> */}
             <Route path='admin/login' element={<AdminLoginPage />} />
             <Route path='admin/tweet' element={<AdminTweetPage />} />
-            <Route path='admin/user' element={<AdminUserPage />} /> */}
+            {/* <Route path='admin/user' element={<AdminUserPage />} /> */}
           </Routes>
         </AuthProvider>
       </BrowserRouter>
