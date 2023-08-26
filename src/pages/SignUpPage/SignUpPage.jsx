@@ -40,6 +40,7 @@ export default function SignUpPage() {
   const handleClick = async () => {
     if (!isValid) {
       Swal.fire({
+        toast: true,
         position: "top",
         title: "請填入正確資料!",
         icon: "error",
@@ -58,6 +59,7 @@ export default function SignUpPage() {
     //signup noti
     if (data.status === "success") {
       Swal.fire({
+        toast: true,
         position: "top",
         title: "註冊成功!請重新登入",
         icon: "success",
@@ -73,6 +75,7 @@ export default function SignUpPage() {
 
     //failed
     Swal.fire({
+      toast: true,
       position: "top",
       title: data.response.data.message,
       icon: "error",

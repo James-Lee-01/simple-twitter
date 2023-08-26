@@ -30,6 +30,7 @@ export default function LoginPage() {
   const handleClick = async () => {
     if (!account || !password) {
       Swal.fire({
+        toast: true,
         position: "top",
         title: "帳號及密碼不可空白",
         icon: "warning",
@@ -44,6 +45,7 @@ export default function LoginPage() {
     const success = await login({ account, password })
     if(success) {
       Swal.fire({
+        toast: true,
         position: "top",
         title: "登入成功",
         icon: "success",
@@ -55,6 +57,7 @@ export default function LoginPage() {
     }
     //login failed
     Swal.fire({
+      toast: true,
       position: "top",
       title: "帳號不存在!",
       icon: "error",
