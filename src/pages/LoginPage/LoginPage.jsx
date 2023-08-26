@@ -1,10 +1,11 @@
 import styles from './LoginPage.module.scss'
-import { useState, useMemo, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import AuthPageContainer from '../../components/AuthPageContainer/AuthPageContainer.jsx'
 import AuthInput from '../../components/AuthInput/AuthInput.jsx'
 import Button from '../../components/Button/Button.jsx'
 import { useAuthContext } from '../../contexts/AuthContext.jsx'
+import Swal from 'sweetalert2'
 
 //{ labelName, type, value, placeholder, onChange, notification, lengthLimit }
 
@@ -28,19 +29,38 @@ export default function LoginPage() {
   //handleClick行為
   const handleClick = async () => {
     if (!account || !password) {
+      Swal.fire({
+        position: "top",
+        title: "帳號及密碼不可空白",
+        icon: "warning",
+        timer: 1000,
+        showConfirmButton: false,
+      });
+
       console.log('Check user info')
       return
     }
-    // if(!isValid) {
-    //   console.log('Check your user info')
-    //   return
-    // }
+
     const success = await login({ account, password })
     if(success) {
+      Swal.fire({
+        position: "top",
+        title: "登入成功",
+        icon: "success",
+        timer: 1000,
+        showConfirmButton: false,
+      });
       console.log('Login success')
       return
     }
     //login failed
+    Swal.fire({
+      position: "top",
+      title: "帳號不存在!",
+      icon: "error",
+      timer: 1000,
+      showConfirmButton: false,
+    });
     console.log('LoginError')
     // console.log(success.data)
   }
@@ -61,7 +81,7 @@ export default function LoginPage() {
         value={account}
         placeholder='請輸入帳號'
         onChange={(accountInput) => setAccount(accountInput)}
-        notification='字數超出上限'
+        notification='字數超出上限!'
         lengthLimit={50}
       />
       <AuthInput
@@ -70,7 +90,7 @@ export default function LoginPage() {
         value={password}
         placeholder='請輸入密碼'
         onChange={(passwordInput) => setPassword(passwordInput)}
-        notification='字數超出上限'
+        notification='字數超出上限!'
         lengthLimit={50}
       />
       <Button size='extraLarge' title='登入' onClick={handleClick} />

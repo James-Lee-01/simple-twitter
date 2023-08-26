@@ -5,6 +5,7 @@ import AuthPageContainer from "../../components/AuthPageContainer/AuthPageContai
 import AuthInput from "../../components/AuthInput/AuthInput.jsx";
 import Button from "../../components/Button/Button.jsx";
 import { useAuthContext } from "../../contexts/AuthContext.jsx";
+import Swal from "sweetalert2";
 
 //{ labelName, type, value, placeholder, onChange, notification, lengthLimit }
 
@@ -28,6 +29,13 @@ export default function AdminLoginPage() {
   //handleClick行為
   const handleClick = async () => {
     if (!account || !password) {
+      Swal.fire({
+        position: "top",
+        title: "帳號及密碼不可空白",
+        icon: "warning",
+        timer: 1000,
+        showConfirmButton: false,
+      });
       console.log("Check user info");
       return;
     }
@@ -35,12 +43,30 @@ export default function AdminLoginPage() {
     //   console.log('Check your user info')
     //   return
     // }
-    const success = await login({ account, password });
+    const success = await login({ 
+      account, 
+      password,
+      role: 'admin',
+    });
     if (success) {
+      Swal.fire({
+        position: "top",
+        title: "登入成功",
+        icon: "success",
+        timer: 1000,
+        showConfirmButton: false,
+      });
       console.log("Login success");
       return;
     }
     //login failed
+    Swal.fire({
+      position: "top",
+      title: "帳號不存在!",
+      icon: "error",
+      timer: 1000,
+      showConfirmButton: false,
+    });
     console.log("LoginError");
   };
 
@@ -60,7 +86,7 @@ export default function AdminLoginPage() {
         value={account}
         placeholder='請輸入帳號'
         onChange={(accountInput) => setAccount(accountInput)}
-        notification='字數超出上限'
+        notification='字數超出上限!'
         lengthLimit={50}
       />
       <AuthInput
@@ -69,7 +95,7 @@ export default function AdminLoginPage() {
         value={password}
         placeholder='請輸入密碼'
         onChange={(passwordInput) => setPassword(passwordInput)}
-        notification='字數超出上限'
+        notification='字數超出上限!'
         lengthLimit={50}
       />
       <Button size='extraLarge' title='登入' onClick={handleClick} />

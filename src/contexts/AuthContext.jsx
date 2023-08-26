@@ -1,4 +1,4 @@
-import { userLogin } from "../api/auth.js";
+import { userLogin, adminLogin } from "../api/auth.js";
 import * as jwt from 'jsonwebtoken'
 import { useState, useEffect, createContext, useContext } from "react";
 import { useLocation } from 'react-router-dom'
@@ -32,7 +32,6 @@ export function AuthProvider({ children }) {
         return;
       }
 
-      //
       //若有，確認攜帶的token是否許可
       if (authToken) {
         const tempPayload = jwt.decode(authToken);
@@ -48,7 +47,6 @@ export function AuthProvider({ children }) {
           setIsAuthenticated(true);
           setPayload(tempPayload);
         }
-        //
       }
     };
     checkTokenIsValid();
@@ -64,11 +62,10 @@ export function AuthProvider({ children }) {
   // }
 
   //針對登入的驗證（判斷是否為前台或後台人員）
-  async function login({account, password}) {
-    // const loginRole = data.role === 'admin' ? adminLogin : userLogin
+  async function login({account, password, role}) {
+    const loginRole = role === 'admin' ? adminLogin : userLogin
 
-
-    const { success, authToken } = await userLogin({
+    const { success, authToken } = await loginRole({
       account,
       password
     });

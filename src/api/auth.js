@@ -1,15 +1,6 @@
 import axios from 'axios'
-
 //baseUrl
 const baseUrl = 'https://young-waters-15158-8b230f0b0919.herokuapp.com/api'
-// const dummyData = [
-//   {
-//     account: 'user1',
-//     password: '12345678',
-//     role: 'admin',
-//     authToken: 12345678
-//   },
-// ]
 
 //api
 //login(user only)
@@ -49,29 +40,28 @@ export const userLogin = async ({ account, password }) => {
 //login(admin only)
 export const adminLogin = async ({ account, password }) => {
   try {
-    // const { data } = await axios.get(dummyData, {
-    //   account,
-    //   password,
-    // })
     const { data } = await axios.post(`${baseUrl}/admin/login`, {
       account,
       password,
     })
 
     //驗證角色身份
-    const { authToken, role } = data 
+    // const { authToken, role } = data
+    const status = data.status
+    const role = data.data.user.role
+    const authToken = data.data.token
     //若角色為admin管理者
-    if (authToken && role === 'admin') {
-      return { success: true, ...data }
+    if (status === 'success' && role === 'admin') {
+      return { success: true, authToken }
     }
     //若角色符合user
-    if (authToken && role === 'user') {
+    if (status === 'success' && role === 'user') {
       //顯示錯誤訊息(暫時)
       console.error('帳號不存在')
     }
-    return data
+    return
   } catch (error) {
-    console.error(`[Get User failed]: `, error)
+    console.error(`[Get Admin User failed]: `, error)
     return error
   }
 }

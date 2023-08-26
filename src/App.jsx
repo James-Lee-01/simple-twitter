@@ -41,7 +41,7 @@ function App() {
             {/* <Route path='user/:userId/reply' element={<UserReplyPage />} /> */}
             {/* <Route path='user/:userId/tweet' element={<UserTweetPage />} /> */}
             <Route path='admin/login' element={<AdminLoginPage />} />
-            {/* <Route path='admin/tweet' element={<AdminTweetPage />} /> */}
+            <Route path='admin/tweet' element={<AdminTweetPage />} />
             {/* <Route path='admin/user' element={<AdminUserPage />} /> */}
           </Routes>
         </AuthProvider>
