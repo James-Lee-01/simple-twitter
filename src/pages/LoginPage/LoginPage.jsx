@@ -50,7 +50,7 @@ export default function LoginPage() {
         timer: 1000,
         showConfirmButton: false,
       });
-      console.log('Login success')
+      // console.log('Login success')
       return
     }
     //login failed
@@ -61,8 +61,7 @@ export default function LoginPage() {
       timer: 1000,
       showConfirmButton: false,
     });
-    console.log('LoginError')
-    // console.log(success.data)
+    // console.log('LoginError')
   }
 
   // useEffect

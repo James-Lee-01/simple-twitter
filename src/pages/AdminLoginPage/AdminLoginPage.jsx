@@ -36,7 +36,7 @@ export default function AdminLoginPage() {
         timer: 1000,
         showConfirmButton: false,
       });
-      console.log("Check user info");
+      // console.log("Check user info");
       return;
     }
     // if(!isValid) {
@@ -56,7 +56,7 @@ export default function AdminLoginPage() {
         timer: 1000,
         showConfirmButton: false,
       });
-      console.log("Login success");
+      // console.log("Login success");
       return;
     }
     //login failed
@@ -67,7 +67,7 @@ export default function AdminLoginPage() {
       timer: 1000,
       showConfirmButton: false,
     });
-    console.log("LoginError");
+    // console.log("LoginError");
   };
 
   // useEffect

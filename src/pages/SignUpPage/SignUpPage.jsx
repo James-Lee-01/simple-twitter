@@ -5,6 +5,7 @@ import AuthPageContainer from "../../components/AuthPageContainer/AuthPageContai
 import AuthInput from "../../components/AuthInput/AuthInput.jsx";
 import Button from "../../components/Button/Button.jsx";
 import { userSignUp } from '../../api/auth';
+import Swal from 'sweetalert2';
 
 
 export default function SignUpPage() {
@@ -38,18 +39,32 @@ export default function SignUpPage() {
 
   const handleClick = async () => {
     if (!isValid) {
-      console.log('Check your info again')
+      Swal.fire({
+        position: "top",
+        title: "請填入正確資料!",
+        icon: "error",
+        timer: 1000,
+        showConfirmButton: false,
+      });
+      // console.log('Check your info again')
       return
     }
 
     //data
     const data = await userSignUp({
-      name, account, email, password, passwordCheck
+      account, name, email, password, passwordCheck
     })
 
     //signup noti
-    if (data === "success") {
-      console.log('success')
+    if (data.status === "success") {
+      Swal.fire({
+        position: "top",
+        title: "註冊成功!請重新登入",
+        icon: "success",
+        timer: 1000,
+        showConfirmButton: false,
+      });
+      // console.log('success')
       
       //註冊成功則導回登入頁
       navigate('/login')
@@ -57,8 +72,14 @@ export default function SignUpPage() {
     }
 
     //failed
-    console.log('signup failed')
-    
+    Swal.fire({
+      position: "top",
+      title: data.response.data.message,
+      icon: "error",
+      timer: 1000,
+      showConfirmButton: false,
+    });
+    // console.log('signup failed')
   }
 
   return (

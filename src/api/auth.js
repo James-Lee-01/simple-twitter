@@ -19,8 +19,8 @@ export const userLogin = async ({ account, password }) => {
 
     //若角色符合user
     if (status === 'success'  && role === 'user') {
-      console.log(status)
-      console.log(authToken)
+      // console.log(status)
+      // console.log(authToken)
       return { success: true, authToken }
     }
     //若角色為admin管理者
