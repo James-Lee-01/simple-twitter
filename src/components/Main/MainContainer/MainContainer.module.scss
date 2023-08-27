@@ -14,8 +14,13 @@
 
 .timeline {
     width:600px;
-    max-width: 600px;
     border: 1px solid #E6ECF0;
+    border-bottom: unset;
+
+    &.extend {
+        width: 100%;
+        border-right: unset;
+    }
 }
 
 // 側欄
