@@ -1,4 +1,4 @@
-import styles from "./MainPage.module.scss";
+import style from "./MainPage.module.scss";
 import Navbar from "../../components/Main/Navbar/Navbar";
 import TweetInput from "../../components/Main/TweetInput/TweetInput";
 import TweetItem from "../../components/Main/TweetItem/TweetItem";

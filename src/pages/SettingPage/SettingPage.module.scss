@@ -1,0 +1,26 @@
+.settingContainer{
+  display: flex;
+  // justify-content: center;
+  width: calc((100vw - 1225px) / 2 + 990px);
+  height: 100vh;
+  // overflow-y: scroll;
+}
+
+// 中間區塊
+.timeline {
+  width: 639px;
+  border-left: 1px solid #E6ECF0;
+  border-right: 1px solid #E6ECF0;
+}
+
+//Input區塊
+.inputContainer {
+  padding: 24px 23px 0;
+}
+
+//Save btn
+.btn {
+  display: flex;
+  justify-content: end;
+}
+
