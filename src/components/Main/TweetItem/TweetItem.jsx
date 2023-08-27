@@ -10,7 +10,7 @@ function TweetItem({user}) {
         <div className={style.postInfo}>
             <div className={style.tweetPoster}>
                 <span className={style.posterName}>{user.name}</span>
-                <span className={style.posterAccount}>@{user.account}‧{user.time}</span>
+                <span className={style.posterAccount}>@{user.account}<b>・</b>{user.time}</span>
             </div>
             <div class={style.postContent}>
                 <p>
