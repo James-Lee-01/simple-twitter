@@ -67,14 +67,14 @@ export const adminLogin = async ({ account, password }) => {
 }
 
 //signup(user)
-export const userSignUp = async ({ account, name, email, password, passwordCheck }) => {
+export const userSignUp = async ({ account, name, email, password, checkPassword }) => {
   try {
     const { data } = await axios.post(`${baseUrl}/users`, {
       account,
       name,
       email,
       password,
-      passwordCheck,
+      checkPassword,
     })
     return data
   } catch (error) {

@@ -13,7 +13,7 @@ export default function SignUpPage() {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [passwordCheck, setPasswordCheck] = useState('')
+  const [checkPassword, setCheckPassword] = useState('')
   const navigate = useNavigate()
 
   const [msg, setMsg] = useState('')
@@ -32,12 +32,12 @@ export default function SignUpPage() {
     if (!password) {
       return false
     }
-    if (!passwordCheck || passwordCheck !== password) {
+    if (!checkPassword) {
       return false
     }
 
     return true
-  }, [account, name, email, password, passwordCheck])
+  }, [account, name, email, password, checkPassword])
 
   const handleClick = async () => {
     if (!isValid) {
@@ -49,14 +49,14 @@ export default function SignUpPage() {
         timer: 1000,
         showConfirmButton: false,
       });
-      setMsg("請填入正確資料!");
+      // setMsg("請填入正確資料!");
       // console.log('Check your info again')
       return
     }
 
     //data
     const data = await userSignUp({
-      account, name, email, password, passwordCheck
+      account, name, email, password, checkPassword
     })
 
     //signup noti
@@ -97,7 +97,7 @@ export default function SignUpPage() {
         value={account}
         placeholder='請輸入帳號'
         onChange={(accountInput) => setAccount(accountInput)}
-        notification={msg}
+        notification={msg === "account 已重複註冊！" ? msg : ""}
         lengthLimit={50}
       />
       <AuthInput
@@ -106,7 +106,7 @@ export default function SignUpPage() {
         value={name}
         placeholder='請輸入使用者名稱'
         onChange={(nameInput) => setName(nameInput)}
-        notification={msg}
+        notification=''
         lengthLimit={50}
       />
       <AuthInput
@@ -115,7 +115,7 @@ export default function SignUpPage() {
         value={email}
         placeholder='請輸入 Email'
         onChange={(emailInput) => setEmail(emailInput)}
-        notification={msg}
+        notification={msg === "email 已重複註冊！" ? msg : ""}
         lengthLimit={50}
       />
       <AuthInput
@@ -124,16 +124,16 @@ export default function SignUpPage() {
         value={password}
         placeholder='請設定密碼'
         onChange={(passwordInput) => setPassword(passwordInput)}
-        notification={msg}
+        notification=''
         lengthLimit={50}
       />
       <AuthInput
         labelName='密碼確認'
         type='password'
-        value={passwordCheck}
+        value={checkPassword}
         placeholder='請再次輸入密碼'
-        onChange={(passwordCheckInput) => setPasswordCheck(passwordCheckInput)}
-        notification={msg}
+        onChange={(checkPasswordInput) => setCheckPassword(checkPasswordInput)}
+        notification={msg === "密碼不相符!" ? msg : ""}
         lengthLimit={50}
       />
       <Button size='extraLarge' title='註冊' onClick={handleClick} />

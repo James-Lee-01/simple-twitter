@@ -16,7 +16,7 @@ export default function MainPage() {
         }
         //若狀態顯示成功則直接擷取資料
         if (res) {
-          setTweets(res.data);
+          setTweets(res.data.tweets); //拆解回傳資料格式
         }
       } catch (error) {
         console.log("推文擷取失敗", error);
