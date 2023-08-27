@@ -4,8 +4,8 @@
   padding: 8px 0;
   border-radius: 50px;
   border: 1px solid #ff6600;
-  background-color: #ff6600;
-  color: #ffffff;
+  background-color: #ffffff;
+  color: #ff6600;
   cursor: pointer;
   font-family: 'Noto Sans TC';
   //font
@@ -36,7 +36,34 @@
     width: 356px;
     //font
     font-size: 20px;
+    //color
+    background-color: #ff6600;
+    border: none;
+    color: #ffffff;
   }
-  &.squareSmall {}
-  &.squareMedium {}
+  &.squareSmall {
+    //box
+    height: 40px;
+    width: 84px;
+    //font
+    font-size: 16px;
+    border-radius: 4.8px;
+  }
+  &.squareMedium {
+    //box
+    height: 46px;
+    width: 112px;
+    //font
+    font-size: 20px;
+    border-radius: 4.8px;
+  }
+}
+
+//橘色
+.active {
+  //box
+  //color
+  background-color: #ff6600;
+  border: none;
+  color: #ffffff;
 }

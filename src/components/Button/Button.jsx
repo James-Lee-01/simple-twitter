@@ -1,7 +1,7 @@
 import styles from './Button.module.scss'
 import clsx from 'clsx'
 
-export default function Button({ size, onClick, title }) {
+export default function Button({ size, onClick, title, isActive }) {
   //definition by size
   const buttonClassName = clsx(styles.button, {
     [styles.small]: size === "small",
@@ -10,6 +10,8 @@ export default function Button({ size, onClick, title }) {
     [styles.extraLarge]: size === "extraLarge",
     [styles.squareMedium]: size === "squareMedium",
     [styles.squareSmall]: size === "squareSmall",
+    //加active代表轉橘色實心，除了extraLarge無效。
+    [styles.active]: isActive,
   });
 
   return (

@@ -1,9 +1,9 @@
-import Button from "../../components/Button/Button";
+// import Button from "../../components/Button/Button";
 
 export default function AdminTweetPage() {
   return (
     <>
-      <br />
+      {/* <br />
       <Button size='small' title='small' />
       <br />
       <br />
@@ -13,13 +13,14 @@ export default function AdminTweetPage() {
       <Button size='large' title='Button' />
       <br />
       <br />
-      <Button size='extraLarge' title='extraLarge' />
+      <Button size='extraLarge' title='Button' />
       <br />
       <br />
-      <Button size='squareMedium' title='squareMedium' />
+      <Button size='squareMedium' title='Button' />
       <br />
       <br />
-      <Button size='squareSmall' title='squareSmall' />
+      <Button size='squareSmall' title='Button' />
+      <Button size='squareSmall' title='Button' isActive/> */}
     </>
   );
 }
