@@ -14,7 +14,7 @@ import ItemContainer from './ItemContainer/ItemContainer';
 import Logo from './Logo/Logo';
 import Button from '../Button/Button';
 
-function Header() {
+function Header({ isAdmin }) {
     const links = [
         {
             path: '/main',
@@ -36,6 +36,21 @@ function Header() {
         },
     ];
 
+    const adminLinks = [
+        {
+            path: '/admin/tweet',
+            text: '推文清單',
+            icon: HomeIcon,
+            actionIcon: HomeActionIcon
+        },
+        {
+            path: '/admin/user',
+            text: '使用者列表',
+            icon: UserIcon,
+            actionIcon: UserActionIcon
+        },
+    ];
+
     const location = useLocation();
 
     return <div className={style.headerContainer}>
@@ -45,7 +60,7 @@ function Header() {
                     <Logo />
                 </ItemContainer>
                 <div>
-                    {links.map((link, index) => <HeaderLink
+                    {(isAdmin ? adminLinks : links).map((link, index) => <HeaderLink
                         {...link}
                         action={location.pathname === link.path}
                         key={index}
