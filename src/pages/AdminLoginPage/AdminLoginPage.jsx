@@ -34,12 +34,12 @@ export default function AdminLoginPage() {
       Swal.fire({
         toast: true,
         position: "top",
-        title: "帳號及密碼不可空白",
+        title: "請填入正確資料",
         icon: "warning",
         timer: 1000,
         showConfirmButton: false,
       });
-      setMsg("帳號及密碼不可空白");
+      setMsg("請填入正確資料");
       // console.log("Check user info");
       return;
     }
@@ -93,7 +93,9 @@ export default function AdminLoginPage() {
         value={account}
         placeholder='請輸入帳號'
         onChange={(accountInput) => setAccount(accountInput)}
-        notification={msg}
+        notification={
+          msg === "帳號不存在!" || msg === "請填入正確資料" ? msg : 0
+        }
         lengthLimit={50}
       />
       <AuthInput
@@ -102,7 +104,7 @@ export default function AdminLoginPage() {
         value={password}
         placeholder='請輸入密碼'
         onChange={(passwordInput) => setPassword(passwordInput)}
-        notification={msg}
+        notification={msg === "請填入正確資料" ? msg : 0}
         lengthLimit={50}
       />
       <Button size='extraLarge' title='登入' onClick={handleClick} />
