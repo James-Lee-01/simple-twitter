@@ -16,6 +16,8 @@ export default function SignUpPage() {
   const [passwordCheck, setPasswordCheck] = useState('')
   const navigate = useNavigate()
 
+  const [msg, setMsg] = useState('')
+
   //確認註冊規範是否符合
   const isValid = useMemo(() => {
     if (!account || account.length > 50) {
@@ -47,6 +49,7 @@ export default function SignUpPage() {
         timer: 1000,
         showConfirmButton: false,
       });
+      setMsg("請填入正確資料!");
       // console.log('Check your info again')
       return
     }
@@ -82,6 +85,7 @@ export default function SignUpPage() {
       timer: 1000,
       showConfirmButton: false,
     });
+    setMsg(data.response.data.message)
     // console.log('signup failed')
   }
 
@@ -93,7 +97,7 @@ export default function SignUpPage() {
         value={account}
         placeholder='請輸入帳號'
         onChange={(accountInput) => setAccount(accountInput)}
-        notification='字數超出上限'
+        notification={msg}
         lengthLimit={50}
       />
       <AuthInput
@@ -102,7 +106,7 @@ export default function SignUpPage() {
         value={name}
         placeholder='請輸入使用者名稱'
         onChange={(nameInput) => setName(nameInput)}
-        notification='字數超出上限'
+        notification={msg}
         lengthLimit={50}
       />
       <AuthInput
@@ -111,7 +115,7 @@ export default function SignUpPage() {
         value={email}
         placeholder='請輸入 Email'
         onChange={(emailInput) => setEmail(emailInput)}
-        notification='字數超出上限'
+        notification={msg}
         lengthLimit={50}
       />
       <AuthInput
@@ -120,7 +124,7 @@ export default function SignUpPage() {
         value={password}
         placeholder='請設定密碼'
         onChange={(passwordInput) => setPassword(passwordInput)}
-        notification='字數超出上限'
+        notification={msg}
         lengthLimit={50}
       />
       <AuthInput
@@ -129,7 +133,7 @@ export default function SignUpPage() {
         value={passwordCheck}
         placeholder='請再次輸入密碼'
         onChange={(passwordCheckInput) => setPasswordCheck(passwordCheckInput)}
-        notification='字數超出上限'
+        notification={msg}
         lengthLimit={50}
       />
       <Button size='extraLarge' title='註冊' onClick={handleClick} />

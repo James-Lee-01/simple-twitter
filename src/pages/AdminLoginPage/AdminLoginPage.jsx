@@ -15,6 +15,8 @@ export default function AdminLoginPage() {
   const navigate = useNavigate();
   const { login, isAuthenticated } = useAuthContext();
 
+  const [msg, setMsg] = useState('')
+
   //透過useMemo來保存驗證結果與確認
   // const isValid = useMemo(() => {
   //   if(!account) {
@@ -37,6 +39,7 @@ export default function AdminLoginPage() {
         timer: 1000,
         showConfirmButton: false,
       });
+      setMsg("帳號及密碼不可空白");
       // console.log("Check user info");
       return;
     }
@@ -70,6 +73,7 @@ export default function AdminLoginPage() {
       timer: 1000,
       showConfirmButton: false,
     });
+    setMsg("帳號不存在!");
     // console.log("LoginError");
   };
 
@@ -89,7 +93,7 @@ export default function AdminLoginPage() {
         value={account}
         placeholder='請輸入帳號'
         onChange={(accountInput) => setAccount(accountInput)}
-        notification='字數超出上限!'
+        notification={msg}
         lengthLimit={50}
       />
       <AuthInput
@@ -98,7 +102,7 @@ export default function AdminLoginPage() {
         value={password}
         placeholder='請輸入密碼'
         onChange={(passwordInput) => setPassword(passwordInput)}
-        notification='字數超出上限!'
+        notification={msg}
         lengthLimit={50}
       />
       <Button size='extraLarge' title='登入' onClick={handleClick} />
