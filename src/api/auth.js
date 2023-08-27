@@ -67,8 +67,8 @@ export const adminLogin = async ({ account, password }) => {
     //驗證角色身份
     // const { authToken, role } = data
     const status = data.status
-    const role = data.data.user.role
-    const authToken = data.data.token
+    const role = data.role
+    const authToken = data.token
     //若角色為admin管理者
     if (status === 'success' && role === 'admin') {
       return { success: true, authToken }
