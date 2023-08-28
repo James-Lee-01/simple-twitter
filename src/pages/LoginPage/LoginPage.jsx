@@ -33,7 +33,7 @@ function LoginPage() {
         notification='字數超出上限'
         lengthLimit={5}
       />
-      <Button size='extraLarge' title='登入' onClick={handleClick} />
+      {/* <Button size='extraLarge' title='登入' onClick={handleClick} /> */}
 
       {/* switch link */}
       <div className={styles.linkContainer}>
