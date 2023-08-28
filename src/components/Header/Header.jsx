@@ -13,9 +13,8 @@ import SignoutActionIcon from '../../assets/icons/nav/nav_signout_action.png';
 import ItemContainer from './ItemContainer/ItemContainer';
 import Logo from './Logo/Logo';
 import Button from '../Button/Button';
-import { useAuthContext } from '../../contexts/AuthContext.jsx'
 
-function Header() {
+function Header({ isAdmin }) {
     const links = [
         {
             path: '/main',
@@ -37,37 +36,50 @@ function Header() {
         },
     ];
 
-    const location = useLocation();
-    const { logout } = useAuthContext();
+    const adminLinks = [
+        {
+            path: '/admin/tweet',
+            text: '推文清單',
+            icon: HomeIcon,
+            actionIcon: HomeActionIcon
+        },
+        {
+            path: '/admin/user',
+            text: '使用者列表',
+            icon: UserIcon,
+            actionIcon: UserActionIcon
+        },
+    ];
 
-    return (
-      <div className={style.headerContainer}>
+    const location = useLocation();
+
+    return <div className={style.headerContainer}>
         <div className={style.header}>
-          <div>
-            <ItemContainer>
-              <Logo />
-            </ItemContainer>
             <div>
-              {links.map((link, index) => (
-                <HeaderLink
-                  {...link}
-                  action={location.pathname === link.path}
-                  key={index}
-                />
-              ))}
+                <ItemContainer>
+                    <Logo />
+                </ItemContainer>
+                <div>
+                    {(isAdmin ? adminLinks : links).map((link, index) => <HeaderLink
+                        {...link}
+                        action={location.pathname === link.path}
+                        key={index}
+                    />)}
+                </div>
+                {!isAdmin &&
+                    <ItemContainer>
+                        <button className={style.postButton}>推文</button>
+                    </ItemContainer>
+                }
             </div>
-          </div>
-          <div onClick={() => logout()}>
-        		<HeaderLink
-							path='/login'
-							text='登出'
-							icon={SignoutIcon}
-							actionIcon={SignoutActionIcon}
-          	/>
-          </div>
+            <HeaderLink
+                path="/login"
+                text="登出"
+                icon={SignoutIcon}
+                actionIcon={SignoutActionIcon}
+            />
         </div>
-      </div>
-    );
+    </div>;
 }
 
 export default Header;

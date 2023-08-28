@@ -1,0 +1,95 @@
+.userWrapper {
+    width: 600px;
+    height: 380px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin-bottom: 20px;
+
+    .coverPhoto {
+        height: 200px;
+        background-color: #aaa;
+    }
+
+    .userAvatar {
+        position: absolute;
+        top: 124px;
+        left: 14px;
+
+        .avatar {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            background-color: #C4C4C4;
+            border: 4px solid #fff;
+        }
+    }
+
+    .userInfo {
+        display: flex;
+        flex-direction: column;
+        padding: 10px 15px 0 15px;
+
+        .editButton {
+            display: flex;
+            justify-content: flex-end;
+    
+            button {
+                width: 120px;
+                height: 35px;
+                background-color: transparent;
+                border: 1px solid #FF6600;
+                border-radius: 100px;
+                color: #FF6600;
+                font-size: 15px;
+                font-weight: 700;
+                outline: none;
+                line-height: 15px;
+                cursor: pointer;
+            }
+        }
+
+        .userName {
+            color: #1C1C1C;
+            font-size: 19px;
+            font-weight: 900;
+            line-height: 27px;
+            margin-top: 24px;
+        }
+
+        .userAccount {
+            color: #657786;
+            font-size: 15px;
+            font-weight: 500;
+            line-height: 21px;
+        }
+
+        p {
+            color: #000;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 20px;
+            padding: 10px 0;
+        }
+
+        .followInfo {
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 20px;
+            color: #657786;
+
+            span{
+                font-weight: 500;
+                color: #000000;
+
+                &:not(:first-child) {
+                    margin-left: 20px;
+                }
+            }
+
+        }
+    }
+
+            
+    
+}
