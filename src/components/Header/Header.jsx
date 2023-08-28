@@ -68,7 +68,7 @@ function Header({ isAdmin }) {
                 </div>
             </div>
             <HeaderLink
-                path="/signout"
+                path="/login"
                 text="登出"
                 icon={SignoutIcon}
                 actionIcon={SignoutActionIcon}

@@ -48,7 +48,7 @@
   //display
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  // align-items: center;
   //box
   height: 24px;
   padding-top: 4px;
@@ -61,6 +61,11 @@
   align-items: center;
   font-size: 12px;
   color: #696974;
+  &.activeText::after {
+    visibility: visible;
+    color: #fc5a5a;
+    content: "字數超出上限!"
+  }
   &.active{
     visibility: visible;
     color: #fc5a5a;

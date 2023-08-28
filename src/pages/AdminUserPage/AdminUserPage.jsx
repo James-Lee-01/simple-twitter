@@ -1,7 +1,7 @@
 import style from "./AdminUserPage.module.scss";
 import MainLayout from "../../components/Main/MainLayout/MainLayout";
 import Navbar from "../../components/Main/Navbar/Navbar";
-import UserCard from "./UserCard/UserCard";
+import UserCard from "../../components/AdminUserCard/AdminUserCard";
 
 function AdminUserPage() {
     const userList = [

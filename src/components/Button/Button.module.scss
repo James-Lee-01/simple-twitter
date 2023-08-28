@@ -1,16 +1,69 @@
-.extraLarge {
+.button {
   //
-  padding: 8px 24px;
+  height: 40px;
+  padding: 8px 0;
   border-radius: 50px;
   border: 1px solid #ff6600;
-  background-color: #ff6600;
-  color: #ffffff;
+  background-color: #ffffff;
+  color: #ff6600;
   cursor: pointer;
   font-family: 'Noto Sans TC';
-
-  //box
-  height: 46px;
-  width: 356px;
   //font
-  font-size: 20px;
+  font-size: 16px;
+
+  &.small {
+    //box
+    width: 68px;
+    height: 32px;
+    padding: 4px 8px;
+  }
+  &.medium {
+    //box
+    width: 84px;
+    padding: 8px 16px;
+
+  }
+  &.large {
+    //box
+    height: 46px;
+    width: 112px;
+    //font
+    font-size: 20px;
+  }
+  &.extraLarge{
+    //box
+    height: 46px;
+    width: 356px;
+    //font
+    font-size: 20px;
+    //color
+    background-color: #ff6600;
+    border: none;
+    color: #ffffff;
+  }
+  &.squareSmall {
+    //box
+    height: 40px;
+    width: 84px;
+    //font
+    font-size: 16px;
+    border-radius: 4.8px;
+  }
+  &.squareMedium {
+    //box
+    height: 46px;
+    width: 112px;
+    //font
+    font-size: 20px;
+    border-radius: 4.8px;
+  }
+}
+
+//橘色
+.active {
+  //box
+  //color
+  background-color: #ff6600;
+  border: none;
+  color: #ffffff;
 }
