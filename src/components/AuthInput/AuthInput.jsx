@@ -4,11 +4,21 @@ import clsx from 'clsx'
 export default function AuthInput ({ labelName, type, value, placeholder, onChange, notification, lengthLimit }) {
   // use clsx to switch className
   // situation normal, over limit or >0
-  const inputClassName = clsx(styles.input, {[styles.active]:value.length > lengthLimit})
+  const inputClassName = clsx(
+    styles.input,
+    { [styles.active]: notification },
+    { [styles.active]: value.length > lengthLimit }
+  );
 
-  const notiClassName = clsx(styles.notification, {
-    [styles.active]: value.length > lengthLimit,
-  })
+  const notiClassName = clsx(
+    styles.notification,
+    {
+      [styles.activeText]: value.length > lengthLimit,
+    },
+    {
+      [styles.active]: notification,
+    }
+  );
 
   const lengthClassName = clsx(
     styles.length,

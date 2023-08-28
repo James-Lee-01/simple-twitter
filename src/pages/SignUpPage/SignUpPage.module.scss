@@ -1,0 +1,20 @@
+.linkContainer {
+  //display
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 16px 0;
+  //box size
+  height: 36px;
+
+}
+
+.link {
+  //box size
+  margin: 0 12px;
+  border-bottom: 1px solid #0062ff;
+  //text
+  color: #0062ff;
+  font-size: 16px;
+  cursor: pointer;
+}
