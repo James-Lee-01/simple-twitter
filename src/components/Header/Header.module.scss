@@ -3,13 +3,27 @@
     display: flex;
     flex-direction: column;
     align-items: end;
-}
 
-.header {
-    width: 235px;
-    margin-top: 4px;
-    height: calc(100vh - 4px);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    .header {
+        width: 235px;
+        margin-top: 4px;
+        height: calc(100vh - 4px);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    
+        .postButton {
+            width: 210px;
+            height: 38px;
+            background-color: #FF6600;
+            border-radius: 100px;
+            color: #fff;
+            font-size: 18px;
+            line-height: 18px;
+            font-weight: 500;
+            padding: 10px 15px 10px 15px;
+            border: none;
+            outline: none;
+        }
+    }
 }

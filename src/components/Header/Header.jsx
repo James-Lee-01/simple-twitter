@@ -66,6 +66,11 @@ function Header({ isAdmin }) {
                         key={index}
                     />)}
                 </div>
+                {!isAdmin &&
+                    <ItemContainer>
+                        <button className={style.postButton}>推文</button>
+                    </ItemContainer>
+                }
             </div>
             <HeaderLink
                 path="/signout"
