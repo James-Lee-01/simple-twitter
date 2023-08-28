@@ -4,6 +4,7 @@ import replyIcon from '../../../assets//icons/tweet/tweet_reply.png';
 import { Link } from 'react-router-dom'
 import { useState } from 'react';
 import clsx from 'clsx';
+import logo_gray from '../../../assets/icons/logo_gray.png'
 
 
 function TweetItem(props) {
@@ -46,7 +47,11 @@ function TweetItem(props) {
       <Link to={`/user/${userId}/tweet`}>
         <div className={style.tweetAvatar}>
           <div className={style.avatar}>
-            <img className={style.avatarImg} src={avatar} alt='avatar' />
+            <img
+              className={style.avatarImg}
+              src={avatar || logo_gray}
+              alt='avatar'
+            />
           </div>
         </div>
       </Link>
@@ -63,9 +68,7 @@ function TweetItem(props) {
 
         <Link to={`/tweets/${tweetId}`}>
           <div class={style.postContent}>
-            <p>
-              {description}
-            </p>
+            <p>{description}</p>
           </div>
         </Link>
 
