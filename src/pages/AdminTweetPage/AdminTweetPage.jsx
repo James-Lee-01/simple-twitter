@@ -7,8 +7,8 @@ export default function AdminTweetPage() {
     <AdminUserCard
       // coverPhoto = {coverPhoto}
       // avatar = {avatar}
-      name = "David"
-      account = "David"
+      name = "John Doe"
+      account = "heyJohn"
       tweetCount = "20"
       likeCount = "30"
       followingNum = "40"
