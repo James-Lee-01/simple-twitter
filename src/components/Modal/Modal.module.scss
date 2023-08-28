@@ -1,0 +1,40 @@
+.modalShadow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal {
+    width: 600px;
+    background-color: white;
+    margin: 54px auto 0;
+    border-radius: 14px;
+    overflow: hidden;
+
+    .modalHeader {
+        padding: 19.5px;
+        border-bottom: 1px solid #E6ECF0;
+    
+        .CancelIcon {
+            width: 15px;
+            height: 15px;
+            cursor: pointer;
+        }    
+    }
+    
+    
+    .modalBody {
+        padding: 15px;
+    }
+    
+    .modalFooter {
+        padding: 15px;
+        padding-top: 0;
+        display: flex;
+        justify-content: flex-end;
+        column-gap: 10px;
+    }
+}
