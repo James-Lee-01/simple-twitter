@@ -1,4 +1,3 @@
-
 import style from "./AdminTweetPage.module.scss";
 import MainLayout from "../../components/Main/MainLayout/MainLayout";
 import Navbar from "../../components/Main/Navbar/Navbar";
