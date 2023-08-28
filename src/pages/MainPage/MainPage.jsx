@@ -118,7 +118,6 @@ export default function MainPage() {
     <MainLayout>
         <Navbar title="首頁" />
         <TweetInput />
-        {/* list tweet */}
         <div className={style.tweetList}>
             {
                 tweetsList.map((user) =>

@@ -1,0 +1,88 @@
+.follow {
+    height: 94px;
+    display: flex;
+    border-bottom: 1px solid #E6ECF0;
+    margin-top: 10px;
+    padding-bottom: 10px;
+
+    .followAvatar {
+        .avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #c4c4c4;
+            margin: 3px 0 0 15px;
+        }
+    }
+
+    .followInfo {
+        display: flex;
+        flex-direction: column;
+        margin-left: 10px;
+
+        .followWrap {
+            display: flex;
+            justify-content: space-between;
+            font-size: 15px;
+            line-height: 15px;
+            margin-bottom: 5px;
+
+            .followUser {
+                display: flex;
+                flex-direction: column;
+
+                .followName {
+                    color: #1C1C1C;
+                    font-weight: 700;
+                    margin-bottom: 5px;
+                }
+                .followAccount {
+                    color: #657786;
+                    font-weight: 500;
+                }
+            }
+
+            .followTypeButton {
+                display: flex;
+                margin-right: 15px;
+
+                button {
+                    height: 25px;
+                    padding: 5px 15px;
+                    border-radius: 100px;
+                    font-weight: 700;
+                    font-size: 15px;
+                    line-height: 15px;
+                    outline: none;
+                    border: none;
+                    cursor: pointer;
+                }
+
+                .followingButton {
+                    width: 90px;
+                    background-color: #FF6600;
+                    color: #fff;
+
+                }
+
+                .followButton {
+                    width: 65px;
+                    background-color: transparent;
+                    color: #FF6600;
+                    border: 1px solid #FF6600;
+                }
+
+            }
+            
+        }
+        
+        .followContent {
+            width: 510px;
+            font-size: 15px;
+            font-weight: 500;
+            line-height: 22px;
+            margin-right: 15px;
+            margin-bottom: 10px;
+        }
+    }
+}

@@ -1,0 +1,16 @@
+.menuItem {
+    height: 54px;
+    width: 130px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #657786;
+    font-weight: 700;
+    font-size: 15px;
+    box-sizing: border-box;
+
+    &.action {
+        color: #FF6600;
+        border-bottom: #FF6600 2px solid;
+    }
+}
