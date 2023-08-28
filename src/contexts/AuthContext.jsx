@@ -6,7 +6,7 @@ import { useLocation } from 'react-router-dom'
 //先設定default狀態
 const defaultAuthContext = {
   login: null,
-  // logout: null,
+  logout: null,
   currentUser: null,
   isAuthenticated: false,
 }
@@ -53,13 +53,13 @@ export function AuthProvider({ children }) {
   }, [pathname]);
 
   //針對登出的狀態
-  // function logout() {
-  //   //remove token
-  //   localStorage.removeItem("AuthToken");
-  //   //reset state
-  //   setIsAuthenticated(false);
-  //   setPayload(null);
-  // }
+  function logout() {
+    //remove token
+    localStorage.removeItem("authToken");
+    //reset state
+    setIsAuthenticated(false);
+    setPayload(null);
+  }
 
   //針對登入的驗證（判斷是否為前台或後台人員）
   async function login({account, password, role}) {
@@ -90,6 +90,7 @@ export function AuthProvider({ children }) {
         isAuthenticated,
         currentUser: payload,
         login,
+        logout
       }}
     >
       {children}

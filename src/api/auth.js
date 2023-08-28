@@ -33,8 +33,8 @@ export const userLogin = async ({ account, password }) => {
     //驗證角色身份
     // const { authToken, role } = data
     const status = data.status
-    const role = data.data.user.role
-    const authToken = data.data.token
+    const role = data.role
+    const authToken = data.token
 
     //若角色符合user
     if (status === 'success'  && role === 'user') {

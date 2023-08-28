@@ -1,0 +1,135 @@
+.itemContainer {
+  // outline: 1px solid blue;
+  // width: 100%;
+  height: 137px;
+  border-bottom: 1px solid #E6ECF0;
+  padding: 16px 0px 16px 24px;
+
+  .itemWrapper {
+      // outline: 1px solid orangered;
+    position: relative;
+    display: flex;
+    gap: 8px;
+    // width: 100%;
+    // height: 78px;
+
+    .itemDeleteBtn {
+      position: absolute;
+      top: 0;
+      right: 0;
+      transform-origin: top right;
+      background-color: rgba(255, 255, 255, 0);
+      border: none;
+
+      .itemDeleteIcon {
+        width: 24px;
+      }
+    }
+    // 頭像
+    .itemAvatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+    }
+
+    .itemInfo {
+      &Wrapper {
+          // outline: 1px solid red;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0px;
+        gap: 8px;
+        width: 100%;
+        // height: 136px;
+      }
+
+      &User {
+        display: flex;
+        align-items: center;
+        padding: 0px;
+        gap: 8px;
+        height: 26px;
+
+        &Name {
+          font-weight: 700;
+          font-size: 16px;
+          line-height: 26px;
+          color: #171725;
+        }
+      }
+        &Tag {
+          height: 22px;
+          font-size: 14px;
+          line-height: 22px;
+          color: #6C757D;
+        }
+
+      &TextWrapper {
+        padding: 0px;
+        width: 100%;
+
+        // Tweet 文字內容
+        .itemInfoText {
+          font-size: 16px;
+          line-height: 26px;
+          color: #171725;
+        }
+      }
+    }
+  }
+
+  
+}
+
+// &Bottom {
+//   display: flex;
+//   flex-direction: row;
+//   align-items: center;
+//   padding: 0px;
+//   gap: 40px;
+//   width: 120px;
+//   height: 16px;
+
+//   &Discussion {
+//     display: flex;
+//     flex-direction: row;
+//     justify-content: center;
+//     align-items: center;
+//     padding: 0px;
+//     gap: 8px;
+//     width: 38px;
+//     height: 16px;
+
+//     .tweetDiscussionNum {
+//       font-family: 'Montserrat';
+//       font-weight: 600;
+//       font-size: 14px;
+//       /* identical to box height, or 100% */
+//       line-height: 14px;
+//       /* color/secondary */
+//       color: #6C757D;
+//     }
+//   }
+
+//   &Like {
+//     display: flex;
+//     flex-direction: row;
+//     justify-content: center;
+//     align-items: center;
+//     padding: 0px;
+//     gap: 8px;
+//     width: 42px;
+//     height: 16px;
+
+//     .tweetLikeNum {
+//       font-family: 'Montserrat';
+//       font-weight: 600;
+//       font-size: 14px;
+//       /* identical to box height, or 100% */
+//       line-height: 14px;
+//       /* color/secondary */
+//       color: #6C757D;
+//     }
+//   }
+// }
