@@ -5,7 +5,7 @@
     border-bottom: 1px solid #E6ECF0;
 
     .tweetAvatar {
-        .avatar {
+        .avatar .avatarImg {
             width: 50px;
             height: 50px;
             border-radius: 50%;
@@ -40,6 +40,10 @@
             font-weight: 500;
             line-height: 22px;
             margin-bottom: 10px;
+
+            p {
+							color: #171725;
+            }
         }
 
         .postAction {

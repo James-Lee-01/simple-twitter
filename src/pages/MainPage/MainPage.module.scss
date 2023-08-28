@@ -10,3 +10,11 @@
     width: 1140px;
 }
 
+.tweetList {
+    height: 100vh;
+    margin: 0 auto;
+    // 隨內容多寡出現捲軸
+    overflow-y: auto;
+    // 橫向捲軸
+    // overflow-x: hidden;
+}

@@ -66,17 +66,20 @@ function TweetItem(props) {
           </div>
         </Link>
 
-        <Link to={`/tweets/${tweetId}`}>
-          <div class={style.postContent}>
+        <Link to={`/tweet/${tweetId}`}>
+          <div className={style.postContent}>
             <p>{description}</p>
           </div>
         </Link>
 
-        <div class={style.postAction}>
-          <div>
-            <img src={replyIcon} alt='reply icon' />
-            <span>{replyCount}</span>
-          </div>
+        <div className={style.postAction}>
+          <Link to={`/tweet/${tweetId}`}>
+            <div>
+              <img src={replyIcon} alt='reply icon' />
+              <span>{replyCount}</span>
+            </div>
+          </Link>
+
           <div className={style.likedBtn} onClick={handleLike}>
             <img className={likedClassName} src={likeIcon} alt='like icon' />
             <span>{likedCount}</span>

@@ -131,31 +131,13 @@ export default function MainPage() {
     });
 
 
-
-  // const tweetListAll = tweets.map((tweet) => {
-  //   return (
-  //     <div key={tweet.id}>
-  //       <div>1:{tweet.id}</div>
-  //       <div>2:{tweet.userId}</div>
-  //       <div>3:{tweet.User.name}</div>
-  //     </div>
-      
-  //   );
-  // });
-
   return (
     <MainLayout>
       <Navbar title='首頁' />
       <TweetInput />
       {/* list tweet */}
       <div className={style.tweetList}>
-        {
-          tweetsList
-          
-          // tweetsList.map((user) =>
-          //     <TweetItem user={user} />
-          // )
-        }
+        { tweetsList }
       </div>
     </MainLayout>
   );

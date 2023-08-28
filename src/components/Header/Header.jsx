@@ -13,6 +13,7 @@ import SignoutActionIcon from '../../assets/icons/nav/nav_signout_action.png';
 import ItemContainer from './ItemContainer/ItemContainer';
 import Logo from './Logo/Logo';
 import Button from '../Button/Button';
+import { useAuthContext } from '../../contexts/AuthContext.jsx'
 
 function Header() {
     const links = [
@@ -37,29 +38,36 @@ function Header() {
     ];
 
     const location = useLocation();
+    const { logout } = useAuthContext();
 
-    return <div className={style.headerContainer}>
+    return (
+      <div className={style.headerContainer}>
         <div className={style.header}>
+          <div>
+            <ItemContainer>
+              <Logo />
+            </ItemContainer>
             <div>
-                <ItemContainer>
-                    <Logo />
-                </ItemContainer>
-                <div>
-                    {links.map((link, index) => <HeaderLink
-                        {...link}
-                        action={location.pathname === link.path}
-                        key={index}
-                    />)}
-                </div>
+              {links.map((link, index) => (
+                <HeaderLink
+                  {...link}
+                  action={location.pathname === link.path}
+                  key={index}
+                />
+              ))}
             </div>
-            <HeaderLink
-                path="/login"
-                text="登出"
-                icon={SignoutIcon}
-                actionIcon={SignoutActionIcon}
-            />
+          </div>
+          <div onClick={() => logout()}>
+        		<HeaderLink
+							path='/login'
+							text='登出'
+							icon={SignoutIcon}
+							actionIcon={SignoutActionIcon}
+          	/>
+          </div>
         </div>
-    </div>;
+      </div>
+    );
 }
 
 export default Header;
