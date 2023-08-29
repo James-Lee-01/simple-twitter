@@ -1,6 +1,10 @@
 import style from "./CurrentUser.module.scss";
+import UserEditModal from "../../Modal/UserEditModal/UserEditModal";
+import { useState } from "react";
 
 const CurrentUser = ({ user }) => {
+    const [ showEditModal, setShowEditModal ] = useState(false);
+
     return <div className={style.userWrapper}>
         <div className={style.coverPhoto}></div>
         <div className={style.userAvatar}>
@@ -9,7 +13,7 @@ const CurrentUser = ({ user }) => {
         </div>
         <div className={style.userInfo}>
             <div className={style.editButton}>
-                <button>編輯個人資料</button>
+                <button onClick={() => setShowEditModal(true)}>編輯個人資料</button>
             </div>
             <span className={style.userName}>{user.name}</span>
             <span className={style.userAccount}>@{user.account}</span>
@@ -19,6 +23,10 @@ const CurrentUser = ({ user }) => {
                 <span>{user.follower} 位</span>跟隨者
             </div>
         </div>
+        <UserEditModal
+            show={showEditModal}
+            onClose={() => setShowEditModal(false)}
+        />
     </div>
 }
 
