@@ -121,3 +121,48 @@ export const unFollowUser = async (followingId) => {
         return error;
     }
 };
+
+//////Admin Get All Tweets
+
+export const getAdminTweets = async () => {
+  try{
+    const {data} = await axiosInstance.get(`/admin/tweets`)
+    return data
+  } catch (error) {
+    console.error('[Admin get all tweets Failed]:', error)
+    return error
+  }
+} 
+
+//Post Tweet Like
+export const postLike = async (tweetId) => {
+    try {
+        await axiosInstance.post(`/tweets/${tweetId}/like`, {});
+    } catch (error) {
+        console.error('[postLike Failed]:', error);
+        console.log('4',tweetId)
+        return error
+    }
+};
+
+//Post Tweet Unlike
+export const postUnlike = async (tweetId) => {
+    try {
+        await axiosInstance.post(`/tweets/${tweetId}/unlike`, {});
+    } catch (error) {
+        console.error('[postUnlike Failed]:', error);
+        return error
+    }
+};
+
+//Admin Get All Tweets
+export const adminGetAllTweets = async () => {
+  try{
+    const {data} = await axiosInstance.get(`/admin/tweets`)
+    console.log('adminTweetPage', data)
+    return data
+  } catch (error) {
+    console.error('[Admin get all tweets Failed]:', error)
+    return error
+  }
+} 
