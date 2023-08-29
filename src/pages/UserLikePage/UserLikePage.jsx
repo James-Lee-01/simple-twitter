@@ -40,7 +40,7 @@ const UserLikePage = () => {
     <UserToggleMenu linkList={linkList} />
     {/* <div className={style.tweetList}>
       {
-        Array.from(Array(16)).map((_, index) => <TweetItem user={likeTweetList[0]} />)
+        Array.from(Array(16)).map((_, index) => <TweetItem user={TweetList[0]} />)
       }
     </div> */}
   </MainLayout>
