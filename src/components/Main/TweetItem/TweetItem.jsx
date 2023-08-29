@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import { useState } from 'react';
 import clsx from 'clsx';
 import logo_gray from '../../../assets/icons/logo_gray.png'
+import { getRelativeTime } from '../../../api/tweet';
 
 
 function TweetItem(props) {
@@ -61,7 +62,7 @@ function TweetItem(props) {
           <div className={style.tweetPoster}>
             <span className={style.posterName}>{userName}</span>
             <span className={style.posterAccount}>
-              @{account}‧{createdAt}
+              @{account}‧{getRelativeTime(createdAt)}
             </span>
           </div>
         </Link>

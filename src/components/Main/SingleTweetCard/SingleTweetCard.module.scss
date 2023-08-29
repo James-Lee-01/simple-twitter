@@ -1,0 +1,143 @@
+.tweet {
+  /*display*/
+  display: flex;
+  flex-direction: column;
+
+  .tweetContent {
+    /*display*/
+    margin: 0 15px;
+    /*box*/
+    line-height: 36px;
+    /*text*/
+    font-size: 24px;
+    color: #171725;
+  }
+
+  .time {
+    /*box*/
+    margin: 16px 16px 8px;
+    /*text*/
+    font-size: 14px;
+    color: #6C757D;
+
+  }
+
+  .userInfo {
+    /*display*/
+    display: flex;
+    flex-direction: row;
+    /*box*/
+    gap: 8px;
+    margin: 16px 0 8px 16px;
+  }
+
+  .userInfoAvatar {
+    /*box*/
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+
+  .tweetAvatar {
+    /*box*/
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .userInfoCard {
+    /*display*/
+    display: flex;
+    flex-direction: column;
+    /*box*/
+    gap: 8px;
+  }
+
+  .userInfoName {
+    /*box*/
+    width: 200px;
+    text-overflow: ellipsis;
+    /*text*/
+    font-size: 16px;
+    color: #171725;
+    font-weight: 700;
+  }
+
+  .userInfoAccount {
+    /*box*/
+    width: 200px;
+    text-overflow: ellipsis;
+    /*text*/
+    font-size: 14px;
+    color: #6C757D;
+  }
+
+  .icons {
+    /*display*/
+    display: flex;
+    align-items: center;
+    /*box*/
+    padding: 10px 19px;
+    border-bottom: 1px solid #E6ECF0;
+
+    .iconReply {
+      /*box*/
+      margin-right: 128px;
+      cursor: pointer;
+    }
+
+    .replyBtn {
+        /*box*/
+        height: 30px;
+        width: 30px;
+    }
+    .likedBtn {
+      /*box*/
+      height: 30px;
+      width: 30px;
+
+      &.active {
+        content: url('../../../assets/icons/tweet/tweet_like_action.png');
+      }
+    }
+  }
+}
+
+.line {
+  /*box*/
+  border-bottom: 1px solid #E6ECF0;
+  margin: 0 16px;
+}
+
+.lineBottom {
+  /*box*/
+  width: 100%;
+  border-bottom: 1px solid #E6ECF0;}
+
+.likeReplyBox {
+  /*display*/
+  display: flex;
+  /*box*/
+  gap: 24px;
+  margin: 16px 0 16px 16px;
+
+  .replyCount,
+  .likeCount {
+    /*text*/
+    font-size: 19px;
+    color: #171725;
+    font-weight: 700;
+  }
+
+  .count,
+  .like {
+    /*text*/
+    font-size: 19px;
+    color: #6C757D
+  }
+}
+
+.cursor {
+  cursor: pointer;
+}
