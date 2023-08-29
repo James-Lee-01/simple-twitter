@@ -96,3 +96,28 @@ export const getTweetReplies = async (tweetId) => {
     return error
     }
 };
+
+//follow
+export const followUser = async (userId) => {
+    try {
+        const { data } = await axiosInstance.post(`/followships`, {
+          id: userId,
+        });
+        return data
+    } catch (error) {
+        console.error('[followUser Failed]', error);
+        return error;
+    }
+};
+
+
+//unfollow
+export const unFollowUser = async (followingId) => {
+    try {
+        const { data } = await axiosInstance.delete(`/followships/${followingId}`);
+        return data
+    } catch (error) {
+        console.error('[unFollowUser Failed]', error);
+        return error;
+    }
+};
