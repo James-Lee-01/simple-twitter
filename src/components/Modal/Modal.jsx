@@ -2,7 +2,7 @@ import style from "./Modal.module.scss";
 import CancelIcon from "../../assets/icons/modal/modal_esc.png"
 
 function Modal(props) {
-    return <div className={style.modalShadow}>
+    return <div className={`${style.modalShadow} ${!props.show && style.hidden}`}>
         <div className={style.modal}>
             <div className={style.modalHeader}>
                 <img
@@ -10,10 +10,9 @@ function Modal(props) {
                     className={style.CancelIcon}
                     onClick={props.onClose}
                 />
+                {props.headerComponent}
             </div>
-            <div className={style.modalBody}>
-                {props.children}
-            </div>
+            {props.children}
             {props.buttons && <div className={style.modalFooter}>
                 {props.buttons}
             </div>}
