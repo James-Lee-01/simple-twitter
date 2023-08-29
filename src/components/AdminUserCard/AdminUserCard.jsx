@@ -6,6 +6,7 @@ import logo_gray from "../../assets/icons/logo_gray.png";
 // import backIcon from "../../../assets//icons/arrow.png";
 
 export default function AdminUserCard(props) {
+const key = props.userId
 const coverPhoto = props.coverPhoto
 const avatar = props.avatar
 const name = props.name
@@ -16,7 +17,7 @@ const followingNum = props.followingNum
 const followerNum = props.followerNum
 
   return (
-    <div className={styles.mainContainer}>
+    <div className={styles.mainContainer} id={key}>
       <div className={styles.photoContainer}>
         <img
           className={styles.coverPhoto}

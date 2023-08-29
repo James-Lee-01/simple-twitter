@@ -1,6 +1,8 @@
 import style from './Header.module.scss';
 import HeaderLink from './HeaderLink/HeaderLink';
 import { useLocation } from 'react-router-dom';
+import { useAuthContext } from "../../contexts/AuthContext.jsx";
+
 
 import HomeIcon from '../../assets/icons/nav/nav_home.png';
 import HomeActionIcon from '../../assets/icons/nav/nav_home_action.png';
@@ -52,6 +54,8 @@ function Header({ isAdmin }) {
     ];
 
     const location = useLocation();
+    const { logout } = useAuthContext();
+
 
     return <div className={style.headerContainer}>
         <div className={style.header}>
@@ -72,12 +76,14 @@ function Header({ isAdmin }) {
                     </ItemContainer>
                 }
             </div>
-            <HeaderLink
-                path="/login"
-                text="登出"
-                icon={SignoutIcon}
-                actionIcon={SignoutActionIcon}
-            />
+            <div onClick={() => logout()}>
+              <HeaderLink
+                  path="/login"
+                  text="登出"
+                  icon={SignoutIcon}
+                  actionIcon={SignoutActionIcon}
+              />
+            </div>  
         </div>
     </div>;
 }
