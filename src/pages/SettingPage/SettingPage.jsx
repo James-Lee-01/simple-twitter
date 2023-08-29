@@ -7,93 +7,128 @@ import { useState, useMemo, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
 ///以下要修改處ＡＰＩ
-import { userSignUp } from '../../api/auth.js'
+import { getUser, setUserAccount } from '../../api/auth.js'
+import { useAuthContext } from '../../contexts/AuthContext'
 
 
 export default function SettingPage() {
-const [account, setAccount] = useState("");
-const [name, setName] = useState("");
-const [email, setEmail] = useState("");
-const [password, setPassword] = useState("");
-const [checkPassword, setCheckPassword] = useState("");
-const navigate = useNavigate();
+  const [account, setAccount] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [checkPassword, setCheckPassword] = useState("");
+  const navigate = useNavigate();
+  const [msg, setMsg] = useState("");
 
-const [msg, setMsg] = useState("");
+  const { currentUser, isAuthenticated } = useAuthContext();
+  //取目前使用者的id
+  const userId = currentUser && currentUser.id;
 
-//確認註冊規範是否符合
-const isValid = useMemo(() => {
-  if (!account || account.length > 50) {
-    return false;
-  }
-  if (!name || name.length > 50) {
-    return false;
-  }
-  if (!email || !email.includes("@")) {
-    return false;
-  }
-  if (!password) {
-    return false;
-  }
-  if (!checkPassword) {
-    return false;
-  }
+  //權限限制與跳轉
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate("/login");
+    }
+  }, [navigate, isAuthenticated]);
 
-  return true;
-}, [account, name, email, password, checkPassword]);
+  //先取得使用者自身資訊
+  useEffect(() => {
+    const getUserData = async () => {
+      try {
+        if (userId) {
+          const data = await getUser(userId);
+          if (data.status === "error") {
+            console.log(data.message);
+            return;
+          }
+          //若取得成功，先顯示在畫面上
+          if (data) {
+            await setAccount(data.account);
+            await setName(data.name);
+            await setEmail(data.email);
+            console.log(data);
+          }
+        }
+      } catch (error) {
+        console.error("[Get Data Failed]", error);
+      }
+    };
+    getUserData();
+  }, [userId]);
 
-const handleClick = async () => {
-  if (!isValid) {
+  //確認註冊規範是否符合
+  const isValid = useMemo(() => {
+    if (!account || account.length > 50) {
+      return false;
+    }
+    if (!name || name.length > 50) {
+      return false;
+    }
+    if (!email || !email.includes("@")) {
+      return false;
+    }
+    if (!password) {
+      return false;
+    }
+    if (!checkPassword) {
+      return false;
+    }
+
+    return true;
+  }, [account, name, email, password, checkPassword]);
+
+  const handleClick = async () => {
+    if (!isValid) {
+      Swal.fire({
+        toast: true,
+        position: "top",
+        title: "請填入正確資料!",
+        icon: "error",
+        timer: 1000,
+        showConfirmButton: false,
+      });
+      // setMsg("請填入正確資料!");
+      // console.log('Check your info again')
+      return;
+    }
+
+    //data
+    const data = await setUserAccount({
+      account,
+      name,
+      email,
+      password,
+      checkPassword,
+      userId,
+    });
+
+    //signup noti
+    if (data.status === "success") {
+      Swal.fire({
+        toast: true,
+        position: "top",
+        title: "修改成功!",
+        icon: "success",
+        timer: 1000,
+        showConfirmButton: false,
+      });
+      // console.log('success')
+
+      return;
+    }
+
+    //failed
     Swal.fire({
       toast: true,
       position: "top",
-      title: "請填入正確資料!",
+      title: data.response.data.message,
       icon: "error",
       timer: 1000,
       showConfirmButton: false,
     });
-    // setMsg("請填入正確資料!");
-    // console.log('Check your info again')
-    return;
-  }
-
-  //data
-  const data = await userSignUp({
-    account,
-    name,
-    email,
-    password,
-    checkPassword,
-  });
-
-  //signup noti
-  if (data.status === "success") {
-    Swal.fire({
-      toast: true,
-      position: "top",
-      title: "註冊成功!請重新登入",
-      icon: "success",
-      timer: 1000,
-      showConfirmButton: false,
-    });
-    // console.log('success')
-
-    //註冊成功則導回登入頁
-    navigate("/login");
-    return;
-  }
-
-  //failed
-  Swal.fire({
-    toast: true,
-    position: "top",
-    title: data.response.data.message,
-    icon: "error",
-    timer: 1000,
-    showConfirmButton: false,
-  });
-  setMsg(data.response.data.message);
-  // console.log('signup failed')
-};
+    setMsg(data.response.data.message);
+    // console.log('signup failed')
+  };
 
   //畫面渲染
   return (

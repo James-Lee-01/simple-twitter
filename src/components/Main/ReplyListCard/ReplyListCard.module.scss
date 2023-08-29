@@ -1,0 +1,80 @@
+.modalContainer {
+  /*display*/
+  display: flex;
+  /*box*/
+  border-bottom: 1px solid #e6ecf0;
+  padding: 16px 23px;
+}
+
+.left {
+  /*display*/
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /*box*/
+  margin-right: 10px;
+
+  .avatarContainer {
+    /*box*/
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+
+  .tweetAvatar {
+    /*box*/
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.right {
+  /*display*/
+  display: flex;
+  flex-direction: column;
+  /*box*/
+  margin-bottom: 8px;
+  /*other*/
+  font-size: 16px;
+
+  .tweetUserInfo {
+    /*Text*/
+    font-weight: 700;
+    color: #171725;
+
+    .tweetUserAccount {
+      /*box*/
+      margin-left: 8px;
+      /*other*/
+      color: #657786;
+      /*Text*/
+      font-size: 14px;
+      font-weight: 700;
+      color: #6C757D;
+    }
+  }
+
+  .tweetContent {
+    /*box*/
+    margin: 9px 0;
+    line-height: 26px;
+  }
+
+  .replyAddress {
+    /*box*/
+    margin: 15px 0 8px 0;
+    font-size: 13px;
+
+    .replyWord {
+      /*other*/
+      color: #657786;
+    }
+
+    .replyAccount {
+      /*other*/
+      color: #FF6600;
+    }
+  }
+}

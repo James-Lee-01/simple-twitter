@@ -28,15 +28,9 @@ function App() {
             <Route path='main' element={<MainPage />} />
             <Route path='setting' element={<SettingPage />} />
             <Route path='signup' element={<SignUpPage />} />
-            {/* <Route path='tweet/:tweetId' element={<TweetPage />} /> */}
-            <Route
-              path='user/:userId/follower'
-              element={<UserFollowerPage />}
-            />
-            <Route
-              path='user/:userId/following'
-              element={<UserFollowingPage />}
-            />
+            <Route path='tweet/:tweetId' element={<TweetPage />} />
+            <Route path='user/:userId/follower' element={<UserFollowerPage />} />
+            <Route path='user/:userId/following' element={<UserFollowingPage />} />
             <Route path='user/:userId/like' element={<UserLikePage />} />
             <Route path='user/:userId/reply' element={<UserReplyPage />} />
             <Route path='user/:userId/tweet' element={<UserTweetPage />} />

@@ -92,7 +92,7 @@ export default function LoginPage() {
         }
         lengthLimit={50}
       />
-      {/* <Button size='extraLarge' title='登入' onClick={handleClick} /> */}
+      <Button size='extraLarge' title='登入' onClick={handleClick} />
 
       {/* switch link */}
       <div className={styles.linkContainer}>
