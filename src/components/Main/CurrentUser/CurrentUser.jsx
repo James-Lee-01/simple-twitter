@@ -36,7 +36,7 @@ const CurrentUser = () => {
         }
       };
       getUserInfo();
-    }, [URL.UserId]);
+    }, [URL.userId]);
 		console.log('3',userProfile)
 
 		const handleOpenModal = () => {
@@ -79,16 +79,16 @@ const CurrentUser = () => {
             <Button title='編輯個人資料' size='large' />
           </div>
 
-          <span className={style.userName}>{ userProfile.name }</span>
+          <span className={style.userName}>{userProfile.name}</span>
           <span className={style.userAccount}>@{userProfile.account}</span>
           <p>
-						{ userProfile.description }
+            {userProfile.description}
             {/* Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet
             sint.{" "} */}
           </p>
           <div className={style.followInfo}>
-            <span>{ userProfile.following } 個</span>跟隨中
-            <span>{ userProfile.follower } 位</span>跟隨者
+            <span>{userProfile.following} 個</span>跟隨中 (API無資料)
+            <span>{userProfile.follower} 位</span>跟隨者(API無資料)
           </div>
         </div>
       </div>

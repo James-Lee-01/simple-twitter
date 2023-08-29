@@ -1,12 +1,42 @@
 import style from "./UserInfo.module.scss";
+import { useState, useEffect } from "react";
+import { getUser } from '../../../../api/auth'
+import { useParams } from "react-router-dom";
 
 function UserInfo() {
+	const [userProfile, setUserProfile] = useState("");
+  const URL = useParams();
+  const name = userProfile?.name;
+
+  useEffect(() => {
+    const getUserInfo = async () => {
+      try {
+        if (URL.userId) {
+          const data = await getUser(URL.userId);
+          if (data.status === "error") {
+            console.log(data.message);
+            return;
+          }
+          if (data) {
+            // update data
+            await setUserProfile(data);
+            console.log("userProfile", data);
+          }
+        }
+      } catch (error) {
+        console.log("getUser Failed", error);
+      }
+    };
+    getUserInfo();
+  }, [URL.userId]);
+
+
     return <div className={style.userInfoContainer}>
         <div className={style.userName}>
-            John Doe
+            { name }
         </div>
         <div className={style.followCount}>
-            25 推文
+            25 推文 (API無資料)
         </div>
     </div>
 }
