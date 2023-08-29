@@ -37,7 +37,7 @@ function App() {
               path='user/:userId/following'
               element={<UserFollowingPage />}
             />
-            {/* <Route path='user/:userId/like' element={<UserLikePage />} /> */}
+            <Route path='user/:userId/like' element={<UserLikePage />} />
             <Route path='user/:userId/reply' element={<UserReplyPage />} />
             <Route path='user/:userId/tweet' element={<UserTweetPage />} />
             <Route path='admin/login' element={<AdminLoginPage />} />
