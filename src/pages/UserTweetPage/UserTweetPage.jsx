@@ -36,7 +36,7 @@ const UserTweetPage = () => {
         <Navbar hasBack={true} >
             <UserInfo />
         </Navbar>
-        <CurrentUser user={userInfo}/>
+        <CurrentUser />
         <UserToggleMenu linkList={linkList} />
         <div className={style.tweetList}>
             {
