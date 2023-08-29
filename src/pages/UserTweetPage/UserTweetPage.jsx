@@ -39,45 +39,45 @@ const UserTweetPage = () => {
   ];
   ///////////////////
 
-  // for tweet mapping
-  useEffect(() => {
-    const getAllTweets = async () => {
-      try {
-        const data = await getUserTweet();
-        //若狀態顯示失敗，回傳訊息
-        if (!data) {
-          // console.log("data failed");
-          return;
-        }
-        //若狀態顯示成功則直接擷取資料
-        if (data) {
-          setTweets(data); //回傳資料格式
-          // console.log('data get!');
-        }
-      } catch (error) {
-        console.log("推文擷取失敗", error);
-      }
-    };
-    getAllTweets();
-  }, []);
+  // // for tweet mapping
+  // useEffect(() => {
+  //   const getAllTweets = async () => {
+  //     try {
+  //       const data = await getUserTweet();
+  //       //若狀態顯示失敗，回傳訊息
+  //       if (!data) {
+  //         // console.log("data failed");
+  //         return;
+  //       }
+  //       //若狀態顯示成功則直接擷取資料
+  //       if (data) {
+  //         setTweets(data); //回傳資料格式
+  //         // console.log('data get!');
+  //       }
+  //     } catch (error) {
+  //       console.log("推文擷取失敗", error);
+  //     }
+  //   };
+  //   getAllTweets();
+  // }, []);
 
-  const tweetsList = tweets.map((props) => {
-    return (
-      <TweetItem
-        key={props.id}
-        tweetId={props.id}
-        userId={props.userId}
-        userName={props.User.name}
-        account={props.User.account}
-        avatar={props.User.avatar}
-        description={props.description}
-        likedCount={props.likedCount}
-        replyCount={props.replyCount}
-        isLiked={props.isLiked}
-        createdAt={props.createdAt}
-      />
-    );
-  });
+  // const tweetsList = tweets.map((props) => {
+  //   return (
+  //     <TweetItem
+  //       key={props.id}
+  //       tweetId={props.id}
+  //       userId={props.userId}
+  //       userName={props.User.name}
+  //       account={props.User.account}
+  //       avatar={props.User.avatar}
+  //       description={props.description}
+  //       likedCount={props.likedCount}
+  //       replyCount={props.replyCount}
+  //       isLiked={props.isLiked}
+  //       createdAt={props.createdAt}
+  //     />
+  //   );
+  // });
 
   return (
     <MainLayout>
@@ -87,10 +87,10 @@ const UserTweetPage = () => {
       <CurrentUser />
       <UserToggleMenu linkList={linkList} />
       <div className={style.tweetList}>
-        {/* {Array.from(Array(16)).map((_, index) => (
+        {Array.from(Array(16)).map((_, index) => (
           <TweetItem user={tweetsList[0]} />
-        ))} */}
-        {tweetsList}
+        ))}
+        {/* {tweetsList} */}
       </div>
     </MainLayout>
   );

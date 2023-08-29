@@ -7,6 +7,8 @@ import clsx from 'clsx';
 import logo_gray from '../../../assets/icons/logo_gray.png'
 import { getRelativeTime } from '../../../api/tweet';
 
+import { postLike, postUnlike } from '../../../api/tweet';
+
 
 function TweetItem(props) {
 	const key = props.tweetId;
@@ -25,23 +27,28 @@ function TweetItem(props) {
 	const [ liked, setLiked ] = useState(isLiked)
 	const likedClassName = clsx(style.likedBtn, {[style.active]: liked})
 	const [ likedNum, setLikedNum ] = useState(likedCount)
+  
 
 
-	const handleLike =  () => {
-		try {
-			if (liked === false) {
-				//false情況下，點下表示按讚
-				setLiked(true)
-				setLikedNum(likedNum + 1);
-			} else {
-				//相反的是取消讚
-				setLiked(false)
-				setLikedNum(likedNum - 1);
-			}
-		} catch (error) {
-			console.error('[Press Like Failed]', error)
-		}
-	}
+	const handleLike = async () => {
+    try {
+      if (Boolean(liked) === false) {
+        //false情況下，點下表示按讚
+        await postLike(tweetId);
+        setLiked(true);
+        setLikedNum(likedNum + 1);
+        
+      } 
+      if (Boolean(liked) === true) {
+        //相反的是取消讚
+        await postUnlike(tweetId);
+        setLiked(false);
+        setLikedNum(likedNum - 1);
+      }
+    } catch (error) {
+      console.error("[Press Like Failed]", error);
+    }
+  };
 
 	return (
     <div className={style.tweet} id={key}>
@@ -83,7 +90,7 @@ function TweetItem(props) {
 
           <div className={style.likedBtn} onClick={handleLike}>
             <img className={likedClassName} src={likeIcon} alt='like icon' />
-            <span>{likedCount}</span>
+            <span>{ likedNum }</span>
           </div>
         </div>
       </div>
