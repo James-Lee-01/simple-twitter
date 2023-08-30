@@ -106,6 +106,7 @@ export const followUser = async (userId) => {
         return data
     } catch (error) {
         console.error('[followUser Failed]', error);
+        // console.log(userId)
         return error;
     }
 };
@@ -118,6 +119,7 @@ export const unFollowUser = async (followingId) => {
         return data
     } catch (error) {
         console.error('[unFollowUser Failed]', error);
+        // console.log(followingId)
         return error;
     }
 };
@@ -140,7 +142,7 @@ export const postLike = async (tweetId) => {
         await axiosInstance.post(`/tweets/${tweetId}/like`, {});
     } catch (error) {
         console.error('[postLike Failed]:', error);
-        console.log('4',tweetId)
+        // console.log('4',tweetId)
         return error
     }
 };
@@ -166,3 +168,14 @@ export const adminGetAllTweets = async () => {
     return error
   }
 } 
+
+//Get User Tweet
+export const getUserTweet = async (userId) => {
+    try {
+        const { data } = await axiosInstance.get(`/users/${userId}/tweets`);
+        return data;
+    } catch (error) {
+        console.log('[getUserTweets Failed]:', error);
+        return error;
+    }
+};

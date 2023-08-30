@@ -12,7 +12,7 @@ import { postLike, postUnlike } from '../../../api/tweet';
 
 
 export default function SingleTweetCard({ onClick, props, userProps }) {
-    console.log("7", props);
+    // console.log("7", props);
 
 	const tweetId = props.id; //For Like checking
 	const userId = props.userId;

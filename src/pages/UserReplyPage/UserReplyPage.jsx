@@ -3,7 +3,6 @@ import Navbar from "../../components/Main/Navbar/Navbar";
 import MainLayout from "../../components/Main/MainLayout/MainLayout";
 import UserInfo from "../../components/Main/Navbar/UserInfo/UserInfo";
 import CurrentUser from "../../components/Main/CurrentUser/CurrentUser";
-import ReplyItem from "../../components/Main/ReplyItem/ReplyItem";
 import UserToggleMenu from "../../components/Main/UserToggleMenu/UserToggleMenu";
 import { useParams } from "react-router-dom";
 const userInfo = {

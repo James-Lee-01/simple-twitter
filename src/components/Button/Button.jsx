@@ -10,6 +10,8 @@ export default function Button({ size, onClick, title, isActive }) {
     [styles.extraLarge]: size === "extraLarge",
     [styles.squareMedium]: size === "squareMedium",
     [styles.squareSmall]: size === "squareSmall",
+    [styles.following]: size === "following",
+    [styles.follow]: size === "follow",
     //加active代表轉橘色實心，除了extraLarge無效。
     [styles.active]: isActive,
   });

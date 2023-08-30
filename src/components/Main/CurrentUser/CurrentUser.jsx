@@ -5,12 +5,16 @@ import { useAuthContext } from "../../../contexts/AuthContext";
 import { Link, useParams } from 'react-router-dom'
 import { getUser } from "../../../api/auth.js";
 import { followUser, unFollowUser } from "../../../api/tweet.js";
+import logo_gray from '../../../assets/icons/logo_gray.png'
+import mail from '../../../assets/icons/user/user_msg.png'
+import notify from '../../../assets/icons/user/user_notfi.png'
+
 
 const CurrentUser = () => {
     const [userProfile, setUserProfile] = useState("");
     const URL = useParams();
-    const userId = userProfile?.id;
-    const isFollowed = userProfile?.isFollowed;
+    const userId = userProfile.id;
+    const isFollowed = userProfile.isFollowed;
     const { currentUser } = useAuthContext();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isClicked, setIsClicked] = useState(isFollowed);
@@ -28,7 +32,6 @@ const CurrentUser = () => {
               // update data
               await setUserProfile(data);
               await setIsClicked(data.isFollowed);
-              console.log("userProfile", data);
             }
           }
         } catch (error) {
@@ -37,7 +40,6 @@ const CurrentUser = () => {
       };
       getUserInfo();
     }, [URL.userId]);
-		console.log('3',userProfile)
 
 		const handleOpenModal = () => {
 			//Modal開啟
@@ -72,23 +74,49 @@ const CurrentUser = () => {
       <div className={style.userWrapper}>
         <div className={style.coverPhoto}></div>
         <div className={style.userAvatar}>
-          <div className={style.avatar}></div>
+          <img
+            className={style.avatar}
+            src={userProfile?.avatar || logo_gray}
+            alt='UserAvatar'
+          />
         </div>
         <div className={style.userInfo}>
-          <div className={style.editButton}>
-            <Button title='編輯個人資料' size='large' />
-          </div>
+          {userId === currentUser.id ? (
+            <div className={style.editButton}>
+              <Button
+                title='編輯個人資料'
+                size='large'
+                onClick={handleOpenModal}
+              />
+            </div>
+          ) : (
+            <div className={style.btnWrapper}>
+              <div className={style.mailImage}>
+                <img src={mail} alt='msg' className={style.mailIcon} />
+              </div>
+              <div className={style.notifyImage}>
+                <img src={notify} alt='notify' className={style.notifyIcon} />
+              </div>
+              <div onClick={handleClick}>
+                <Button
+                  title={isClicked ? "正在跟隨" : "跟隨"}
+                  size={isClicked ? "following" : "follow"}
+                  isActive={isClicked}
+                />
+              </div>
+            </div>
+          )}
 
           <span className={style.userName}>{userProfile.name}</span>
           <span className={style.userAccount}>@{userProfile.account}</span>
-          <p>
-            {userProfile.description}
-            {/* Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet
-            sint.{" "} */}
-          </p>
+          <p>{userProfile.introduction}</p>
           <div className={style.followInfo}>
-            <span>{userProfile.following} 個</span>跟隨中 (API無資料)
-            <span>{userProfile.follower} 位</span>跟隨者(API無資料)
+            <Link to={`/user/${userId}/following`} className={style.link}>
+              <span>{userProfile.followingCount} 個</span>跟隨中
+            </Link>
+            <Link to={`/user/${userId}/follower`} className={style.link}>
+              <span>{userProfile.followerCount} 位</span>跟隨者
+            </Link>
           </div>
         </div>
       </div>

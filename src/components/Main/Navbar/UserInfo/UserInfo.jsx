@@ -7,6 +7,7 @@ function UserInfo() {
 	const [userProfile, setUserProfile] = useState("");
   const URL = useParams();
   const name = userProfile?.name;
+  const tweetNum = userProfile?.tweetCount;
 
   useEffect(() => {
     const getUserInfo = async () => {
@@ -20,7 +21,7 @@ function UserInfo() {
           if (data) {
             // update data
             await setUserProfile(data);
-            console.log("userProfile", data);
+            // console.log("userProfile", data);
           }
         }
       } catch (error) {
@@ -31,14 +32,12 @@ function UserInfo() {
   }, [URL.userId]);
 
 
-    return <div className={style.userInfoContainer}>
-        <div className={style.userName}>
-            { name }
-        </div>
-        <div className={style.followCount}>
-            25 推文 (API無資料)
-        </div>
-    </div>
+    return (
+      <div className={style.userInfoContainer}>
+        <div className={style.userName}>{name}</div>
+        <div className={style.followCount}>{tweetNum} 推文</div>
+      </div>
+    );
 }
 
 export default UserInfo;

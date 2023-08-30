@@ -3,32 +3,18 @@ import Navbar from "../../components/Main/Navbar/Navbar";
 import MainLayout from "../../components/Main/MainLayout/MainLayout";
 import UserInfo from "../../components/Main/Navbar/UserInfo/UserInfo";
 import CurrentUser from "../../components/Main/CurrentUser/CurrentUser";
-import TweetItem from "../../components/Main/TweetItem/TweetItem";
 import UserToggleMenu from "../../components/Main/UserToggleMenu/UserToggleMenu";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { getUserTweet } from '../../api/tweet.js'
 
+import SingleUserTweet from "../../components/Main/TweetItem/SingleUserTweet";
 
-const userInfo = {
-    "name": "John Doe",
-    "account": "heyJohn",
-    "following": "34",
-    "follower": "59",
-}
-
-const tweetsList = [
-    {
-        "name": "John Doe",
-        "account": "heyJohn",
-        "time": "3 小時",
-        "replyCount": "13",
-        "likeCount": "76"
-    },
-]
 
 const UserTweetPage = () => {
   const { userId } = useParams();
 	const [tweets, setTweets] = useState([]);
+  const URL = useParams()
 
 
   ///////////////////
@@ -40,44 +26,40 @@ const UserTweetPage = () => {
   ///////////////////
 
   // // for tweet mapping
-  // useEffect(() => {
-  //   const getAllTweets = async () => {
-  //     try {
-  //       const data = await getUserTweet();
-  //       //若狀態顯示失敗，回傳訊息
-  //       if (!data) {
-  //         // console.log("data failed");
-  //         return;
-  //       }
-  //       //若狀態顯示成功則直接擷取資料
-  //       if (data) {
-  //         setTweets(data); //回傳資料格式
-  //         // console.log('data get!');
-  //       }
-  //     } catch (error) {
-  //       console.log("推文擷取失敗", error);
-  //     }
-  //   };
-  //   getAllTweets();
-  // }, []);
+  useEffect(() => {
+    const getAllUserTweets = async () => {
+      try {
+        const data = await getUserTweet(URL.userId);
+        //若狀態顯示失敗，回傳訊息
+        if (!data) {
+          // console.log("data failed");
+          return;
+        }
+        //若狀態顯示成功則直接擷取資料
+        if (data) {
+          setTweets(data); //回傳資料格式
+          // console.log('data get!');
+        }
+      } catch (error) {
+        console.log("推文擷取失敗", error);
+      }
+    };
+    getAllUserTweets();
+  }, []);
 
-  // const tweetsList = tweets.map((props) => {
-  //   return (
-  //     <TweetItem
-  //       key={props.id}
-  //       tweetId={props.id}
-  //       userId={props.userId}
-  //       userName={props.User.name}
-  //       account={props.User.account}
-  //       avatar={props.User.avatar}
-  //       description={props.description}
-  //       likedCount={props.likedCount}
-  //       replyCount={props.replyCount}
-  //       isLiked={props.isLiked}
-  //       createdAt={props.createdAt}
-  //     />
-  //   );
-  // });
+
+  const tweetsList = tweets.map((props) => {
+    return (
+      <SingleUserTweet
+        key={props.id}
+        tweetId={props.id}
+        description={props.description}
+        likedCount={props.likedCount}
+        replyCount={props.replyCount}
+        createdAt={props.createdAt}
+      />
+    );
+  });
 
   return (
     <MainLayout>
@@ -87,10 +69,7 @@ const UserTweetPage = () => {
       <CurrentUser />
       <UserToggleMenu linkList={linkList} />
       <div className={style.tweetList}>
-        {Array.from(Array(16)).map((_, index) => (
-          <TweetItem user={tweetsList[0]} />
-        ))}
-        {/* {tweetsList} */}
+        {tweetsList}
       </div>
     </MainLayout>
   );
