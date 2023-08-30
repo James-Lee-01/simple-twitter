@@ -74,7 +74,7 @@ export default function TweetPage() {
     );
   });
 
-  //頁面導向限制
+  // 頁面導向限制
   // useEffect(() => {
   //   if (!isAuthenticated && isAuthChecked) {
   //     navigate("/login");

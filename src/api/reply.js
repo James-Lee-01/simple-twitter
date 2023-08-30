@@ -1,28 +1,21 @@
-import { apiHelper } from '../api/tweet';
+import axios from "axios";
 import Swal from 'sweetalert2';
 
-// 獲取推文回覆
-export const getTweetReplies = async (TweetId) => {
-  try {
-    const { data } = await apiHelper.get(`/tweets/${TweetId}/replies`);
-
-    return data;
-  } catch (error) {
-    console.error("[Get tweet replies Failed]:", error);
-    return error
-  }
-};
+export const baseUrl = ""
+const axiosInstance = axios.create({
+  baseURL: baseUrl,
+});
 
 // 發布回覆
-export const postReply = async (comment, TweetId) => {
+export const postReply = async (comment, tweetId) => {
   try {
-    const { data } = await apiHelper.post(`/tweets/${TweetId}/replies`, {
+    const { data } = await axiosInstance.post(`/tweets/${tweetId}/replies`, {
       comment,
     });
 
     return data;
   } catch (error) {
-    console.error(error);
+    console.error('[getPostReply Failed]');
     return error;
   }
 };
