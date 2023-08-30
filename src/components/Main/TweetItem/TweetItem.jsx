@@ -11,6 +11,7 @@ import { postLike, postUnlike } from '../../../api/tweet';
 
 
 function TweetItem(props) {
+  // console.log("TweetItem props:", props);
 	const key = props.tweetId;
 	const tweetId = props.tweetId;
 	const userId = props.userId

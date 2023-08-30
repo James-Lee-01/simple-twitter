@@ -10,7 +10,8 @@ import { getRelativeTime } from "../../../api/tweet";
 import { postLike, postUnlike } from "../../../api/tweet";
 
 ///////////
-import { useParams } from "react-router-dom";import { getUser } from "../../../api/auth";
+import { useParams } from "react-router-dom";
+import { getUser } from "../../../api/auth";
 
 function SingleUserTweet(props) {
   const [userProfile, setUserProfile] = useState("");

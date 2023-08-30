@@ -179,3 +179,29 @@ export const getUserTweet = async (userId) => {
         return error;
     }
 };
+
+//Get User Like Tweets
+export const getUserLike = async (userId) => {
+    try {
+        const { data } = await axiosInstance.get(`/users/${userId}/likes`);
+        
+        return data;
+    } catch (error) {
+        console.log('[getUserLike Failed]:', error);
+        return error;
+    }
+};
+
+//Get User Reply Tweets
+export const getUserReply = async (userId) => {
+    try {
+        const { data } = await axiosInstance.get(`/users/${userId}/replied_tweets`);
+        console.log('getUserReply',data)
+        return data;
+    } catch (error) {
+        console.log('[Get user replies Failed]:', error);
+        return error;
+    }
+};
+
+
