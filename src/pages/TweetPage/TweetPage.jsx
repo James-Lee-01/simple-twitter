@@ -6,6 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { getTweet, getTweetReplies } from "../../api/tweet.js";
 import ReplyItem from '../../components/Main/ReplyListCard/ReplyListCard';
+import SingleTweetReplyModal from '../../components/Modal/SingleTweetReplyModal/SingleTweetReplyModal.jsx';
 
 export default function TweetPage() {
   //利用useParams的hook取得id值
@@ -13,7 +14,15 @@ export default function TweetPage() {
   const [tweet, setTweet] = useState('');
   const [user, setUser] = useState({});
   const [replies, setReplies] = useState([])
-  // const navigate = useNavigate()
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  // const navigate = useNavigate();
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
 
   //Get Single Tweet API
   useEffect(() => {
@@ -81,13 +90,14 @@ export default function TweetPage() {
           <SingleTweetCard
             props={tweet}
             userProps={user}
-            // onClick={handleOpenModal}
+            onClick={handleOpenModal}
           />
         )}
       </div>
       <div className={styles.listContainer}>
         {replies && repliesList}
       </div>
+      {isModalOpen && <SingleTweetReplyModal handleCloseModal={handleCloseModal} props={tweet} />}
     </MainLayout>
   );
 }
