@@ -4,7 +4,7 @@ import { setUserProfile } from '../api/tweet'
 export default function useUpdateChange () {
   const [isUpdating, setIsUpdating] = useState(false)
 
-  const updateUser = async (user) => {
+  const updateUserInfo = async (user) => {
     try {
       if (isUpdating) return
 
@@ -32,6 +32,6 @@ export default function useUpdateChange () {
   } 
   return {
     isUpdating,
-    updateUser
+    updateUserInfo
   } 
 }

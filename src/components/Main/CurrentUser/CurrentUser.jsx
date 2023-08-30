@@ -9,6 +9,9 @@ import logo_gray from '../../../assets/icons/logo_gray.png'
 import mail from '../../../assets/icons/user/user_msg.png'
 import notify from '../../../assets/icons/user/user_notfi.png'
 import UserEditModal from "../../Modal/UserEditModal/UserEditModal";
+import profileBG from "../../../assets/images/profileBG.jpeg";
+
+import { useDataChange } from '../../../contexts/DataChangeContext'
 
 
 const CurrentUser = () => {
@@ -19,6 +22,7 @@ const CurrentUser = () => {
     const { currentUser } = useAuthContext();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isClicked, setIsClicked] = useState(isFollowed);
+    const { isDataChange, setIsDataChange } = useDataChange()////
 
     useEffect(() => {
       const getUserInfo = async () => {
@@ -40,7 +44,7 @@ const CurrentUser = () => {
         }
       };
       getUserInfo();
-    }, [URL.userId]);
+    }, [URL.userId], isDataChange);////
 
 		const handleOpenModal = () => {
 			//Modal開啟
@@ -57,12 +61,14 @@ const CurrentUser = () => {
           const data = await followUser(userId);
           if (data.followingId) {
             await setIsClicked(true);
+            await setIsDataChange(!isDataChange);////
           }
         }
         if (isClicked === true) {
           const data = await unFollowUser(userId);
           if (data.followingId) {
             await setIsClicked(false);
+            await setIsDataChange(!isDataChange);////
           }
         }
       } catch (error) {
@@ -73,7 +79,13 @@ const CurrentUser = () => {
 
     return (
       <div className={style.userWrapper}>
-        <div className={style.coverPhoto}></div>
+        <div className={style.coverPhoto}>
+          <img
+            src={userProfile?.coverPhoto || profileBG}
+            alt='coverPhoto'
+            className={style.coverImg}
+          />
+        </div>
         <div className={style.userAvatar}>
           <img
             className={style.avatar}

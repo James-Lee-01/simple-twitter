@@ -3,14 +3,17 @@ import { followUser, unFollowUser } from '../../../../api/tweet';
 import { useState, useEffect } from 'react';
 import Button from '../../../Button/Button';
 import logo_gray from '../../../../assets/icons/logo_gray.png'
+///////////
 
 
-function SuggestUserItem({user}) {
+function SuggestUserItem(user) {
     const name = user.name
 		const account = user.account
-		const userId = user.userId
+		const userId = user.userId;
 		const isFollowed = user.isFollowed
 		const avatar = user.avatar
+		const id = user.userId;
+
 
 		const [isClicked, setIsClicked] = useState(isFollowed)
 
@@ -40,7 +43,7 @@ function SuggestUserItem({user}) {
 		}, [isFollowed])
 
     return (
-      <div className={style.suggestUserItem}>
+      <div className={style.suggestUserItem} id={id}>
         <div className={style.userWrapper}>
           <div className={style.userAvatar}>
 

@@ -222,3 +222,15 @@ export const setUserProfile = async (formData, userId) => {
   }
 
 };
+
+//Get Top 10 Users
+export const getTopTenUsers = async () => {
+    try {
+        const { data } = await axiosInstance.get(`/users/top`);
+        console.log(data)
+        return data;
+    } catch (error) {
+        console.error('[getTopTenUsers Failed]:', error);
+        return error;
+    }
+};

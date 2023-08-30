@@ -1,66 +1,50 @@
 import style from './SuggestUser.module.scss';
 import SuggestUserItem from './SuggestUserItem/SuggestUserItem';
-
-const userList = [
-  {
-    name: "test1",
-    account: "test1",
-    isFollowed: true,
-  },
-  {
-    name: "test2",
-    account: "test2",
-    isFollowed: false,
-  },
-  {
-    name: "test3",
-    account: "test3",
-    isFollowed: false,
-  },
-  {
-    name: "test4",
-    account: "test4",
-    isFollowed: false,
-  },
-  {
-    name: "test5",
-    account: "test5",
-    isFollowed: false,
-  },
-  {
-    name: "test6",
-    account: "test6",
-    isFollowed: false,
-  },
-  {
-    name: "test7",
-    account: "test7",
-    isFollowed: false,
-  },
-  {
-    name: "test8",
-    account: "test8",
-    isFollowed: false,
-  },
-  {
-    name: "test9",
-    account: "test9",
-    isFollowed: false,
-  },
-  {
-    name: "test10",
-    account: "test10",
-    isFollowed: false,
-  },
-];
+import { getTopTenUsers } from '../../../api/tweet';
+import { useEffect, useState } from 'react';
 
 function SuggestUser() {
-    return <div className={style.suggestUser}>
+  const [ users, setUsers ] =useState([])
+
+  useEffect( () => {
+    const getTopTen = async () => {
+      try {
+        const data = await getTopTenUsers()
+        if (data.status === 'error') {
+          console.log(data.message)
+          return
+        }
+        if (data) {
+          setUsers(data)
+          console.log('get', data)
+        }
+      } catch (error) {
+        console.error('[getTopTen Failed]',error)
+      }
+    }
+    getTopTen()
+  }, [])
+
+  
+  const topUserList = users.map((user) => {
+    return(
+      <SuggestUserItem 
+        key={user.id}
+        name={user.name}
+        account={user.account}
+        avatar={user.avatar}
+        isFollowed={user.isFollowed}
+        userId={user.id}
+      />
+    )
+  })
+
+    return (
+    <div className={style.suggestUser}>
         <h2>Popular</h2>
-        {userList.map((user) =>
-            <SuggestUserItem user={user} />
-        )}
+        {topUserList}
     </div>
+    )
 }
 
 export default SuggestUser;
