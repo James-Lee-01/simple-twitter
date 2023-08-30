@@ -25,28 +25,38 @@
 }
 
 .userWrapper {
+
     display: flex;
     flex-direction: column;
     position: relative;
     margin-bottom: 20px;
 
     .coverPhoto {
+				// position: relative;
         height: 200px;
         background-color: #aaa;
         margin: 0 1px;
-
-        .photoIcon {
-            display: flex;
-            justify-content: center;
-            column-gap: 30px;
-            margin-top: 88px;
-
-            img {
-                width: 24px;
-                height: 24px;
-            }
-        }
+				width: 100%;
+				object-fit: cover;
+				z-index: 0;
     }
+		.photoIcon {
+			position: absolute;
+
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			column-gap: 30px;
+			margin-top: 88px;
+			left: 45%;
+			z-index: 1;
+
+			.uploadIcon,
+			.cancelIcon {
+				width: 24px;
+				height: 24px;
+			}
+		}
 
     .userAvatar {
         position: absolute;

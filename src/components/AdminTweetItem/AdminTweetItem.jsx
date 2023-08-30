@@ -1,7 +1,7 @@
 import styles from './AdminTweetItem.module.scss'
 import admin_delete from '../../assets/icons/admin/admin_delete.png'
 import logo_gray from '../../assets/icons/logo_gray.png'
-
+import { getRelativeTime } from '../../api/tweet';
 
 export default function AdminTweetItem (props) {
   const {
@@ -9,7 +9,7 @@ export default function AdminTweetItem (props) {
     avatar,
     name,
     account,
-    createAt,
+    createdAt,
     description,
     // onClick: handleDelete,
   } = props;
@@ -31,8 +31,8 @@ export default function AdminTweetItem (props) {
   return (
     <div className={styles.itemContainer}>
       <div className={styles.itemWrapper}>
-        <button className={styles.itemDeleteBtn} >
-        {/* <button className={styles.itemDeleteBtn} onClick={deleteTweet}> */}
+        <button className={styles.itemDeleteBtn}>
+          {/* <button className={styles.itemDeleteBtn} onClick={deleteTweet}> */}
           <img
             className={styles.itemDeleteIcon}
             src={admin_delete}
@@ -50,7 +50,7 @@ export default function AdminTweetItem (props) {
           <div className={styles.itemInfoUser}>
             <div className={styles.itemInfoUserName}>{name}</div>
             <div className={styles.itemInfoTag}>
-              @{account}・{createAt}
+              @{account}・{ getRelativeTime(createdAt) }
             </div>
           </div>
           <div className={styles.itemInfoTextWrapper}>

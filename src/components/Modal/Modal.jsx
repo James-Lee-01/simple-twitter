@@ -7,6 +7,7 @@ function Modal(props) {
             <div className={style.modalHeader}>
                 <img
                     src={CancelIcon}
+                    alt='img'
                     className={style.CancelIcon}
                     onClick={props.onClose}
                 />

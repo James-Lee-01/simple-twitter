@@ -96,3 +96,129 @@ export const getTweetReplies = async (tweetId) => {
     return error
     }
 };
+
+//follow
+export const followUser = async (userId) => {
+    try {
+        const { data } = await axiosInstance.post(`/followships`, {
+          id: userId,
+        });
+        return data
+    } catch (error) {
+        console.error('[followUser Failed]', error);
+        // console.log(userId)
+        return error;
+    }
+};
+
+
+//unfollow
+export const unFollowUser = async (followingId) => {
+    try {
+        const { data } = await axiosInstance.delete(`/followships/${followingId}`);
+        return data
+    } catch (error) {
+        console.error('[unFollowUser Failed]', error);
+        // console.log(followingId)
+        return error;
+    }
+};
+
+//////Admin Get All Tweets
+
+export const getAdminTweets = async () => {
+  try{
+    const {data} = await axiosInstance.get(`/admin/tweets`)
+    return data
+  } catch (error) {
+    console.error('[Admin get all tweets Failed]:', error)
+    return error
+  }
+} 
+
+//Post Tweet Like
+export const postLike = async (tweetId) => {
+    try {
+        await axiosInstance.post(`/tweets/${tweetId}/like`, {});
+    } catch (error) {
+        console.error('[postLike Failed]:', error);
+        // console.log('4',tweetId)
+        return error
+    }
+};
+
+//Post Tweet Unlike
+export const postUnlike = async (tweetId) => {
+    try {
+        await axiosInstance.post(`/tweets/${tweetId}/unlike`, {});
+    } catch (error) {
+        console.error('[postUnlike Failed]:', error);
+        return error
+    }
+};
+
+//Admin Get All Tweets
+export const adminGetAllTweets = async () => {
+  try{
+    const {data} = await axiosInstance.get(`/admin/tweets`)
+    console.log('adminTweetPage', data)
+    return data
+  } catch (error) {
+    console.error('[Admin get all tweets Failed]:', error)
+    return error
+  }
+} 
+
+//Get User Tweet
+export const getUserTweet = async (userId) => {
+    try {
+        const { data } = await axiosInstance.get(`/users/${userId}/tweets`);
+        return data;
+    } catch (error) {
+        console.log('[getUserTweets Failed]:', error);
+        return error;
+    }
+};
+
+//Get User Like Tweets
+export const getUserLike = async (userId) => {
+    try {
+        const { data } = await axiosInstance.get(`/users/${userId}/likes`);
+        
+        return data;
+    } catch (error) {
+        console.log('[getUserLike Failed]:', error);
+        return error;
+    }
+};
+
+//Get User Reply Tweets
+export const getUserReply = async (userId) => {
+    try {
+        const { data } = await axiosInstance.get(`/users/${userId}/replied_tweets`);
+        console.log('getUserReply',data)
+        return data;
+    } catch (error) {
+        console.log('[Get user replies Failed]:', error);
+        return error;
+    }
+};
+
+//Update user profile(photo)
+export const setUserProfile = async (formData, userId) => {
+  try {
+    const {data} = await axiosInstance.put(`/users/${userId}`,
+      formData ,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+    return data
+  } catch (error) {
+    console.log("[setUserProfile Failed]:", error);
+    return error
+  }
+
+};

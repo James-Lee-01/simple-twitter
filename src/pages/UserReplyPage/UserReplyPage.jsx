@@ -3,18 +3,17 @@ import Navbar from "../../components/Main/Navbar/Navbar";
 import MainLayout from "../../components/Main/MainLayout/MainLayout";
 import UserInfo from "../../components/Main/Navbar/UserInfo/UserInfo";
 import CurrentUser from "../../components/Main/CurrentUser/CurrentUser";
-import ReplyItem from "../../components/Main/ReplyItem/ReplyItem";
 import UserToggleMenu from "../../components/Main/UserToggleMenu/UserToggleMenu";
 import { useParams } from "react-router-dom";
-const userInfo = {
-  "name": "John Doe",
-  "account": "heyJohn",
-  "following": "34",
-  "follower": "59",
-}
+import SingleUserReply from "../../components/Main/ReplyListCard/SingleUserReply";
+import { useState, useEffect } from "react";
+import { getUserReply } from "../../api/tweet";
+
 
 const UserReplyPage = () => {
   const { userId } = useParams();
+  const URL = useParams()
+  const [userReply, setUserReply] = useState([])
 
   const linkList = [
     { title: "推文", link: `/user/${userId}/tweet` },
@@ -22,18 +21,55 @@ const UserReplyPage = () => {
     { title: "喜歡的內容", link: `/user/${userId}/like` },
   ];
 
-  return <MainLayout>
-    <Navbar hasBack={true} >
-      <UserInfo />
-    </Navbar>
-    <CurrentUser user={userInfo} />
-    <UserToggleMenu linkList={linkList} />
-    {/* <div className={style.replyList}>
-      {
-        Array.from(Array(16)).map((_, index) => <ReplyItem user={replyList[0]} />)
+  // for tweet mapping
+
+  useEffect(() => {
+    const getUserReplyTweets = async () => {
+      try {
+        const data = await getUserReply(URL.userId);
+        //若狀態顯示失敗，回傳訊息
+        if (!data) {
+          console.log("data failed", data.message);
+          return;
+        }
+        //若狀態顯示成功則直接擷取資料
+        if (data) {
+          setUserReply(data); //回傳資料格式
+          // console.log('data get!');
+        }
+      } catch (error) {
+        console.log("喜愛推文擷取失敗", error);
       }
-    </div> */}
-  </MainLayout>
+    };
+    getUserReplyTweets();
+  }, [URL.userId]);
+
+  const replyTweetsList = userReply.map((props) => {
+    // console.log('props: ', props);
+    return (
+      <SingleUserReply
+        // key={props.id}
+        // tweetId={props.id}
+        createdAt={props.createdAt}
+        tweetAccount = {props.Tweet.User.name}
+        const comment = {props.comment}
+      />
+    );
+  });
+
+  return (
+    <MainLayout>
+      <Navbar hasBack={true}>
+        <UserInfo />
+      </Navbar>
+      <CurrentUser />
+      <UserToggleMenu linkList={linkList} />
+      <div className={style.replyList}>
+
+        {replyTweetsList}
+      </div>
+    </MainLayout>
+  );
 }
 
 export default UserReplyPage;

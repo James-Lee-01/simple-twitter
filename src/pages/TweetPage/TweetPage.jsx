@@ -25,7 +25,6 @@ export default function TweetPage() {
           setTweet(data);
           setUser(data.User);
         }
-        // console.log(data)
         // console.log(data.User.name)
         setTweet(data);
       } catch (error) {
