@@ -8,6 +8,7 @@ import { followUser, unFollowUser } from "../../../api/tweet.js";
 import logo_gray from '../../../assets/icons/logo_gray.png'
 import mail from '../../../assets/icons/user/user_msg.png'
 import notify from '../../../assets/icons/user/user_notfi.png'
+import UserEditModal from "../../Modal/UserEditModal/UserEditModal";
 
 
 const CurrentUser = () => {
@@ -119,6 +120,17 @@ const CurrentUser = () => {
             </Link>
           </div>
         </div>
+        {/* Modal Control */}
+        {isModalOpen && (
+          <UserEditModal
+            handleCloseModal={handleCloseModal}
+            id={userId}
+            originName={userProfile.name}
+            originIntroduction={userProfile.introduction}
+            originAvatar={userProfile.avatar}
+            originCoverPhoto={userProfile.coverPhoto}
+          />
+        )}
       </div>
     );
 }

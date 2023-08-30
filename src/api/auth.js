@@ -48,7 +48,7 @@ export const userLogin = async ({ account, password }) => {
       console.error('帳號不存在')
     }
 
-    // console.log(data)
+    
     return 
   } catch (error) {
     console.error(`[Get User failed]: `, error)

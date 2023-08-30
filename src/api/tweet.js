@@ -204,4 +204,21 @@ export const getUserReply = async (userId) => {
     }
 };
 
+//Update user profile(photo)
+export const setUserProfile = async (formData, userId) => {
+  try {
+    const {data} = await axiosInstance.put(`/users/${userId}`,
+      formData ,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+    return data
+  } catch (error) {
+    console.log("[setUserProfile Failed]:", error);
+    return error
+  }
 
+};
