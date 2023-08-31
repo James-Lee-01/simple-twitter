@@ -75,6 +75,7 @@ function UserEditModal({
     if (introduction.length > 160) {
       return;
     }
+		///以下為傳送至API的value名稱
     await updateUserInfo({
       updateCoverPhoto,
       updateAvatar,
@@ -117,7 +118,7 @@ function UserEditModal({
       >
         <div className={style.userWrapper}>
           <div className={style.photoIcon}>
-            <label className={style.upload} htmlFor='coverInput'>
+            <label className={style.upload} htmlFor='cover'>
               <img
                 src={UploadIcon}
                 alt='UploadIcon'
@@ -126,7 +127,8 @@ function UserEditModal({
               <input
                 className={style.fileInput}
                 type='file'
-                id='coverInput'
+                id='cover'
+								name='cover'
                 onChange={(event) => handleImgChange(event, "cover")}
               />
             </label>
@@ -152,7 +154,7 @@ function UserEditModal({
             {/* <div className={style.avatar}> */}
             <img className={style.avatar} src={avatar} alt='avatar' />
             {/* </div> */}
-            <label className={style.avatarUpload} htmlFor='avatarInput'>
+            <label className={style.avatarUpload} htmlFor='avatar'>
               <img
                 className={style.uploadIcon}
                 src={UploadIcon}
@@ -161,7 +163,8 @@ function UserEditModal({
               <input
                 className={style.fileInput}
                 type='file'
-                id='avatarInput'
+                id='avatar'
+								name='avatar'
                 onChange={(event) => handleImgChange(event, "avatar")}
               />
             </label>

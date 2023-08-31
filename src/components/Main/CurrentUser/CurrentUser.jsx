@@ -39,6 +39,7 @@ const CurrentUser = () => {
               await setUserProfile(data);
               await setIsClicked(data.isFollowed);
             }
+            
           }
         } catch (error) {
           console.log("getUser Failed", error);
@@ -83,7 +84,7 @@ const CurrentUser = () => {
       <div className={style.userWrapper}>
         <div className={style.coverPhoto}>
           <img
-            src={userProfile?.coverPhoto || profileBG}
+            src={userProfile?.cover || profileBG}
             alt='coverPhoto'
             className={style.coverImg}
           />
@@ -143,7 +144,7 @@ const CurrentUser = () => {
             originName={userProfile.name}
             originIntroduction={userProfile.introduction}
             originAvatar={userProfile.avatar}
-            originCoverPhoto={userProfile.coverPhoto}
+            originCoverPhoto={userProfile.cover}
           />
         )}
       </div>
