@@ -16,7 +16,7 @@ function SuggestUser() {
         }
         if (data) {
           setUsers(data)
-          console.log('get', data)
+          // console.log('get', data)
         }
       } catch (error) {
         console.error('[getTopTen Failed]',error)

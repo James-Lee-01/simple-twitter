@@ -103,6 +103,7 @@ export const followUser = async (userId) => {
         const { data } = await axiosInstance.post(`/followships`, {
           id: userId,
         });
+        console.log(data)
         return data
     } catch (error) {
         console.error('[followUser Failed]', error);
@@ -116,10 +117,11 @@ export const followUser = async (userId) => {
 export const unFollowUser = async (followingId) => {
     try {
         const { data } = await axiosInstance.delete(`/followships/${followingId}`);
+        // console.log(data)
         return data
     } catch (error) {
         console.error('[unFollowUser Failed]', error);
-        // console.log(followingId)
+        
         return error;
     }
 };
@@ -173,6 +175,7 @@ export const adminGetAllTweets = async () => {
 export const getUserTweet = async (userId) => {
     try {
         const { data } = await axiosInstance.get(`/users/${userId}/tweets`);
+        console.log('getUserTweet',data)
         return data;
     } catch (error) {
         console.log('[getUserTweets Failed]:', error);
@@ -227,10 +230,48 @@ export const setUserProfile = async (formData, userId) => {
 export const getTopTenUsers = async () => {
     try {
         const { data } = await axiosInstance.get(`/users/top`);
-        console.log(data)
+        console.log('getTopTenUsers', data)
         return data;
     } catch (error) {
         console.error('[getTopTenUsers Failed]:', error);
         return error;
     }
 };
+
+//Get User Following List
+export const getUserFollowing = async (userId) => {
+  try {
+    const { data } = await axiosInstance.get(`/users/${userId}/followings`)
+    console.log('getUserFollowing',data)
+    return data
+  } catch (error) {
+    console.error('[getUserFollowing Failed]:', error);
+    return
+  }
+
+}
+
+//Get User Follower List
+export const getUserFollower = async (userId) => {
+  try {
+    const { data } = await axiosInstance.get(`/users/${userId}/followers`)
+    console.log('getUserFollower',data)
+    return data
+  } catch (error) {
+    console.error('[getUserFollowing Failed]:', error);
+    return
+  }
+
+}
+
+//Admin Delete Tweet
+export const deleteAdminTweet = async (tweetId) => {
+  try {
+    const { data } = await axiosInstance.delete(`/admin/tweets/${tweetId}`)
+    console.log(data.status)
+    return data
+  } catch (error) {
+    console.error('[刪除推文失敗]', error)
+    return
+  }
+}

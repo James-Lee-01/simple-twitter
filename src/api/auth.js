@@ -132,3 +132,16 @@ export const getUser = async (userId) => {
     return error
   }
 }
+
+
+//Admin Get Users
+export const getAdminUsers = async () => {
+  try {
+    const { data } = await axiosInstance.get(`/admin/users`)
+    console.log('getAdminUsers', data)
+    return data
+  } catch (error) {
+    console.error('[getAdminUsers Failed], error')
+    return
+  }
+}

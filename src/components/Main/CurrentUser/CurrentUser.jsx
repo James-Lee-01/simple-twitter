@@ -22,6 +22,7 @@ const CurrentUser = () => {
     const { currentUser } = useAuthContext();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isClicked, setIsClicked] = useState(isFollowed);
+
     const { isDataChange, setIsDataChange } = useDataChange()////
 
     useEffect(() => {
@@ -53,6 +54,7 @@ const CurrentUser = () => {
     const handleCloseModal = () => {
 			//Modal關閉
       setIsModalOpen(false);
+      
     };
 
     const handleClick = async () => {
@@ -137,6 +139,7 @@ const CurrentUser = () => {
           <UserEditModal
             handleCloseModal={handleCloseModal}
             id={userId}
+            // show={show}
             originName={userProfile.name}
             originIntroduction={userProfile.introduction}
             originAvatar={userProfile.avatar}

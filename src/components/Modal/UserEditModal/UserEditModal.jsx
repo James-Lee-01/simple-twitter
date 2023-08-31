@@ -9,7 +9,7 @@ import profileBG from "../../../assets/images/profileBG.jpeg";
 import Button from "../../Button/Button";
 
 import useUpdateChange from "../../../hooks/useUpdateChange";
-import { useDataChange } from "../../../contexts/DataChangeContext";
+// import { useDataChange } from "../../../contexts/DataChangeContext";
 
 function UserEditModal({
   originCoverPhoto,
@@ -26,10 +26,14 @@ function UserEditModal({
   const [name, setName] = useState(originName);
   const [introduction, setIntroduction] = useState(originIntroduction || "");
 
+	const [show, setShow] = useState(true);
+
   const { isUpdating, updateUserInfo } = useUpdateChange();
 
-  const { isDataChange, setIsDataChange } = useDataChange(); ////
-  //////Change Image/////////
+  // const { isDataChange, setIsDataChange } = useDataChange(); ////
+
+
+  ////Change Image/////////
   const handleImgChange = (event, type) => {
     if (!event.target.files[0]) {
       return;
@@ -40,7 +44,7 @@ function UserEditModal({
     ///如果是封面相片
     if (type === "cover") {
       setUpdateCoverPhoto(selectFile);
-      // setCoverPhoto(objectURL);
+      setCoverPhoto(objectURL);
     } else if (type === "avatar") {
       ///如果是頭貼相片
       setUpdateAvatar(selectFile);
@@ -52,13 +56,16 @@ function UserEditModal({
 	const handleCancelImg = () => {
     if (isUpdating) return;
     setCoverPhoto(originCoverPhoto);
-    // setUpdateCoverPhoto(null);
+    setUpdateCoverPhoto(null);
   };
 
   // const handleCloseIcon = (event) => {
-  //   if (isUpdating) return;
-    
-  //   // onClose(); ////pause
+  //   if (isUpdating) {
+	// 		setShow(false)
+	// 		return;
+	// 	}
+		
+  //   onClose(); ////pause
   // };
 
   const handleSubmit = async () => {
@@ -75,11 +82,15 @@ function UserEditModal({
       introduction,
       id,
     });
-		await setIsDataChange(!isDataChange)
+		// await setIsDataChange(!isDataChange)
+		if (!isUpdating) {
+      setShow(false);
+      handleCloseModal();
+    }
   };
 
 	const handleCloseModalAtBg = (event) => {
-    if (isUpdating) return;
+    if (!isUpdating) return;
     if (event.target.classList.contains(style.modalOverlay)) {
       handleCloseModal();
     }
@@ -87,13 +98,10 @@ function UserEditModal({
 
   
   return (
-    <div className={style.modalOverlay} 
-		onClick={handleCloseModalAtBg}
-		>
-      <Modal 
-				onClose={handleCloseModal}
-				onClick={handleCloseModal}
-
+    <div className={style.modalOverlay} onClick={handleCloseModalAtBg}>
+      <Modal
+        onClose={handleCloseModal}
+        show={show}
         headerComponent={
           <div className={style.headerContainer}>
             <div className={style.title}>編輯個人資料</div>
@@ -106,7 +114,6 @@ function UserEditModal({
             />
           </div>
         }
-        // show={prop.show}
       >
         <div className={style.userWrapper}>
           <div className={style.photoIcon}>
@@ -125,9 +132,7 @@ function UserEditModal({
             </label>
 
             {/* Cancel icon */}
-            <div className={style.cancel} 
-						onClick={handleCancelImg}
-						>
+            <div className={style.cancel} onClick={handleCancelImg}>
               <img
                 src={CancelIcon}
                 alt='CancelIcon'
@@ -135,6 +140,7 @@ function UserEditModal({
               />
             </div>
           </div>
+
           <div className={style.coverPhoto}>
             <img
               className={style.coverPhoto}
@@ -186,6 +192,7 @@ function UserEditModal({
                   onChange={(infoInput) => setIntroduction(infoInput)}
                   notification='字數超出限制'
                   lengthLimit={160}
+                  className={style.textarea}
                 />
                 {/* <label>自我介紹</label>
                 <textarea></textarea> */}

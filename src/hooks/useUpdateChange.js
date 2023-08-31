@@ -11,18 +11,18 @@ export default function useUpdateChange () {
       setIsUpdating (true)
 
       const formData = new FormData();
-            formData.append("coverPhoto", user.upCoverPhoto);
-            formData.append("avatar", user.upAvatar);
+            formData.append("cover", user.cover);
+            formData.append("avatar", user.avatar);
             formData.append("name", user.name);
             formData.append("introduction", user.introduction);
       const data = await setUserProfile (formData, user.id)
       
       if (data.status==="error") {
-            console.log('修改個人資料失敗')         
+            console.log('修改個人資料失敗:',data.message)         
           return
       }
       
-      console.log("修改個人資料成功",)
+      console.log(data.message)
       setIsUpdating(false)
 
     } catch (error) {
