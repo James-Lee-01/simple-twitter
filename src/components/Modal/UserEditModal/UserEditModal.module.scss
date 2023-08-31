@@ -25,7 +25,6 @@
 }
 
 .userWrapper {
-
     display: flex;
     flex-direction: column;
     position: relative;
@@ -42,7 +41,6 @@
     }
 		.photoIcon {
 			position: absolute;
-
 			display: flex;
 			justify-content: center;
 			align-items: center;
@@ -111,8 +109,8 @@
                 outline: none;
             }
     
-            textarea {
-                resize: none;
+            .textarea {
+                // resize: none;
                 height: 130px;
             }
 
@@ -131,7 +129,7 @@
 
         p {
             display: flex;
-            justify-content: end;
+            justify-content: flex-end;
             color: #657786;
             font-size: 15px;
             font-weight: 500;
@@ -142,4 +140,12 @@
 
             
     
+}
+.uploadIcon, .cancelIcon {
+    cursor: pointer;
+}
+
+.fileInput {
+    outline: 1px solid green;
+    display: none;
 }

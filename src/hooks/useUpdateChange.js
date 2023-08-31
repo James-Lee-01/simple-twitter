@@ -4,25 +4,28 @@ import { setUserProfile } from '../api/tweet'
 export default function useUpdateChange () {
   const [isUpdating, setIsUpdating] = useState(false)
 
-  const updateUser = async (user) => {
+  const updateUserInfo = async (user) => {
     try {
       if (isUpdating) return
 
       setIsUpdating (true)
+      console.log('6', user)
 
+      ///FormData.append(key, value)
       const formData = new FormData();
-            formData.append("coverPhoto", user.upCoverPhoto);
-            formData.append("avatar", user.upAvatar);
+            formData.append("cover", user.updateCoverPhoto);
+            formData.append("avatar", user.updateAvatar);
             formData.append("name", user.name);
             formData.append("introduction", user.introduction);
       const data = await setUserProfile (formData, user.id)
       
       if (data.status==="error") {
-            console.log('修改個人資料失敗')         
+            console.log('修改個人資料失敗:',data.message)         
           return
       }
       
-      console.log("修改個人資料成功",)
+      console.log(data.message)
+      console.log('check',data)
       setIsUpdating(false)
 
     } catch (error) {
@@ -32,6 +35,6 @@ export default function useUpdateChange () {
   } 
   return {
     isUpdating,
-    updateUser
+    updateUserInfo
   } 
 }

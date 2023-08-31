@@ -6,17 +6,27 @@ import AdminContainer from "./AdminContainer/AdminContainer";
 import tweetCancelImage from "../../assets/icons/tweet/tweet_cancel.png";
 import AdminTweetItem from "../../components/AdminTweetItem/AdminTweetItem.jsx";
 import { useState, useEffect } from "react";
-import { adminGetAllTweets } from "../../api/tweet";
+import { adminGetAllTweets, deleteAdminTweet } from "../../api/tweet";
 
-function AdminUserPage() {
+function AdminTweetPage() {
   const [tweets, setTweets] = useState([])
   
   ////// for DeleteTweets
-  // const handleDeleteTweet = (tweetIndex) => {
-  //   const updatedTweetList = tweetList.filter((_, index) => index !== tweetIndex);
-  //   setTweetList(updatedTweetList);
-  // };
-  ////////////////////////////////
+  const handleDelete = async (tweetId) => {
+    // console.log(tweetId)
+    try {
+      const confirmed = window.confirm("Are you sure you want to delete?");
+      if (confirmed) {
+      await deleteAdminTweet(tweetId);
+      setTweets((tweets) => {
+        return tweets.filter((tweet) => tweet.id !== tweetId);
+      });
+      console.log(`刪除推文成功： ${tweetId}`);
+      }
+    } catch (error) {
+      console.error("刪除推文失敗", error);
+    }
+  };
 
   useEffect(() => {
     const adminAllTweets = async () => {
@@ -29,12 +39,13 @@ function AdminUserPage() {
         if (data) {
           setTweets(data)
         }
+        return
       } catch (error) {
         console.error('[Admin Get All Tweets Failed]', error)
       }
     }
     adminAllTweets()
-  })
+  }, [])
 
   const tweetListAll = tweets.map((props) => {
     return (
@@ -46,7 +57,7 @@ function AdminUserPage() {
         account={props.User.account}
         createdAt={props.createdAt}
         description={props.description}
-        // onClick = {handleDelete}
+        onClick = {handleDelete}
       />
     );
   })
@@ -63,7 +74,7 @@ function AdminUserPage() {
   );
 }
 
-export default AdminUserPage;
+export default AdminTweetPage;
 
 
 /* {tweetList.map((user, index) => (

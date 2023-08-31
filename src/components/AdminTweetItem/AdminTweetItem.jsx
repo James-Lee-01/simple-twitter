@@ -11,34 +11,23 @@ export default function AdminTweetItem (props) {
     account,
     createdAt,
     description,
-    // onClick: handleDelete,
+    onClick:handleDelete,
   } = props;
 
-  // const deleteTweet = async () => {
-  //   try {
-  //     // 呼叫刪除API
-  //     // 例如：await deleteTweetAPI(tweetId);
-  //     console.log(`刪除推文 ${tweetId}`);
-      
-  //     if (handleDelete) {
-  //       handleDelete(tweetId);
-  //     }
-  //   } catch (error) {
-  //     console.error("刪除推文失敗", error);
-  //   }
-  // };
+  
 
   return (
-    <div className={styles.itemContainer}>
+    <div className={styles.itemContainer} key={tweetId}>
       <div className={styles.itemWrapper}>
-        <button className={styles.itemDeleteBtn}>
-          {/* <button className={styles.itemDeleteBtn} onClick={deleteTweet}> */}
+        <div className={styles.itemDeleteBtn}>
+          <button className={styles.itemDeleteBtn} onClick={() => handleDelete(tweetId)}>
           <img
             className={styles.itemDeleteIcon}
             src={admin_delete}
             alt='deleteIcon'
           />
-        </button>
+          </button>
+        </div>
         <div>
           <img
             className={styles.itemAvatar}
@@ -59,5 +48,5 @@ export default function AdminTweetItem (props) {
         </div>
       </div>
     </div>
-  );
+  )
 }
