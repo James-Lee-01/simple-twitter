@@ -1,25 +1,26 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Toast } from '../../../api/reply.js';
 import { getRelativeTime } from '../../../api/tweet.js';
 import { useAuthContext } from "../../../contexts/AuthContext.jsx";
-import { useDataStatus } from '../../../contexts/DataContext.jsx'
+import { useDataStatus } from '../../../contexts/DataContext.jsx';
 import clsx from 'clsx';
-import usePostReply from '../../../hooks/usePostReply.js'
+import usePostReply from '../../../hooks/usePostReply.js';
 import Button from '../../Button/Button.jsx';
 
 import modal_esc from '../../../assets/icons/modal/modal_esc.png';
 import styles from './SingleTweetReplyModal.module.scss';
 
 export default function SingleTweetReplyModal({ handleCloseModal, props }) {
-  const [textInput, setTextInput] = useState('');
+  const [replyText, setreplyText] = useState('');
   const { currentUser } = useAuthContext();
   const { isDataUpdate, setIsDataUpdate } = useDataStatus();
-  const { isUpdating, postReplyHook } = usePostReply();
+  const { isUpdating, replyPostHook } = usePostReply();
+  const [avatarUrl, setAvatarUrl] = useState(''); // 新增狀態變數來存放頭貼圖片URL
   
 
-  const warningClassName = clsx(styles.waring, { [styles.active]: textInput.length > 140 });
-  const headsUpClassName = clsx(styles.headsUp, { [styles.active]: textInput.length === 0 });
-  const bodyClassName = clsx(styles.body, { [styles.active]: textInput.length > 0 });
+  const warningClassName = clsx(styles.waring, { [styles.active]: replyText.length > 140 });
+  const headsUpClassName = clsx(styles.headsUp, { [styles.active]: replyText.length === 0 });
+  const bodyClassName = clsx(styles.body, { [styles.active]: replyText.length > 0 });
 
   const tweetId = props.id;
   const userName = props.User.name;
@@ -28,26 +29,38 @@ export default function SingleTweetReplyModal({ handleCloseModal, props }) {
   const description = props.description;
   const createdAt = props.createdAt;
 
+  useEffect(() => {
+    // 假設您的後端 API 是這樣的：GET /user/:userId/avatar
+    const userId = props.User.id;
+    fetch(`/api/user/${userId}/avatar`)
+      .then(response => response.json())
+      .then(data => {
+        setAvatarUrl(data.avatarUrl);
+      })
+      .catch(error => {
+        console.error('Error fetching avatar URL:', error);
+      });
+  }, [props.User.id]);
+
   const handlePostReply = async () => {
-    if (textInput.trim().length === 0) {
-      setTextInput('');
+    if (replyText.trim().length === 0) {
+      setreplyText('');
       Toast.fire({
         title: '內容不可空白',
         icon: 'error',
       });
       return;
+      
     }
-    if (textInput.length > 140) return;
-    await postReplyHook(textInput, tweetId)
-    await setTextInput('');
-    await setIsDataUpdate(!isDataUpdate)
+    if (replyText.length > 140) return;
+    await replyPostHook(replyText, tweetId);
+    setreplyText('');
+    setIsDataUpdate(!isDataUpdate);
     // setIsUpdating(true);
-
-
   };
 
 
-  const handleCloseModalAtBg = (e) => {
+  const handleCloseBtn = (e) => {
     if (!isUpdating) {
       if (e.target.classList.contains(styles.modalOverlay)) {
         handleCloseModal();
@@ -56,7 +69,7 @@ export default function SingleTweetReplyModal({ handleCloseModal, props }) {
   }
 
   return (
-    <div className={styles.modalOverlay} onClick={handleCloseModalAtBg}>
+    <div className={styles.modalOverlay} onClick={handleCloseBtn}>
       <div className={styles.modalContainer}>
         <div className={styles.header}>
           <div onClick={handleCloseModal}>
@@ -96,9 +109,9 @@ export default function SingleTweetReplyModal({ handleCloseModal, props }) {
 
           <textarea
             className={bodyClassName}
-            onChange={(event) => setTextInput(event.target.value)}
+            onChange={(event) => setreplyText(event.target.value)}
             placeholder="推你的回覆"
-            value={textInput}
+            value={replyText}
           />
 
           <div className={styles.footer}>
