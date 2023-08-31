@@ -9,6 +9,9 @@ import logo_gray from '../../../assets/icons/logo_gray.png'
 import mail from '../../../assets/icons/user/user_msg.png'
 import notify from '../../../assets/icons/user/user_notfi.png'
 import UserEditModal from "../../Modal/UserEditModal/UserEditModal";
+import profileBG from "../../../assets/images/profileBG.jpeg";
+
+import { useDataChange } from '../../../contexts/DataChangeContext'
 
 
 const CurrentUser = () => {
@@ -19,6 +22,8 @@ const CurrentUser = () => {
     const { currentUser } = useAuthContext();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isClicked, setIsClicked] = useState(isFollowed);
+
+    const { isDataChange, setIsDataChange } = useDataChange()////
 
     useEffect(() => {
       const getUserInfo = async () => {
@@ -34,13 +39,14 @@ const CurrentUser = () => {
               await setUserProfile(data);
               await setIsClicked(data.isFollowed);
             }
+            
           }
         } catch (error) {
           console.log("getUser Failed", error);
         }
       };
       getUserInfo();
-    }, [URL.userId]);
+    }, [URL.userId], isDataChange);////
 
 		const handleOpenModal = () => {
 			//Modal開啟
@@ -49,6 +55,7 @@ const CurrentUser = () => {
     const handleCloseModal = () => {
 			//Modal關閉
       setIsModalOpen(false);
+      
     };
 
     const handleClick = async () => {
@@ -57,12 +64,14 @@ const CurrentUser = () => {
           const data = await followUser(userId);
           if (data.followingId) {
             await setIsClicked(true);
+            await setIsDataChange(!isDataChange);////
           }
         }
         if (isClicked === true) {
           const data = await unFollowUser(userId);
           if (data.followingId) {
             await setIsClicked(false);
+            await setIsDataChange(!isDataChange);////
           }
         }
       } catch (error) {
@@ -73,7 +82,13 @@ const CurrentUser = () => {
 
     return (
       <div className={style.userWrapper}>
-        <div className={style.coverPhoto}></div>
+        <div className={style.coverPhoto}>
+          <img
+            src={userProfile?.cover || profileBG}
+            alt='coverPhoto'
+            className={style.coverImg}
+          />
+        </div>
         <div className={style.userAvatar}>
           <img
             className={style.avatar}
@@ -125,10 +140,11 @@ const CurrentUser = () => {
           <UserEditModal
             handleCloseModal={handleCloseModal}
             id={userId}
+            // show={show}
             originName={userProfile.name}
             originIntroduction={userProfile.introduction}
             originAvatar={userProfile.avatar}
-            originCoverPhoto={userProfile.coverPhoto}
+            originCoverPhoto={userProfile.cover}
           />
         )}
       </div>

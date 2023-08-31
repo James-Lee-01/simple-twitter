@@ -3,64 +3,83 @@ import { followUser, unFollowUser } from '../../../../api/tweet';
 import { useState, useEffect } from 'react';
 import Button from '../../../Button/Button';
 import logo_gray from '../../../../assets/icons/logo_gray.png'
+import { Link } from 'react-router-dom';
+///////////
 
 
-function SuggestUserItem({user}) {
-    const name = user.name
-		const account = user.account
-		const userId = user.userId
-		const isFollowed = user.isFollowed
-		const avatar = user.avatar
+function SuggestUserItem(props) {
+    const name = props.name
+		const account = props.account
+		const userId = props.userId;
+		const isFollowed = props.isFollowed
+		const avatar = props.avatar
+		const id = props.userId;
 
 		const [isClicked, setIsClicked] = useState(isFollowed)
-
-		const handleClick = async() => {
-			try {
-				if (isClicked === true) {
-					const data = await unFollowUser(userId)
-					if (data.followId) {
-						setIsClicked(false)
-						console.log(data.followId)
-					}
-				}
-				if (isClicked === false) {
-					const data = await followUser(userId)
-					if (data.followId) {
-						setIsClicked(true)
-						console.log(data.followId);
-					}
-				}
-			} catch (error) {
-				console.error('[Click FollowBtn Failed]', error)
-			}
-		}
 
 		useEffect(() => {
 			setIsClicked(isFollowed)
 		}, [isFollowed])
 
-    return (
-      <div className={style.suggestUserItem}>
-        <div className={style.userWrapper}>
-          <div className={style.userAvatar}>
+		const handleClick = async() => {
+			try {
+				if (isClicked === true) {
+					const data = await unFollowUser(userId)
+					if (data.status === 'success') {
+						setIsClicked(false)
+						console.log(isClicked);
+						
+					}
+				}
+				if (isClicked === false) {
+					const data = await followUser(userId)
+					if (data.status === "success") {
+            setIsClicked(true);
+            console.log(isClicked);
+          }
+				}
+				return
+			} catch (error) {
+				console.error('[Click FollowBtn Failed]', error)
+			}
+		}
 
+		
+
+    return (
+      <div className={style.suggestUserItem} id={id}>
+        <Link to={`/user/${id}/tweet`}>
+          <div className={style.userWrapper}>
+            <div className={style.userAvatar}>
               <img
                 className={style.avatar}
                 src={avatar || logo_gray}
                 alt='avatar'
               />
+            </div>
+            <div className={style.userInfo}>
+              <span className={style.userName}> {name} </span>
+              <span className={style.userAccount}> @{account} </span>
+            </div>
+          </div>
+        </Link>
 
-          </div>
-          <div className={style.userInfo}>
-            <span className={style.userName}> { name } </span>
-            <span className={style.userAccount}> @{ account } </span>
-          </div>
-        </div>
-        <div className={style.followButton} onClick={handleClick}>
+        <div className={style.followButton}>
           {isClicked ? (
-            <Button className={style.following} title='正在跟隨' size='large' isActive/>
+            <Button
+              className={style.following}
+              title='正在跟隨'
+              size='large'
+              isActive
+              onClick={handleClick}
+            />
           ) : (
-            <Button className={style.unfollow} title='跟隨' size='small'/>
+            <Button
+              className={style.unfollow}
+              title='跟隨'
+              size='small'
+              onClick={handleClick}
+            />
           )}
         </div>
       </div>

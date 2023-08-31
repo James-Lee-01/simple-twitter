@@ -1,30 +1,84 @@
+import { useState, useEffect } from "react";
 import style from "./FollowTypeCard.module.scss";
+import { followUser, unFollowUser } from "../../../api/tweet";
+import Button from "../../Button/Button";
+import defaultAvatar from '../../../assets/icons/logo_gray.png'
+import { Link } from "react-router-dom";
 
-const FollowTypeCard = ({user}) => {
-    return <div className={style.follow}>
-    <div className={style.followAvatar}>
-        <div className={style.avatar}></div>
-    </div>
-    <div className={style.followInfo}>
-        <div className={style.followWrap}>
+function FollowTypeCard (props) {
+    const userId = props.userId;
+    const name = props.name;
+    const avatar = props.avatar;
+    const introduction = props.introduction;
+    const isFollowed = props.isFollowed;
+
+    const [ isClicked, setIsClicked] = useState(isFollowed)
+
+    useEffect(() => {
+        setIsClicked(isFollowed);
+    }, [isFollowed]);
+
+    const handleClick = async () => {
+        try {
+            if (isClicked === true) {
+                //Change to unfollow
+                const data = await unFollowUser(userId)
+                if (data.status === "success") {
+                  setIsClicked(false);
+                  console.log(isClicked);
+                }
+            }
+            if (isClicked === false) {
+                //Change to follow
+                const data = await followUser(userId)
+                if (data.status === "success") {
+                  setIsClicked(true);
+                  console.log(isClicked);
+                }
+            }
+        } catch (error) {
+            console.log('[Click Undone]', error)
+        }
+    }
+    
+
+    return (
+      <div className={style.follow}>
+        <Link to={`/user/${userId}/tweet`}>
+          <div className={style.followAvatar}>
+            <img
+              className={style.avatar}
+              src={avatar || defaultAvatar}
+              alt='avatar'
+            />
+          </div>
+        </Link>
+        <div className={style.followInfo}>
+          <div className={style.followWrap}>
             <div className={style.followUser}>
-                <span className={style.followName}>{user.name}</span>
-                <span className={style.followAccount}>@{user.account}</span>
+              <Link to={`/user/${userId}/tweet`}>
+                <span className={style.followName}>{name}</span>
+              </Link>
             </div>
             <div className={style.followTypeButton}>
-                { user.isFollowing ? 
-                    <button className={style.followingButton}>正在跟隨</button> :
-                    <button className={style.followButton}>跟隨</button>
-                }
+              {isClicked ? (
+                <Button
+                  title='正在跟隨'
+                  size='following'
+                  isActive
+                  onClick={handleClick}
+                />
+              ) : (
+                <Button title='跟隨' size='follow' onClick={handleClick} />
+              )}
             </div>
+          </div>
+          <div className={style.followContent}>
+            <p>{introduction}</p>
+          </div>
         </div>
-        <div class={style.followContent}>
-            <p>
-                Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.
-            </p>
-        </div>
-    </div>
-</div>
+      </div>
+    );
 }
 
 export default FollowTypeCard;

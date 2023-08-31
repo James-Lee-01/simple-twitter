@@ -9,6 +9,14 @@
     .coverPhoto {
         height: 200px;
         background-color: #aaa;
+        .coverImg {
+                
+            display: block;
+            object-fit: cover;
+            
+            width: 100%;
+            height: 100%;
+            }
     }
 
     .userAvatar {

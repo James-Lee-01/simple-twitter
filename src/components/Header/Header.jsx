@@ -15,8 +15,12 @@ import SignoutActionIcon from '../../assets/icons/nav/nav_signout_action.png';
 import ItemContainer from './ItemContainer/ItemContainer';
 import Logo from './Logo/Logo';
 import Button from '../Button/Button';
+import { currentUser } from "../../contexts/AuthContext.jsx";
 
 function Header({ isAdmin }) {
+    const { currentUser } = useAuthContext()
+    const userId = currentUser.id
+
     const links = [
         {
             path: '/main',
@@ -25,7 +29,7 @@ function Header({ isAdmin }) {
             actionIcon: HomeActionIcon
         },
         {
-            path: '/profile',
+            path: `/user/${userId}/tweet`,
             text: '個人資料',
             icon: UserIcon,
             actionIcon: UserActionIcon
@@ -68,6 +72,7 @@ function Header({ isAdmin }) {
                         {...link}
                         action={location.pathname === link.path}
                         key={index}
+                        
                     />)}
                 </div>
                 {!isAdmin &&
