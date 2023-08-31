@@ -223,5 +223,5 @@ export const setUserProfile = async (formData, userId) => {
 
 };
 
-//
-export const apiHelper = axiosInstance;
+//Export axiosInstance as function
+export const apiFunction = axiosInstance;

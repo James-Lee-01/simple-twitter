@@ -14,7 +14,8 @@ export default function SingleTweetReplyModal({ handleCloseModal, props }) {
   const [textInput, setTextInput] = useState('');
   const { currentUser } = useAuthContext();
   const { isDataUpdate, setIsDataUpdate } = useDataStatus();
-  const { isUpdating, postReplyHook } = usePostReply()
+  const { isUpdating, postReplyHook } = usePostReply();
+  
 
   const warningClassName = clsx(styles.waring, { [styles.active]: textInput.length > 140 });
   const headsUpClassName = clsx(styles.headsUp, { [styles.active]: textInput.length === 0 });
@@ -40,13 +41,17 @@ export default function SingleTweetReplyModal({ handleCloseModal, props }) {
     await postReplyHook(textInput, tweetId)
     await setTextInput('');
     await setIsDataUpdate(!isDataUpdate)
+    // setIsUpdating(true);
+
+
   };
 
 
   const handleCloseModalAtBg = (e) => {
-    if (isUpdating) return
-    if (e.target.classList.contains(styles.modalOverlay)) {
-      handleCloseModal()
+    if (!isUpdating) {
+      if (e.target.classList.contains(styles.modalOverlay)) {
+        handleCloseModal();
+      }
     }
   }
 

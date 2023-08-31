@@ -9,7 +9,7 @@ export default function usePostReply() {
     try {
       if (isUpdating) return
 
-      setIsUpdating(true)
+      setIsUpdating(true);
       const res = await postReply(textInput, tweetId);
 
       if (res.id) {
@@ -31,7 +31,7 @@ export default function usePostReply() {
         title: '回覆發送失敗',
         icon: 'error',
       });
-      setIsUpdating(false)
+      setIsUpdating(false);
 
     }
   }
