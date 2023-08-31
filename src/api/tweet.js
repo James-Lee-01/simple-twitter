@@ -30,10 +30,10 @@ export const getRelativeTime = (createdAt) => {
 
   if (seconds < 60) {
     return `${seconds}秒前`;
-  } else if (seconds < 3600) {
+  } else if (seconds >= 60 && seconds < 3600) {
     const minutes = Math.floor(seconds / 60);
     return `${minutes}分鐘前`;
-  } else if (seconds < 86400) {
+  } else if (seconds >= 3600 && seconds < 86400) {
     const hours = Math.floor(seconds / 3600);
     return `${hours}小時前`;
   } else {

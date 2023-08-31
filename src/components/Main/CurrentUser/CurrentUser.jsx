@@ -55,6 +55,7 @@ const CurrentUser = () => {
     const handleCloseModal = () => {
 			//Modal關閉
       setIsModalOpen(false);
+       ////
       
     };
 
@@ -84,7 +85,8 @@ const CurrentUser = () => {
       <div className={style.userWrapper}>
         <div className={style.coverPhoto}>
           <img
-            src={userProfile?.cover || profileBG}
+            // src={userProfile?.cover || profileBG}
+            src={userProfile?.cover}
             alt='coverPhoto'
             className={style.coverImg}
           />
@@ -145,6 +147,7 @@ const CurrentUser = () => {
             originIntroduction={userProfile.introduction}
             originAvatar={userProfile.avatar}
             originCoverPhoto={userProfile.cover}
+            
           />
         )}
       </div>

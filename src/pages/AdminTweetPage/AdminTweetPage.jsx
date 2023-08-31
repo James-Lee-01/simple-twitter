@@ -1,9 +1,9 @@
 import style from "./AdminTweetPage.module.scss";
 import MainLayout from "../../components/Main/MainLayout/MainLayout";
 import Navbar from "../../components/Main/Navbar/Navbar";
-import TweetItem from "../../components/Main/TweetItem/TweetItem";
+// import TweetItem from "../../components/Main/TweetItem/TweetItem";
 import AdminContainer from "./AdminContainer/AdminContainer";
-import tweetCancelImage from "../../assets/icons/tweet/tweet_cancel.png";
+// import tweetCancelImage from "../../assets/icons/tweet/tweet_cancel.png";
 import AdminTweetItem from "../../components/AdminTweetItem/AdminTweetItem.jsx";
 import { useState, useEffect } from "react";
 import { adminGetAllTweets, deleteAdminTweet } from "../../api/tweet";

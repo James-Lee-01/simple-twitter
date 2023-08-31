@@ -8,7 +8,8 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { getUserTweet } from '../../api/tweet.js'
 
-import SingleUserTweet from "../../components/Main/TweetItem/SingleUserTweet";
+// import SingleUserTweet from "../../components/Main/TweetItem/SingleUserTweet";
+import TweetItem from "../../components/Main/TweetItem/TweetItem";
 
 
 const UserTweetPage = () => {
@@ -49,17 +50,35 @@ const UserTweetPage = () => {
 
 
   const tweetsList = tweets.map((props) => {
+    console.log('2',props)
     return (
-      <SingleUserTweet
+      <TweetItem
         key={props.id}
         tweetId={props.id}
         description={props.description}
         likedCount={props.likedCount}
         replyCount={props.replyCount}
         createdAt={props.createdAt}
+        userId={props.User.id}
+        userName={props.User.userName}
+        account={props.User.account}
+        avatar={props.User.avatar}
+        isLiked={props.isLiked}
       />
     );
   });
+  // const tweetsList = tweets.map((props) => {
+  //   return (
+  //     <SingleUserTweet
+  //       key={props.id}
+  //       tweetId={props.id}
+  //       description={props.description}
+  //       likedCount={props.likedCount}
+  //       replyCount={props.replyCount}
+  //       createdAt={props.createdAt}
+  //     />
+  //   );
+  // });
 
   return (
     <MainLayout>
