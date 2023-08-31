@@ -12,18 +12,17 @@ function AdminTweetPage() {
   const [tweets, setTweets] = useState([])
   
   ////// for DeleteTweets
-  // const handleDeleteTweet = (tweetIndex) => {
-  //   const updatedTweetList = tweetList.filter((_, index) => index !== tweetIndex);
-  //   setTweetList(updatedTweetList);
-  // };
-  ////////////////////////////////
   const handleDelete = async (tweetId) => {
+    // console.log(tweetId)
     try {
+      const confirmed = window.confirm("Are you sure you want to delete?");
+      if (confirmed) {
       await deleteAdminTweet(tweetId);
-      setTweets((preTweets) => {
-        return preTweets.filter((props) => props.id !== tweetId);
+      setTweets((tweets) => {
+        return tweets.filter((tweet) => tweet.id !== tweetId);
       });
       console.log(`刪除推文成功： ${tweetId}`);
+      }
     } catch (error) {
       console.error("刪除推文失敗", error);
     }

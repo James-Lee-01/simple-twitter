@@ -20,7 +20,7 @@ export default function AdminTweetItem (props) {
     <div className={styles.itemContainer} key={tweetId}>
       <div className={styles.itemWrapper}>
         <div className={styles.itemDeleteBtn}>
-          <button className={styles.itemDeleteBtn} onClick={handleDelete}>
+          <button className={styles.itemDeleteBtn} onClick={() => handleDelete(tweetId)}>
           <img
             className={styles.itemDeleteIcon}
             src={admin_delete}
