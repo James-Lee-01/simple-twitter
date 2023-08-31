@@ -9,10 +9,12 @@ export default function useUpdateChange () {
       if (isUpdating) return
 
       setIsUpdating (true)
+      console.log('6', user)
 
+      ///FormData.append(key, value)
       const formData = new FormData();
-            formData.append("cover", user.cover);
-            formData.append("avatar", user.avatar);
+            formData.append("cover", user.updateCoverPhoto);
+            formData.append("avatar", user.updateAvatar);
             formData.append("name", user.name);
             formData.append("introduction", user.introduction);
       const data = await setUserProfile (formData, user.id)
@@ -23,6 +25,7 @@ export default function useUpdateChange () {
       }
       
       console.log(data.message)
+      console.log('check',data)
       setIsUpdating(false)
 
     } catch (error) {

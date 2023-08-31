@@ -31,14 +31,11 @@
                 display: flex;
                 flex-direction: column;
 
-                .followName {
+                span {
                     color: #1C1C1C;
                     font-weight: 700;
                     margin-bottom: 5px;
-                }
-                .followAccount {
-                    color: #657786;
-                    font-weight: 500;
+                    line-height: 26px;
                 }
             }
 
@@ -47,14 +44,14 @@
                 margin-right: 15px;
 
                 button {
-                    height: 25px;
-                    padding: 5px 15px;
-                    border-radius: 100px;
-                    font-weight: 700;
-                    font-size: 15px;
-                    line-height: 15px;
-                    outline: none;
-                    border: none;
+                    // height: 25px;
+                    // padding: 5px 15px;
+                    // border-radius: 100px;
+                    // font-weight: 700;
+                    // font-size: 15px;
+                    // line-height: 15px;
+                    // outline: none;
+                    // border: none;
                     cursor: pointer;
                 }
 
