@@ -18,10 +18,12 @@ import AdminUserPage from "./pages/AdminUserPage/AdminUserPage.jsx";
 import { AuthProvider } from "./contexts/AuthContext.jsx";
 import { DataChangeProvider } from './contexts/DataChangeContext.jsx'
 
+const basename = process.env.PUBLIC_URL;
+
 function App() {
   return (
     <div className='App'>
-      <BrowserRouter>
+      <BrowserRouter basename={basename}>
         <AuthProvider>
           <DataChangeProvider>
             <Routes>
