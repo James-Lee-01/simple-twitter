@@ -12,19 +12,6 @@ export default function usePostReply() {
       //執行回覆發送postReply
       const res = await postReply(textInput, tweetId);
 
-      console.log('Response from postReply:', res);
-
-      if (res.id) {
-        Toast.fire({
-          title: '回覆發送成功',
-          icon: 'success',
-        });
-      } else {
-        Toast.fire({
-          title: '回覆發送失敗',
-          icon: 'error',
-        });
-      }
       setIsUpdating(false); //回覆發送操作結束
 
     } catch (error) {
