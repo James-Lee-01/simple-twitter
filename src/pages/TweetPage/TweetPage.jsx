@@ -6,6 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { getTweet, getTweetReplies } from "../../api/tweet.js";
 import ReplyItem from '../../components/Main/ReplyListCard/ReplyListCard';
+import SingleTweetReplyModal from '../../components/Modal/SingleTweetReplyModal/SingleTweetReplyModal.jsx';
 
 import { useAuthContext } from "../../contexts/AuthContext.jsx";
 import {  useLocation } from "react-router-dom";
@@ -15,11 +16,22 @@ export default function TweetPage() {
   const param = useParams();
   const [tweet, setTweet] = useState("");
   const [user, setUser] = useState({});
-  const [replies, setReplies] = useState([]);
 
   const { isAuthenticated } = useAuthContext();
   const navigate = useNavigate();
   const { pathname } = useLocation();
+  const [replies, setReplies] = useState([])
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  // const navigate = useNavigate();
+
+  const handleOpenModal = () => {
+    //Modal開啟
+    setIsModalOpen(true);
+  };
+  const handleCloseModal = () => {
+    //Modal關閉
+    setIsModalOpen(false);
+  };
 
   //Get Single Tweet API
   useEffect(() => {
@@ -66,6 +78,7 @@ export default function TweetPage() {
         createdAt={reply.createdAt}
         comment={reply.comment}
         tweetAccount={reply.repliesAccount}
+        className={styles.replyItem}
       />
     );
   });
@@ -77,19 +90,30 @@ export default function TweetPage() {
     }
   }, [pathname, navigate, isAuthenticated]);
 
+
   return (
-    <MainLayout>
-      <Navbar title='推文' hasBack={true} />
-      <div>
-        {tweet && (
-          <SingleTweetCard
+    <div className={styles.mainContainer}>
+      <MainLayout>
+        <Navbar title='推文' hasBack={true} />
+        <div>
+          {tweet && (
+            <SingleTweetCard
+              props={tweet}
+              userProps={user}
+              onClick={handleOpenModal}
+            />
+          )}
+        </div>
+        <div className={styles.listContainer}>
+          {replies && repliesList}
+        </div>
+        {isModalOpen && (
+          <SingleTweetReplyModal
+            handleCloseModal={handleCloseModal}
             props={tweet}
-            userProps={user}
-            // onClick={handleOpenModal}
           />
         )}
-      </div>
-      <div className={styles.listContainer}>{replies && repliesList}</div>
-    </MainLayout>
+      </MainLayout>
+    </div>
   );
 }

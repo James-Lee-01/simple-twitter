@@ -1,0 +1,14 @@
+.mainContainer {
+  max-width: 100%;
+}
+
+.listContainer {
+  max-width: 100%;
+}
+
+.replyItem {
+  max-width: 400px; // 可以根據需要調整最大寬度
+  word-wrap: break-word; // 讓文字換行
+  overflow-wrap: break-word; // 適用於非英語語言的換行
+  /* 這裡可以添加其他文字相關的樣式設定，如字體大小、行高等 */
+}

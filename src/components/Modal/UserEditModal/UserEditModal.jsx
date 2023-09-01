@@ -22,13 +22,13 @@ function UserEditModal({
   id,
 }) {
   const [coverPhoto, setCoverPhoto] = useState(originCoverPhoto || profileBG);
-	const [updateCoverPhoto, setUpdateCoverPhoto] = useState(coverPhoto);
+  const [updateCoverPhoto, setUpdateCoverPhoto] = useState(coverPhoto);
   const [avatar, setAvatar] = useState(originAvatar || logo_gray);
-	const [updateAvatar, setUpdateAvatar] = useState(avatar);
+  const [updateAvatar, setUpdateAvatar] = useState(avatar);
   const [name, setName] = useState(originName);
   const [introduction, setIntroduction] = useState(originIntroduction || "");
 
-	const [show, setShow] = useState(true);
+  const [show, setShow] = useState(true);
 
   const { isUpdating, updateUserInfo } = useUpdateChange();
 
@@ -58,7 +58,7 @@ function UserEditModal({
   };
 
   /////////////////////////////
-	const handleCancelImg = () => {
+  const handleCancelImg = () => {
     if (isUpdating) return;
     setCoverPhoto(originCoverPhoto);
     setUpdateCoverPhoto(null);
@@ -66,10 +66,10 @@ function UserEditModal({
 
   // const handleCloseIcon = (event) => {
   //   if (isUpdating) {
-	// 		setShow(false)
-	// 		return;
-	// 	}
-		
+  // 		setShow(false)
+  // 		return;
+  // 	}
+
   //   onClose(); ////pause
   // };
 
@@ -86,7 +86,7 @@ function UserEditModal({
       setIntroMsg("字數超出上限");
       return;
     }
-		///以下為傳送至API的value名稱
+    ///以下為傳送至API的value名稱
     await updateUserInfo({
       updateCoverPhoto,
       updateAvatar,
@@ -102,7 +102,7 @@ function UserEditModal({
     console.log(updateUserInfo);///
   };
 
-	const handleCloseModalAtBg = (event) => {
+  const handleCloseBtn = (event) => {
     if (!isUpdating) return;
     if (event.target.classList.contains(style.modalOverlay)) {
       handleCloseModal();
@@ -115,7 +115,7 @@ function UserEditModal({
 
   
   return (
-    <div className={style.modalOverlay} onClick={handleCloseModalAtBg}>
+    <div className={style.modalOverlay} onClick={handleCloseBtn}>
       <Modal
         onClose={handleCloseModal}
         show={show}
