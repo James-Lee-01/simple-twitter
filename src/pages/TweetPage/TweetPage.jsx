@@ -7,13 +7,19 @@ import { useState, useEffect } from 'react';
 import { getTweet, getTweetReplies } from "../../api/tweet.js";
 import ReplyItem from '../../components/Main/ReplyListCard/ReplyListCard';
 
+import { useAuthContext } from "../../contexts/AuthContext.jsx";
+import {  useLocation } from "react-router-dom";
+
 export default function TweetPage() {
   //利用useParams的hook取得id值
   const param = useParams();
-  const [tweet, setTweet] = useState('');
+  const [tweet, setTweet] = useState("");
   const [user, setUser] = useState({});
-  const [replies, setReplies] = useState([])
-  // const navigate = useNavigate()
+  const [replies, setReplies] = useState([]);
+
+  const { isAuthenticated } = useAuthContext();
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   //Get Single Tweet API
   useEffect(() => {
@@ -49,7 +55,6 @@ export default function TweetPage() {
     getReplies();
   }, [param.tweetId]);
 
-
   const repliesList = replies.map((reply) => {
     return (
       <ReplyItem
@@ -66,12 +71,11 @@ export default function TweetPage() {
   });
 
   //頁面導向限制
-  // useEffect(() => {
-  //   if (!isAuthenticated && isAuthChecked) {
-  //     navigate("/login");
-  //   }
-  // }, [navigate, isAuthenticated, isAuthChecked]);
-
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate("/login");
+    }
+  }, [pathname, navigate, isAuthenticated]);
 
   return (
     <MainLayout>
@@ -85,9 +89,7 @@ export default function TweetPage() {
           />
         )}
       </div>
-      <div className={styles.listContainer}>
-        {replies && repliesList}
-      </div>
+      <div className={styles.listContainer}>{replies && repliesList}</div>
     </MainLayout>
   );
 }

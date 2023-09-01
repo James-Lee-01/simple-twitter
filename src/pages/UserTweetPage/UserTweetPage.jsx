@@ -11,12 +11,23 @@ import { getUserTweet } from '../../api/tweet.js'
 // import SingleUserTweet from "../../components/Main/TweetItem/SingleUserTweet";
 import TweetItem from "../../components/Main/TweetItem/TweetItem";
 
+import { useAuthContext } from "../../contexts/AuthContext.jsx";
+import { useNavigate, useLocation } from "react-router-dom";
+
+import { useDataChange } from "../../contexts/DataChangeContext";
+
+
 
 const UserTweetPage = () => {
   const { userId } = useParams();
-	const [tweets, setTweets] = useState([]);
-  const URL = useParams()
+  const [tweets, setTweets] = useState([]);
+  const URL = useParams();
 
+  const { isAuthenticated } = useAuthContext();
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
+
+  const { isDataChange } = useDataChange(); ////
 
   ///////////////////
   const linkList = [
@@ -46,11 +57,10 @@ const UserTweetPage = () => {
       }
     };
     getAllUserTweets();
-  }, []);
-
+  }, [URL.userId, isDataChange]);
 
   const tweetsList = tweets.map((props) => {
-    console.log('2',props)
+    // console.log("2", props);
     return (
       <TweetItem
         key={props.id}
@@ -67,6 +77,13 @@ const UserTweetPage = () => {
       />
     );
   });
+
+  //prohibited
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate("/login");
+    }
+  }, [pathname, navigate, isAuthenticated]);
   // const tweetsList = tweets.map((props) => {
   //   return (
   //     <SingleUserTweet
@@ -87,9 +104,7 @@ const UserTweetPage = () => {
       </Navbar>
       <CurrentUser />
       <UserToggleMenu linkList={linkList} />
-      <div className={style.tweetList}>
-        {tweetsList}
-      </div>
+      <div className={style.tweetList}>{tweetsList}</div>
     </MainLayout>
   );
 }

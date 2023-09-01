@@ -7,11 +7,17 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getUserFollowing } from "../../api/tweet";
 
+import { useAuthContext } from "../../contexts/AuthContext.jsx";
+import { useNavigate, useLocation } from "react-router-dom";
+
 const UserFollowingPage = () => {
   const { userId } = useParams();
-  const URL = useParams()
-  const [usersList, setUsersList] = useState([])
+  const URL = useParams();
+  const [usersList, setUsersList] = useState([]);
 
+      const { isAuthenticated } = useAuthContext();
+      const navigate = useNavigate();
+      const { pathname } = useLocation();
 
   const linkList = [
     { title: "跟隨者", link: `/user/${userId}/follower` },
@@ -28,7 +34,7 @@ const UserFollowingPage = () => {
           // console.log("7", data);
         }
         if (!data) {
-          console.log('No data');
+          console.log("No data");
           return;
         }
       } catch (error) {
@@ -38,14 +44,10 @@ const UserFollowingPage = () => {
     getUserFollowingList();
   }, [URL.userId]);
 
-
-
-  
-
   const followingUsers = usersList.map((user) => {
     return (
       <FollowTypeCard
-        key = {user.followingId}
+        key={user.followingId}
         userId={user.followingId}
         name={user.name}
         avatar={user.avatar}
@@ -54,6 +56,13 @@ const UserFollowingPage = () => {
       />
     );
   });
+
+  //頁面導向限制
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate("/login");
+    }
+  }, [pathname, navigate, isAuthenticated]);
 
   return (
     <MainLayout>

@@ -8,20 +8,27 @@ import AdminTweetItem from "../../components/AdminTweetItem/AdminTweetItem.jsx";
 import { useState, useEffect } from "react";
 import { adminGetAllTweets, deleteAdminTweet } from "../../api/tweet";
 
+import { useAuthContext } from "../../contexts/AuthContext.jsx";
+import { useNavigate, useLocation } from "react-router-dom";
+
 function AdminTweetPage() {
-  const [tweets, setTweets] = useState([])
-  
+  const { isAuthenticated } = useAuthContext();
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
+
+  const [tweets, setTweets] = useState([]);
+
   ////// for DeleteTweets
   const handleDelete = async (tweetId) => {
     // console.log(tweetId)
     try {
       const confirmed = window.confirm("Are you sure you want to delete?");
       if (confirmed) {
-      await deleteAdminTweet(tweetId);
-      setTweets((tweets) => {
-        return tweets.filter((tweet) => tweet.id !== tweetId);
-      });
-      console.log(`刪除推文成功： ${tweetId}`);
+        await deleteAdminTweet(tweetId);
+        setTweets((tweets) => {
+          return tweets.filter((tweet) => tweet.id !== tweetId);
+        });
+        console.log(`刪除推文成功： ${tweetId}`);
       }
     } catch (error) {
       console.error("刪除推文失敗", error);
@@ -31,21 +38,28 @@ function AdminTweetPage() {
   useEffect(() => {
     const adminAllTweets = async () => {
       try {
-        const data = await adminGetAllTweets()
-        if (data.status === 'error') {
-          console.log(data)
-          return
+        const data = await adminGetAllTweets();
+        if (data.status === "error") {
+          console.log(data);
+          return;
         }
         if (data) {
-          setTweets(data)
+          setTweets(data);
         }
-        return
+        return;
       } catch (error) {
-        console.error('[Admin Get All Tweets Failed]', error)
+        console.error("[Admin Get All Tweets Failed]", error);
       }
+    };
+    adminAllTweets();
+  }, []);
+
+  //prohibited
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate("/login");
     }
-    adminAllTweets()
-  }, [])
+  }, [pathname, navigate, isAuthenticated]);
 
   const tweetListAll = tweets.map((props) => {
     return (
@@ -57,18 +71,16 @@ function AdminTweetPage() {
         account={props.User.account}
         createdAt={props.createdAt}
         description={props.description}
-        onClick = {handleDelete}
+        onClick={handleDelete}
       />
     );
-  })
+  });
 
   return (
     <MainLayout extendMainContainer={true} isAdmin={true}>
       <Navbar title='推文清單' />
       <AdminContainer>
-        <div className={style.tweetList}>
-          { tweetListAll }
-        </div>
+        <div className={style.tweetList}>{tweetListAll}</div>
       </AdminContainer>
     </MainLayout>
   );

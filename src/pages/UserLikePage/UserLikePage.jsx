@@ -9,12 +9,19 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { getUserLike } from "../../api/tweet";
 
+import { useAuthContext } from "../../contexts/AuthContext.jsx";
+import { useNavigate, useLocation } from "react-router-dom";
+
 
 const UserLikePage = () => {
   const { userId } = useParams();
 
   const URL = useParams();
   const [userLike, setUserLike] = useState([]);
+
+  const { isAuthenticated } = useAuthContext();
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   const linkList = [
     { title: "推文", link: `/user/${userId}/tweet` },
@@ -46,7 +53,6 @@ const UserLikePage = () => {
     getUserLikeTweets();
   }, [URL.userId]);
 
-
   const likeTweetsList = userLike.map((props) => {
     // console.log(" get!", props);
     return (
@@ -65,6 +71,13 @@ const UserLikePage = () => {
       />
     );
   });
+
+  //prohibited
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate("/login");
+    }
+  }, [pathname, navigate, isAuthenticated]);
 
   return (
     <MainLayout>

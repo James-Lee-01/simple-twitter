@@ -6,14 +6,15 @@
     position: relative;
     margin-bottom: 20px;
 
+    // position: relative;
+    // z-index: -1;
+
     .coverPhoto {
         height: 200px;
         background-color: #aaa;
-        .coverImg {
-                
+        img {
             display: block;
             object-fit: cover;
-            
             width: 100%;
             height: 100%;
             }
@@ -126,6 +127,10 @@
         }
     }
 
+    .btn {
+        position: relative;
+        z-index: 0;
+    }
             
     
 }

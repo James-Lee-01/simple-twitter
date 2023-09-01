@@ -9,11 +9,18 @@ import SingleUserReply from "../../components/Main/ReplyListCard/SingleUserReply
 import { useState, useEffect } from "react";
 import { getUserReply } from "../../api/tweet";
 
+import { useAuthContext } from "../../contexts/AuthContext.jsx";
+import { useNavigate, useLocation } from "react-router-dom";
+
 
 const UserReplyPage = () => {
   const { userId } = useParams();
-  const URL = useParams()
-  const [userReply, setUserReply] = useState([])
+  const URL = useParams();
+  const [userReply, setUserReply] = useState([]);
+
+  const { isAuthenticated } = useAuthContext();
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   const linkList = [
     { title: "推文", link: `/user/${userId}/tweet` },
@@ -51,11 +58,19 @@ const UserReplyPage = () => {
         // key={props.id}
         // tweetId={props.id}
         createdAt={props.createdAt}
-        tweetAccount = {props.Tweet.User.name}
-        const comment = {props.comment}
+        tweetAccount={props.Tweet.User.name}
+        const
+        comment={props.comment}
       />
     );
   });
+
+  //prohibited
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate("/login");
+    }
+  }, [pathname, navigate, isAuthenticated]);
 
   return (
     <MainLayout>
@@ -64,10 +79,7 @@ const UserReplyPage = () => {
       </Navbar>
       <CurrentUser />
       <UserToggleMenu linkList={linkList} />
-      <div className={style.replyList}>
-
-        {replyTweetsList}
-      </div>
+      <div className={style.replyList}>{replyTweetsList}</div>
     </MainLayout>
   );
 }

@@ -9,7 +9,9 @@ import profileBG from "../../../assets/images/profileBG.jpeg";
 import Button from "../../Button/Button";
 
 import useUpdateChange from "../../../hooks/useUpdateChange";
-// import { useDataChange } from "../../../contexts/DataChangeContext";
+
+import { useDataChange } from "../../../contexts/DataChangeContext";
+
 
 function UserEditModal({
   originCoverPhoto,
@@ -33,7 +35,7 @@ function UserEditModal({
   const [nameMsg, setNameMsg] = useState("");
   const [introMsg, setIntroMsg] = useState('')
 
-  // const { isDataChange, setIsDataChange } = useDataChange(); ////
+  const { isDataChange, setIsDataChange } = useDataChange(); ////
 
 
   ////Change Image/////////
@@ -92,7 +94,7 @@ function UserEditModal({
       introduction,
       id,
     });
-		// await setIsDataChange(!isDataChange)
+		await setIsDataChange(!isDataChange)
 		if (!isUpdating) {
       setShow(false);
       handleCloseModal();

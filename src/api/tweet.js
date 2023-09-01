@@ -275,3 +275,17 @@ export const deleteAdminTweet = async (tweetId) => {
     return
   }
 }
+
+//Post Tweet
+export const postTweet = async (description) => {
+  try {
+    const { data } = await axiosInstance.post(`/tweets`, {
+      description,
+    })
+    console.log('postTweet', data)
+    return data
+  } catch (error) {
+    console.error('[postTweet Failed]', error)
+    return error
+  }
+}
