@@ -33,7 +33,7 @@ function SingleUserTweet(props) {
   const likedClassName = clsx(style.likedBtn, { [style.active]: liked });
   const [likedNum, setLikedNum] = useState(likedCount);
   //////////////////////////
-  
+
 
   useEffect(() => {
     const getUserInfo = async () => {
@@ -56,9 +56,9 @@ function SingleUserTweet(props) {
     getUserInfo();
   }, [URL.userId]);
 
-  
-    ///////////////////////////////////////////
-  
+
+  ///////////////////////////////////////////
+
   const handleLike = async () => {
     try {
       if (Boolean(liked) === false) {
