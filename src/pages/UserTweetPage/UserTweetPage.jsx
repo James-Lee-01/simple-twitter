@@ -55,8 +55,10 @@ const UserTweetPage = () => {
       } catch (error) {
         console.log("推文擷取失敗", error);
       }
+      console.log("isDataChange changed:", isDataChange);
     };
     getAllUserTweets();
+    
   }, [URL.userId, isDataChange]);
 
   const tweetsList = tweets.map((props) => {
@@ -78,12 +80,24 @@ const UserTweetPage = () => {
     );
   });
 
-  //prohibited
-  useEffect(() => {
-    if (!isAuthenticated) {
-      navigate("/login");
-    }
-  }, [pathname, navigate, isAuthenticated]);
+  // //prohibited
+  // useEffect(() => {
+  //   if (!isAuthenticated) {
+  //     navigate("/login");
+  //   }
+  // }, [pathname, navigate, isAuthenticated]);
+
+  // //prohibited setTimeout
+  // useEffect(() => {
+  //   if (!isAuthenticated) {
+  //     setTimeout(() => {
+  //       navigate("/login");
+  //     }, 1000); // 延遲  秒導向
+  //   }
+  // }, [pathname, navigate, isAuthenticated]);
+
+
+
   // const tweetsList = tweets.map((props) => {
   //   return (
   //     <SingleUserTweet
@@ -104,7 +118,9 @@ const UserTweetPage = () => {
       </Navbar>
       <CurrentUser />
       <UserToggleMenu linkList={linkList} />
-      <div className={style.tweetList}>{tweetsList}</div>
+      <div className={style.tweetList}>
+        {tweetsList}
+      </div>
     </MainLayout>
   );
 }

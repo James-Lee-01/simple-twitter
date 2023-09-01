@@ -22,6 +22,8 @@ function TweetInput() {
 
 	const { isDataChange, setIsDataChange } = useDataChange()
 
+  const userAvatar = userProfile.avatar
+
 
   //CSS styles switch
   const limitClassName = clsx(style.limit, { [style.active]: msg });
@@ -96,7 +98,7 @@ function TweetInput() {
   return (
     <div className={style.post}>
       <div className={style.postAvatar}>
-        <img className={style.avatar} src={userProfile.avatar} alt='avatar' />
+        <img className={style.avatar} src={userAvatar} alt='avatar' />
       </div>
       <div className={style.postContent}>
         <textarea

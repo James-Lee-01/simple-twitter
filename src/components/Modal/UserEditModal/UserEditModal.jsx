@@ -2,7 +2,7 @@ import Modal from "../Modal";
 import style from "./UserEditModal.module.scss";
 import CancelIcon from "../../../assets/icons/modal/modal_cancel.png";
 import UploadIcon from "../../../assets/icons/modal/modal_upload.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import logo_gray from "../../../assets/icons/logo_gray.png";
 import AuthInput from "../../AuthInput/AuthInput";
 import profileBG from "../../../assets/images/profileBG.jpeg";
@@ -75,15 +75,15 @@ function UserEditModal({
 
   const handleSubmit = async () => {
     if (!name) {
-      setNameMsg("請輸入名稱");
+      // setNameMsg("請輸入名稱");
       return;
     }
     if (name.length > 50) {
-      setNameMsg("字數超出上限");
+      // setNameMsg("字數超出上限");
       return;
     }
     if (introduction.length > 160) {
-      setIntroMsg("字數超出上限");
+      // setIntroMsg("字數超出上限");
       return;
     }
     ///以下為傳送至API的value名稱
@@ -98,6 +98,7 @@ function UserEditModal({
 		if (!isUpdating) {
       setShow(false);
       handleCloseModal();
+      window.location.reload()
     }
     console.log(updateUserInfo);///
   };
