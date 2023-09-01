@@ -7,9 +7,9 @@ export default function usePostReply() {
 
   const replyPostHook = async (textInput, tweetId) => {
     try {
-      if (isUpdating) return //已有回覆發送操作正在進行，因為不允許同時進行多個回覆發送操作，所以這裡直接返回
-
-      setIsUpdating(true);
+      if (isUpdating) return //不允許同時進行多個回覆發送操作
+      setIsUpdating(true); //正在進行回覆發送操作
+      //執行回覆發送postReply
       const res = await postReply(textInput, tweetId);
 
       if (res.id) {
@@ -23,7 +23,7 @@ export default function usePostReply() {
           icon: 'error',
         });
       }
-      setIsUpdating(false)
+      setIsUpdating(false); //回覆發送操作結束
 
     } catch (error) {
       console.error(error)
@@ -31,7 +31,7 @@ export default function usePostReply() {
         title: '回覆發送失敗',
         icon: 'error',
       });
-      setIsUpdating(false);
+      setIsUpdating(false); //回覆發送操作結束
 
     }
   }

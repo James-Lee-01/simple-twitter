@@ -18,9 +18,11 @@ export default function TweetPage() {
   // const navigate = useNavigate();
 
   const handleOpenModal = () => {
+    //Modal開啟
     setIsModalOpen(true);
   };
   const handleCloseModal = () => {
+    //Modal關閉
     setIsModalOpen(false);
   };
 
@@ -97,7 +99,12 @@ export default function TweetPage() {
       <div className={styles.listContainer}>
         {replies && repliesList}
       </div>
-      {isModalOpen && <SingleTweetReplyModal handleCloseModal={handleCloseModal} props={tweet} />}
+      {isModalOpen && (
+        <SingleTweetReplyModal
+          handleCloseModal={handleCloseModal}
+          props={tweet}
+        />
+      )}
     </MainLayout>
   );
 }

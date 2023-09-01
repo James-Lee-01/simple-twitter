@@ -9,10 +9,8 @@
 }
 
 .modalContainer {
-  /*display*/
   display: flex;
   flex-direction: column;
-  /*box model*/
   width: 634px;
   margin: 56px auto;
   border-radius: 14px;
@@ -21,17 +19,14 @@
 }
 
 .header {
-  /*display*/
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /*box model*/
   height: 56px;
   width: 100%;
   border-bottom: 1px solid gray;
 
   .modalEsc {
-    /*box model*/
     height: 20px;
     width: 20px;
     margin-left: 20px;
@@ -42,20 +37,15 @@
 
 
 .tweet {
-  /*display*/
   display: flex;
-  /*box model*/
   margin: 15px 15px 0 15px;
 
   .left {
-    /*display*/
     display: flex;
     flex-direction: column;
     align-items: center;
 
-    /*box model*/
     .line {
-      /*box model*/
       flex: 1;
       border: 1px solid #CCD6DD;
       margin: 5px 5px 5px 0;
@@ -63,7 +53,6 @@
   }
 
   .right {
-    /*display*/
     display: flex;
     flex-direction: column;
     margin: 10px 0;
@@ -71,31 +60,26 @@
 
     .tweetUserInfo {
       .tweetUserAccount {
-        /*box model*/
         margin-left: 5px;
         color: #657786;
       }
     }
 
     .tweetContent {
-      /*box model*/
       height: 100%;
       margin: 9px 0;
       line-height: 22px;
     }
 
     .replyAddress {
-      /*box model*/
       margin: 12px 0;
       font-size: 13px;
 
       .replyWord {
-        /*other*/
         color: #657786;
       }
 
       .replyAccount {
-        /*other*/
         color: orangered; //brandcolor?
       }
     }
@@ -103,7 +87,6 @@
 }
 
 .positionAnchor {
-  /*display*/
   position: relative;
   padding: 20px 40px 55px 70px;
   height: 245px;
@@ -113,12 +96,9 @@
 .body {
   all: unset;
   word-wrap: break-word;
-  /*box model*/
   width: 100%;
   height: 100%;
   line-height: 30px;
-
-  // border: 1px solid #000;
 
   &:focus+.info {
     display: none;
@@ -132,7 +112,6 @@
 }
 
 .footer {
-  /*display*/
   position: absolute;
   bottom: 16px;
   right: 16px;
@@ -140,11 +119,8 @@
   align-items: center;
 
   .waring {
-    /*display*/
     display: none;
-    /*box model*/
     margin-right: 20px;
-    /*other*/
     font-size: 15px;
     color: red;
 
@@ -154,11 +130,8 @@
   }
 
   .headsUp {
-    /*display*/
     display: none;
-    /*box model*/
     margin-right: 20px;
-    /*other*/
     font-size: 15px;
     color: red;
 
@@ -169,7 +142,6 @@
 }
 
 .avatarContainer {
-  /*box model*/
   height: 50px;
   width: 50px;
   border-radius: 50%;
@@ -178,25 +150,18 @@
 }
 
 .downAvatarContainer {
-  /*box model*/
   height: 50px;
   width: 50px;
   border-radius: 50%;
   margin-right: 10px;
   overflow: hidden;
-  /*display*/
   position: absolute;
   top: 0px;
   left: 15px;
 }
 
 .avatar {
-  /*box model*/
   height: 100%;
   width: 100%;
   object-fit: cover;
-}
-
-.rwdBtnContainer {
-  display: none;
 }

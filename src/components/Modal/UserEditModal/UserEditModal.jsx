@@ -20,13 +20,13 @@ function UserEditModal({
   id,
 }) {
   const [coverPhoto, setCoverPhoto] = useState(originCoverPhoto || profileBG);
-	const [updateCoverPhoto, setUpdateCoverPhoto] = useState(coverPhoto);
+  const [updateCoverPhoto, setUpdateCoverPhoto] = useState(coverPhoto);
   const [avatar, setAvatar] = useState(originAvatar || logo_gray);
-	const [updateAvatar, setUpdateAvatar] = useState(avatar);
+  const [updateAvatar, setUpdateAvatar] = useState(avatar);
   const [name, setName] = useState(originName);
   const [introduction, setIntroduction] = useState(originIntroduction || "");
 
-	const [show, setShow] = useState(true);
+  const [show, setShow] = useState(true);
 
   const { isUpdating, updateUserInfo } = useUpdateChange();
 
@@ -53,7 +53,7 @@ function UserEditModal({
   };
 
   /////////////////////////////
-	const handleCancelImg = () => {
+  const handleCancelImg = () => {
     if (isUpdating) return;
     setCoverPhoto(originCoverPhoto);
     setUpdateCoverPhoto(null);
@@ -61,10 +61,10 @@ function UserEditModal({
 
   // const handleCloseIcon = (event) => {
   //   if (isUpdating) {
-	// 		setShow(false)
-	// 		return;
-	// 	}
-		
+  // 		setShow(false)
+  // 		return;
+  // 	}
+
   //   onClose(); ////pause
   // };
 
@@ -75,7 +75,7 @@ function UserEditModal({
     if (introduction.length > 160) {
       return;
     }
-		///以下為傳送至API的value名稱
+    ///以下為傳送至API的value名稱
     await updateUserInfo({
       updateCoverPhoto,
       updateAvatar,
@@ -83,23 +83,23 @@ function UserEditModal({
       introduction,
       id,
     });
-		// await setIsDataChange(!isDataChange)
-		if (!isUpdating) {
+    // await setIsDataChange(!isDataChange)
+    if (!isUpdating) {
       setShow(false);
       handleCloseModal();
     }
   };
 
-	const handleCloseModalAtBg = (event) => {
+  const handleCloseBtn = (event) => {
     if (!isUpdating) return;
     if (event.target.classList.contains(style.modalOverlay)) {
       handleCloseModal();
     }
   };
 
-  
+
   return (
-    <div className={style.modalOverlay} onClick={handleCloseModalAtBg}>
+    <div className={style.modalOverlay} onClick={handleCloseBtn}>
       <Modal
         onClose={handleCloseModal}
         show={show}
@@ -128,7 +128,7 @@ function UserEditModal({
                 className={style.fileInput}
                 type='file'
                 id='cover'
-								name='cover'
+                name='cover'
                 onChange={(event) => handleImgChange(event, "cover")}
               />
             </label>
@@ -164,7 +164,7 @@ function UserEditModal({
                 className={style.fileInput}
                 type='file'
                 id='avatar'
-								name='avatar'
+                name='avatar'
                 onChange={(event) => handleImgChange(event, "avatar")}
               />
             </label>

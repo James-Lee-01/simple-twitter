@@ -7,7 +7,8 @@ import clsx from 'clsx';
 import usePostReply from '../../../hooks/usePostReply.js';
 import Button from '../../Button/Button.jsx';
 
-import modal_esc from '../../../assets/icons/modal/modal_esc.png';
+import CancelIcon from '../../../assets/icons/modal/modal_esc.png';
+import Modal from '../Modal'
 import styles from './SingleTweetReplyModal.module.scss';
 
 export default function SingleTweetReplyModal({ handleCloseModal, props }) {
@@ -15,8 +16,8 @@ export default function SingleTweetReplyModal({ handleCloseModal, props }) {
   const { currentUser } = useAuthContext();
   const { isDataUpdate, setIsDataUpdate } = useDataStatus();
   const { isUpdating, replyPostHook } = usePostReply();
-  const [avatarUrl, setAvatarUrl] = useState(''); // 新增狀態變數來存放頭貼圖片URL
-  
+  const [avatarUrl, setAvatarUrl] = useState('');
+  const [show, setShow] = useState(true);
 
   const warningClassName = clsx(styles.waring, { [styles.active]: replyText.length > 140 });
   const headsUpClassName = clsx(styles.headsUp, { [styles.active]: replyText.length === 0 });
@@ -30,7 +31,6 @@ export default function SingleTweetReplyModal({ handleCloseModal, props }) {
   const createdAt = props.createdAt;
 
   useEffect(() => {
-    // 假設您的後端 API 是這樣的：GET /user/:userId/avatar
     const userId = props.User.id;
     fetch(`/api/user/${userId}/avatar`)
       .then(response => response.json())
@@ -50,19 +50,22 @@ export default function SingleTweetReplyModal({ handleCloseModal, props }) {
         icon: 'error',
       });
       return;
-      
+
     }
     if (replyText.length > 140) return;
+
     await replyPostHook(replyText, tweetId);
-    setreplyText('');
-    setIsDataUpdate(!isDataUpdate);
-    // setIsUpdating(true);
+    await setreplyText('');
+    await setIsDataUpdate(!isDataUpdate);
+    await setShow(false);
+    await handleCloseModal();
   };
 
 
   const handleCloseBtn = (e) => {
     if (!isUpdating) {
       if (e.target.classList.contains(styles.modalOverlay)) {
+        setShow(false);
         handleCloseModal();
       }
     }
@@ -70,15 +73,11 @@ export default function SingleTweetReplyModal({ handleCloseModal, props }) {
 
   return (
     <div className={styles.modalOverlay} onClick={handleCloseBtn}>
-      <div className={styles.modalContainer}>
-        <div className={styles.header}>
-          <div onClick={handleCloseModal}>
-            <img className={styles.modalEsc} src={modal_esc} alt="modal esc" />
-          </div>
-          <div className={styles.rwdBtnContainer}>
-            <Button title="回覆" size="small" isAction onClick={handlePostReply}></Button>
-          </div>
-        </div>
+      <Modal
+        onClose={handleCloseModal}
+        show={show}
+
+      >
         <div className={styles.tweet}>
           <div className={styles.left}>
             <div className={styles.avatarContainer}>
@@ -118,11 +117,16 @@ export default function SingleTweetReplyModal({ handleCloseModal, props }) {
             <span className={warningClassName}>字數不可超過 140 字</span>
             <span className={headsUpClassName}>內容不可空白</span>
             <div className={styles.btnContainer}>
-              <Button title="回覆" size="small" isAction onClick={handlePostReply}></Button>
+              <Button
+                title="回覆"
+                size="small"
+                isAction
+                onClick={handlePostReply}
+              />
             </div>
           </div>
         </div>
-      </div>
+      </Modal>
     </div>
   );
 }
