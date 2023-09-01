@@ -8,15 +8,15 @@
   z-index: 99;
 }
 
-.modalContainer {
-  display: flex;
-  flex-direction: column;
-  width: 634px;
-  margin: 56px auto;
-  border-radius: 14px;
-  background-color: white;
-  border: 1px solid gray;
-}
+// .modalContainer {
+//   display: flex;
+//   flex-direction: column;
+//   width: 634px;
+//   margin: 56px auto;
+//   border-radius: 14px;
+//   background-color: white;
+//   border: 1px solid gray;
+// }
 
 .header {
   display: flex;
@@ -80,7 +80,7 @@
       }
 
       .replyAccount {
-        color: orangered; //brandcolor?
+        color: orangered;
       }
     }
   }
@@ -118,7 +118,7 @@
   display: flex;
   align-items: center;
 
-  .waring {
+  .warning {
     display: none;
     margin-right: 20px;
     font-size: 15px;
@@ -138,6 +138,12 @@
     &.active {
       display: flex;
     }
+  }
+
+  .replyButton {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
   }
 }
 

@@ -11,15 +11,18 @@ import Button from '../../Button/Button.jsx';
 import CancelIcon from '../../../assets/icons/modal/modal_esc.png';
 import Modal from '../Modal'
 import styles from './SingleTweetReplyModal.module.scss';
+import { Form } from 'react-router-dom';
 
-export default function SingleTweetReplyModal({ handleCloseModal, props }) {
-  const [replyText, setreplyText] = useState('');
+export default function SingleTweetReplyModal({ handleCloseModal, props, onChange }) {
+  const [replyText, setReplyText] = useState('');
   const { currentUser } = useAuthContext();
   const { isDataUpdate, setIsDataUpdate } = useDataStatus();
   const [show, setShow] = useState(true);
   const { isUpdating, replyPostHook } = usePostReply();
   const [avatarUrl, setAvatarUrl] = useState('');
-  const [showHeadsUp, setShowHeadsUp] = useState(false);
+
+  const [newRerender, setNewRerender] = useState(false);
+  const [msg, setMsg] = useState('');
 
   const headsUpClassName = clsx(styles.headsUp, { [styles.active]: replyText.length === 0 });
   const bodyClassName = clsx(styles.body, { [styles.active]: replyText.length > 0 });
@@ -30,6 +33,7 @@ export default function SingleTweetReplyModal({ handleCloseModal, props }) {
   const avatar = props.User.avatar;
   const description = props.description;
   const createdAt = props.createdAt;
+  const limitClassName = clsx(styles.limit, { [styles.active]: msg });
 
   useEffect(() => {
     const userId = props.User.id;
@@ -49,23 +53,24 @@ export default function SingleTweetReplyModal({ handleCloseModal, props }) {
 
   const handlePostReply = async () => {
     if (replyText.trim().length === 0) {
-      setreplyText('');
-      setShowHeadsUp(true); // 送出空白回覆時設置為顯示
+      setReplyText('');
       Toast.fire({
         title: '內容不可空白',
         icon: 'error',
       });
+      setMsg("內容不可空白");
       return;
 
     } else {
-      setShowHeadsUp(false);
+      handleCloseModal()
+      setNewRerender(true);
     }
 
     await replyPostHook(replyText, tweetId);
-    await setreplyText('');
-    setIsDataUpdate(!isDataUpdate);
+    await setReplyText(''); //清空
+    await setIsDataUpdate(!isDataUpdate);
     setShow(false);
-    // setShowHeadsUp(true);
+    await handleCloseModal();
   };
 
 
@@ -83,7 +88,7 @@ export default function SingleTweetReplyModal({ handleCloseModal, props }) {
       <Modal
         onClose={handleCloseModal}
         show={show}
-        // className={styles.modalContainer}
+      // className={styles.modalContainer}
       >
         <div className={styles.tweet}>
           <div className={styles.left}>
@@ -110,25 +115,31 @@ export default function SingleTweetReplyModal({ handleCloseModal, props }) {
         <div className={styles.positionAnchor}>
 
           <div className={styles.downAvatarContainer}>
-            <img className={styles.avatar} src={currentUser.avatar} alt="avatar" />
+            <img
+            className={styles.avatar} src={currentUser.avatar} alt="avatar" />
           </div>
 
           {/* <div className={styles.replyTextContainer}> */}
           <textarea
             className={bodyClassName}
-            onChange={(event) => setreplyText(event.target.value)}
+            onChange={(event) => setReplyText(event.target.value)}
             placeholder="推你的回覆"
             value={replyText}
           />
           {/* </div> */}
 
-          <div className={styles.footer}>
-            {showHeadsUp && <span className={styles.headsUp}>內容不可空白</span>}
-            <div className={styles.btnContainer}>
+          <div
+            className={styles.footer}
+          >
+            {/* {replyText.trim().length === 0 && (
+              <div className={headsUpClassName}>内容不可為空白</div>
+            )} */}
+            <div className={styles.replyButton}>
+              <span className={headsUpClassName}>{msg}</span>
               <Button
                 title="回覆"
                 size="small"
-                isAction
+                isActive
                 onClick={handlePostReply}
               />
             </div>

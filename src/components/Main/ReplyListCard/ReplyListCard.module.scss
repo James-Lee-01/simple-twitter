@@ -60,6 +60,9 @@
     /*box*/
     margin: 9px 0;
     line-height: 26px;
+    max-width: 100%;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
 
   .replyAddress {
