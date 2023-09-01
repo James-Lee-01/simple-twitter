@@ -17,10 +17,28 @@ import Logo from './Logo/Logo';
 import Button from '../Button/Button';
 import { currentUser } from "../../contexts/AuthContext.jsx";
 
+import { useState } from 'react';
+import PostTweetModal from '../Modal/PostTweetModal/PostTweetModal'
+
 function Header({ isAdmin }) {
     const { currentUser } = useAuthContext()
     const userId = currentUser.id
 
+    ///////////Tweet Button/////////
+		const avatar = currentUser.avatar
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const handleOpenModal = () => {
+      //Modal開啟
+      setIsModalOpen(true);
+    };
+    const handleCloseModal = () => {
+      //Modal關閉
+      setIsModalOpen(false);
+      
+    };
+
+    //////////////////////////////////////
     const links = [
         {
             path: '/main',
@@ -61,36 +79,50 @@ function Header({ isAdmin }) {
     const { logout } = useAuthContext();
 
 
-    return <div className={style.headerContainer}>
+    return (
+      <div className={style.headerContainer}>
+        {/* Modal Control */}
+        {isModalOpen && (
+          <PostTweetModal
+            handleCloseModal={handleCloseModal}
+            id={userId}
+            // show={show}
+            avatar={avatar}
+          />
+        )}
         <div className={style.header}>
+          <div>
+            <ItemContainer>
+              <Logo />
+            </ItemContainer>
             <div>
-                <ItemContainer>
-                    <Logo />
-                </ItemContainer>
-                <div>
-                    {(isAdmin ? adminLinks : links).map((link, index) => <HeaderLink
-                        {...link}
-                        action={location.pathname === link.path}
-                        key={index}
-                        
-                    />)}
-                </div>
-                {!isAdmin &&
-                    <ItemContainer>
-                        <button className={style.postButton}>推文</button>
-                    </ItemContainer>
-                }
+              {(isAdmin ? adminLinks : links).map((link, index) => (
+                <HeaderLink
+                  {...link}
+                  action={location.pathname === link.path}
+                  key={index}
+                />
+              ))}
             </div>
-            <div onClick={() => logout()}>
-              <HeaderLink
-                  path="/login"
-                  text="登出"
-                  icon={SignoutIcon}
-                  actionIcon={SignoutActionIcon}
-              />
-            </div>  
+            {!isAdmin && (
+              <ItemContainer>
+                <button className={style.postButton} onClick={handleOpenModal}>
+                  推文
+                </button>
+              </ItemContainer>
+            )}
+          </div>
+          <div onClick={() => logout()}>
+            <HeaderLink
+              path='/login'
+              text='登出'
+              icon={SignoutIcon}
+              actionIcon={SignoutActionIcon}
+            />
+          </div>
         </div>
-    </div>;
+      </div>
+    );
 }
 
 export default Header;

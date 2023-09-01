@@ -19,8 +19,8 @@ export default function useUpdateChange () {
             formData.append("introduction", user.introduction);
       const data = await setUserProfile (formData, user.id)
       
-      if (data.status==="error") {
-            console.log('修改個人資料失敗:',data.message)         
+      if (data==="error") {
+            console.log('修改個人資料失敗:',data.res.data.message)         
           return
       }
       

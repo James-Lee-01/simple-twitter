@@ -8,14 +8,26 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { getUserTweet } from '../../api/tweet.js'
 
-import SingleUserTweet from "../../components/Main/TweetItem/SingleUserTweet";
+// import SingleUserTweet from "../../components/Main/TweetItem/SingleUserTweet";
+import TweetItem from "../../components/Main/TweetItem/TweetItem";
+
+import { useAuthContext } from "../../contexts/AuthContext.jsx";
+import { useNavigate, useLocation } from "react-router-dom";
+
+import { useDataChange } from "../../contexts/DataChangeContext";
+
 
 
 const UserTweetPage = () => {
   const { userId } = useParams();
-	const [tweets, setTweets] = useState([]);
-  const URL = useParams()
+  const [tweets, setTweets] = useState([]);
+  const URL = useParams();
 
+  const { isAuthenticated } = useAuthContext();
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
+
+  const { isDataChange } = useDataChange(); ////
 
   ///////////////////
   const linkList = [
@@ -45,21 +57,45 @@ const UserTweetPage = () => {
       }
     };
     getAllUserTweets();
-  }, []);
-
+  }, [URL.userId, isDataChange]);
 
   const tweetsList = tweets.map((props) => {
+    // console.log("2", props);
     return (
-      <SingleUserTweet
+      <TweetItem
         key={props.id}
         tweetId={props.id}
         description={props.description}
         likedCount={props.likedCount}
         replyCount={props.replyCount}
         createdAt={props.createdAt}
+        userId={props.User.id}
+        userName={props.User.userName}
+        account={props.User.account}
+        avatar={props.User.avatar}
+        isLiked={props.isLiked}
       />
     );
   });
+
+  //prohibited
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate("/login");
+    }
+  }, [pathname, navigate, isAuthenticated]);
+  // const tweetsList = tweets.map((props) => {
+  //   return (
+  //     <SingleUserTweet
+  //       key={props.id}
+  //       tweetId={props.id}
+  //       description={props.description}
+  //       likedCount={props.likedCount}
+  //       replyCount={props.replyCount}
+  //       createdAt={props.createdAt}
+  //     />
+  //   );
+  // });
 
   return (
     <MainLayout>
@@ -68,9 +104,7 @@ const UserTweetPage = () => {
       </Navbar>
       <CurrentUser />
       <UserToggleMenu linkList={linkList} />
-      <div className={style.tweetList}>
-        {tweetsList}
-      </div>
+      <div className={style.tweetList}>{tweetsList}</div>
     </MainLayout>
   );
 }

@@ -9,7 +9,9 @@ import profileBG from "../../../assets/images/profileBG.jpeg";
 import Button from "../../Button/Button";
 
 import useUpdateChange from "../../../hooks/useUpdateChange";
-// import { useDataChange } from "../../../contexts/DataChangeContext";
+
+import { useDataChange } from "../../../contexts/DataChangeContext";
+
 
 function UserEditModal({
   originCoverPhoto,
@@ -30,7 +32,10 @@ function UserEditModal({
 
   const { isUpdating, updateUserInfo } = useUpdateChange();
 
-  // const { isDataChange, setIsDataChange } = useDataChange(); ////
+  const [nameMsg, setNameMsg] = useState("");
+  const [introMsg, setIntroMsg] = useState('')
+
+  const { isDataChange, setIsDataChange } = useDataChange(); ////
 
 
   ////Change Image/////////
@@ -69,10 +74,16 @@ function UserEditModal({
   // };
 
   const handleSubmit = async () => {
-    if (!name || name.length > 50) {
+    if (!name) {
+      setNameMsg("請輸入名稱");
+      return;
+    }
+    if (name.length > 50) {
+      setNameMsg("字數超出上限");
       return;
     }
     if (introduction.length > 160) {
+      setIntroMsg("字數超出上限");
       return;
     }
     ///以下為傳送至API的value名稱
@@ -83,11 +94,12 @@ function UserEditModal({
       introduction,
       id,
     });
-    // await setIsDataChange(!isDataChange)
-    if (!isUpdating) {
+		await setIsDataChange(!isDataChange)
+		if (!isUpdating) {
       setShow(false);
       handleCloseModal();
     }
+    console.log(updateUserInfo);///
   };
 
   const handleCloseBtn = (event) => {
@@ -97,7 +109,11 @@ function UserEditModal({
     }
   };
 
+  /////////////////////
 
+  /////////////////////
+
+  
   return (
     <div className={style.modalOverlay} onClick={handleCloseBtn}>
       <Modal
@@ -178,9 +194,9 @@ function UserEditModal({
                   labelName='名稱'
                   type='text'
                   value={name}
-                  placeholder=''
+                  placeholder='請輸入名稱'
                   onChange={(nameInput) => setName(nameInput)}
-                  notification='字數超出限制'
+                  notification={nameMsg}
                   lengthLimit={50}
                 />
               </div>
@@ -191,14 +207,12 @@ function UserEditModal({
                   labelName='自我介紹'
                   type='text'
                   value={introduction}
-                  placeholder=''
+                  placeholder='請輸入自我介紹'
                   onChange={(infoInput) => setIntroduction(infoInput)}
-                  notification='字數超出限制'
+                  notification={introMsg}
                   lengthLimit={160}
-                  className={style.textarea}
+                  // className={style.textarea}
                 />
-                {/* <label>自我介紹</label>
-                <textarea></textarea> */}
               </div>
             </div>
           </div>

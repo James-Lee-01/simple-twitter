@@ -4,11 +4,11 @@ import AuthInput from '../../components/AuthInput/AuthInput.jsx'
 import Button from '../../components/Button/Button.jsx'
 import Navbar from '../../components/Main/Navbar/Navbar.jsx'
 import { useState, useMemo, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
 ///以下要修改處ＡＰＩ
 import { getUser, setUserAccount } from '../../api/auth.js'
 import { useAuthContext } from '../../contexts/AuthContext'
+import { useNavigate, useLocation } from "react-router-dom";
 
 
 export default function SettingPage() {
@@ -19,6 +19,9 @@ export default function SettingPage() {
   const [checkPassword, setCheckPassword] = useState("");
   const navigate = useNavigate();
   const [msg, setMsg] = useState("");
+
+
+    const { pathname } = useLocation();
 
   const { currentUser, isAuthenticated } = useAuthContext();
   //取目前使用者的id
@@ -129,6 +132,13 @@ export default function SettingPage() {
     setMsg(data.response.data.message);
     // console.log('signup failed')
   };
+
+  //prohibited
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate("/login");
+    }
+  }, [pathname, navigate, isAuthenticated]);
 
   //畫面渲染
   return (

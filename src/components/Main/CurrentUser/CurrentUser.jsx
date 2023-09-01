@@ -9,7 +9,7 @@ import logo_gray from '../../../assets/icons/logo_gray.png'
 import mail from '../../../assets/icons/user/user_msg.png'
 import notify from '../../../assets/icons/user/user_notfi.png'
 import UserEditModal from "../../Modal/UserEditModal/UserEditModal";
-import profileBG from "../../../assets/images/profileBG.jpeg";
+
 
 import { useDataChange } from '../../../contexts/DataChangeContext'
 
@@ -19,11 +19,14 @@ const CurrentUser = () => {
     const URL = useParams();
     const userId = userProfile.id;
     const isFollowed = userProfile.isFollowed;
+    const followerCount = userProfile.followerCount;
     const { currentUser } = useAuthContext();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isClicked, setIsClicked] = useState(isFollowed);
 
     const { isDataChange, setIsDataChange } = useDataChange()////
+
+    const [followerNum, setFollowerNum] = useState(followerCount);
 
     useEffect(() => {
       const getUserInfo = async () => {
@@ -38,6 +41,8 @@ const CurrentUser = () => {
               // update data
               await setUserProfile(data);
               await setIsClicked(data.isFollowed);
+              setFollowerNum(data.followerCount)
+              console.log(data.userProfile);
             }
             
           }
@@ -55,6 +60,7 @@ const CurrentUser = () => {
     const handleCloseModal = () => {
 			//Modal關閉
       setIsModalOpen(false);
+       ////
       
     };
 
@@ -62,18 +68,22 @@ const CurrentUser = () => {
       try {
         if (isClicked === false) {
           const data = await followUser(userId);
-          if (data.followingId) {
-            await setIsClicked(true);
-            await setIsDataChange(!isDataChange);////
+          if (data.status === "success") {
+            setIsClicked(true);
+            setFollowerNum(followerNum + 1);
+            await setIsDataChange(!isDataChange); ////
           }
         }
         if (isClicked === true) {
           const data = await unFollowUser(userId);
-          if (data.followingId) {
-            await setIsClicked(false);
-            await setIsDataChange(!isDataChange);////
+          if (data.status === "success") {
+            setIsClicked(false);
+            setFollowerNum(followerNum - 1);
+            await setIsDataChange(!isDataChange); ////
           }
         }
+        // console.log(isClicked)
+        // console.log(isDataChange);
       } catch (error) {
         console.error(error);
       }
@@ -84,7 +94,7 @@ const CurrentUser = () => {
       <div className={style.userWrapper}>
         <div className={style.coverPhoto}>
           <img
-            src={userProfile?.cover || profileBG}
+            src={userProfile?.cover}
             alt='coverPhoto'
             className={style.coverImg}
           />
@@ -96,6 +106,7 @@ const CurrentUser = () => {
             alt='UserAvatar'
           />
         </div>
+
         <div className={style.userInfo}>
           {userId === currentUser.id ? (
             <div className={style.editButton}>
@@ -113,7 +124,7 @@ const CurrentUser = () => {
               <div className={style.notifyImage}>
                 <img src={notify} alt='notify' className={style.notifyIcon} />
               </div>
-              <div onClick={handleClick}>
+              <div onClick={handleClick} className={style.btn}>
                 <Button
                   title={isClicked ? "正在跟隨" : "跟隨"}
                   size={isClicked ? "following" : "follow"}
@@ -131,10 +142,11 @@ const CurrentUser = () => {
               <span>{userProfile.followingCount} 個</span>跟隨中
             </Link>
             <Link to={`/user/${userId}/follower`} className={style.link}>
-              <span>{userProfile.followerCount} 位</span>跟隨者
+              <span>{followerNum} 位</span>跟隨者
             </Link>
           </div>
         </div>
+
         {/* Modal Control */}
         {isModalOpen && (
           <UserEditModal

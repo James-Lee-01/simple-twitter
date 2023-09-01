@@ -11,7 +11,7 @@ const DataChangeContext = createContext(defaultDataContext);
 export const useDataChange = () => useContext(DataChangeContext);
 
 export function DataChangeProvider({ children }) {
-  const { isDataChange, setIsDataChange } = useState(false);
+  const [ isDataChange, setIsDataChange ] = useState(false);
 
   return (
     <DataChangeContext.Provider

@@ -8,11 +8,18 @@ import { getTweet, getTweetReplies } from "../../api/tweet.js";
 import ReplyItem from '../../components/Main/ReplyListCard/ReplyListCard';
 import SingleTweetReplyModal from '../../components/Modal/SingleTweetReplyModal/SingleTweetReplyModal.jsx';
 
+import { useAuthContext } from "../../contexts/AuthContext.jsx";
+import {  useLocation } from "react-router-dom";
+
 export default function TweetPage() {
   //利用useParams的hook取得id值
   const param = useParams();
-  const [tweet, setTweet] = useState('');
+  const [tweet, setTweet] = useState("");
   const [user, setUser] = useState({});
+
+  const { isAuthenticated } = useAuthContext();
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
   const [replies, setReplies] = useState([])
   const [isModalOpen, setIsModalOpen] = useState(false);
   // const navigate = useNavigate();
@@ -60,7 +67,6 @@ export default function TweetPage() {
     getReplies();
   }, [param.tweetId]);
 
-
   const repliesList = replies.map((reply) => {
     return (
       <ReplyItem
@@ -77,13 +83,12 @@ export default function TweetPage() {
     );
   });
 
-  // 頁面導向限制
-  // useEffect(() => {
-  //   if (!isAuthenticated && isAuthChecked) {
-  //     navigate("/login");
-  //   }
-  // }, [navigate, isAuthenticated, isAuthChecked]);
-
+  //頁面導向限制
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate("/login");
+    }
+  }, [pathname, navigate, isAuthenticated]);
 
 
   return (

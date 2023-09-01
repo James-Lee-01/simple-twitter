@@ -31,10 +31,10 @@ export const getRelativeTime = (createdAt) => {
 
   if (seconds < 60) {
     return `${seconds}秒前`;
-  } else if (seconds < 3600) {
+  } else if (seconds >= 60 && seconds < 3600) {
     const minutes = Math.floor(seconds / 60);
     return `${minutes}分鐘前`;
-  } else if (seconds < 86400) {
+  } else if (seconds >= 3600 && seconds < 86400) {
     const hours = Math.floor(seconds / 3600);
     return `${hours}小時前`;
   } else {
@@ -308,5 +308,19 @@ export const deleteAdminTweet = async (tweetId) => {
   } catch (error) {
     console.error('[刪除推文失敗]', error)
     return
+  }
+}
+
+//Post Tweet
+export const postTweet = async (description) => {
+  try {
+    const { data } = await axiosInstance.post(`/tweets`, {
+      description,
+    })
+    console.log('postTweet', data)
+    return data
+  } catch (error) {
+    console.error('[postTweet Failed]', error)
+    return error
   }
 }

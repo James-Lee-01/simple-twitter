@@ -3,12 +3,17 @@ import Header from '../../Header/Header.jsx';
 import MainContainer from '../MainContainer/MainContainer';
 
 function MainLayout({children, extendMainContainer, isAdmin}) {
-    return <div className={style.MainLayout}>
-        <Header isAdmin={isAdmin} />
-        <MainContainer extendMainContainer={extendMainContainer}>
-            {children}
+    return (
+      <div className={style.MainLayout}>
+        <Header isAdmin={isAdmin} className={style.Header} />
+        <MainContainer
+          extendMainContainer={extendMainContainer}
+          className={style.MainContainer}
+        >
+          {children}
         </MainContainer>
-    </div>
+      </div>
+    );
 }
 
 export default MainLayout;
