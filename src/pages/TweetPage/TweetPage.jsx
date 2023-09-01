@@ -72,6 +72,7 @@ export default function TweetPage() {
         createdAt={reply.createdAt}
         comment={reply.comment}
         tweetAccount={reply.repliesAccount}
+        className={styles.replyItem}
       />
     );
   });
@@ -84,27 +85,30 @@ export default function TweetPage() {
   // }, [navigate, isAuthenticated, isAuthChecked]);
 
 
+
   return (
-    <MainLayout>
-      <Navbar title='推文' hasBack={true} />
-      <div>
-        {tweet && (
-          <SingleTweetCard
+    <div className={styles.mainContainer}>
+      <MainLayout>
+        <Navbar title='推文' hasBack={true} />
+        <div>
+          {tweet && (
+            <SingleTweetCard
+              props={tweet}
+              userProps={user}
+              onClick={handleOpenModal}
+            />
+          )}
+        </div>
+        <div className={styles.listContainer}>
+          {replies && repliesList}
+        </div>
+        {isModalOpen && (
+          <SingleTweetReplyModal
+            handleCloseModal={handleCloseModal}
             props={tweet}
-            userProps={user}
-            onClick={handleOpenModal}
           />
         )}
-      </div>
-      <div className={styles.listContainer}>
-        {replies && repliesList}
-      </div>
-      {isModalOpen && (
-        <SingleTweetReplyModal
-          handleCloseModal={handleCloseModal}
-          props={tweet}
-        />
-      )}
-    </MainLayout>
+      </MainLayout>
+    </div>
   );
 }

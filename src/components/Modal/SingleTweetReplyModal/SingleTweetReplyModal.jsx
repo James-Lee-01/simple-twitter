@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
-import { Toast } from '../../../api/reply.js';
+import { Toast } from '../../../api/tweet.js';
 import { getRelativeTime } from '../../../api/tweet.js';
 import { useAuthContext } from "../../../contexts/AuthContext.jsx";
 import { useDataStatus } from '../../../contexts/DataContext.jsx';
+// import { apiFunction } from '../../../api/tweet.js';
 import clsx from 'clsx';
 import usePostReply from '../../../hooks/usePostReply.js';
 import Button from '../../Button/Button.jsx';
@@ -15,11 +16,10 @@ export default function SingleTweetReplyModal({ handleCloseModal, props }) {
   const [replyText, setreplyText] = useState('');
   const { currentUser } = useAuthContext();
   const { isDataUpdate, setIsDataUpdate } = useDataStatus();
+  const [show, setShow] = useState(true);
   const { isUpdating, replyPostHook } = usePostReply();
   const [avatarUrl, setAvatarUrl] = useState('');
-  const [show, setShow] = useState(true);
 
-  const warningClassName = clsx(styles.waring, { [styles.active]: replyText.length > 140 });
   const headsUpClassName = clsx(styles.headsUp, { [styles.active]: replyText.length === 0 });
   const bodyClassName = clsx(styles.body, { [styles.active]: replyText.length > 0 });
 
@@ -32,10 +32,14 @@ export default function SingleTweetReplyModal({ handleCloseModal, props }) {
 
   useEffect(() => {
     const userId = props.User.id;
-    fetch(`/api/user/${userId}/avatar`)
+    fetch(`/api/user/${userId}/avatar`) // 確保這個 URL 正確
       .then(response => response.json())
       .then(data => {
-        setAvatarUrl(data.avatarUrl);
+        if (data.avatarUrl) { // 確保有正確取得 avatarUrl
+          setAvatarUrl(data.avatarUrl);
+        } else {
+          console.error('Avatar URL not found:', data);
+        }
       })
       .catch(error => {
         console.error('Error fetching avatar URL:', error);
@@ -52,13 +56,11 @@ export default function SingleTweetReplyModal({ handleCloseModal, props }) {
       return;
 
     }
-    if (replyText.length > 140) return;
 
     await replyPostHook(replyText, tweetId);
     await setreplyText('');
-    await setIsDataUpdate(!isDataUpdate);
-    await setShow(false);
-    await handleCloseModal();
+    setIsDataUpdate(!isDataUpdate);
+    setShow(false);
   };
 
 
@@ -76,7 +78,7 @@ export default function SingleTweetReplyModal({ handleCloseModal, props }) {
       <Modal
         onClose={handleCloseModal}
         show={show}
-
+        // className={styles.modalContainer}
       >
         <div className={styles.tweet}>
           <div className={styles.left}>
@@ -106,15 +108,16 @@ export default function SingleTweetReplyModal({ handleCloseModal, props }) {
             <img className={styles.avatar} src={currentUser.avatar} alt="avatar" />
           </div>
 
+          {/* <div className={styles.replyTextContainer}> */}
           <textarea
             className={bodyClassName}
             onChange={(event) => setreplyText(event.target.value)}
             placeholder="推你的回覆"
             value={replyText}
           />
+          {/* </div> */}
 
           <div className={styles.footer}>
-            <span className={warningClassName}>字數不可超過 140 字</span>
             <span className={headsUpClassName}>內容不可空白</span>
             <div className={styles.btnContainer}>
               <Button

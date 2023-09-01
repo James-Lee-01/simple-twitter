@@ -1,4 +1,5 @@
 import axios from "axios";
+import Swal from 'sweetalert2';
 
 export const baseUrl = "https://young-waters-15158-8b230f0b0919.herokuapp.com/api"
 
@@ -229,6 +230,28 @@ export const setUserProfile = async (formData, userId) => {
 
 //Export axiosInstance as function
 export const apiFunction = axiosInstance;
+// postReply
+export const postReply = async (comment, tweetId) => {
+  try {
+    const { data } = await axiosInstance.post(`/tweets/${tweetId}/replies`, {
+      comment,
+    });
+
+    return data;
+  } catch (error) {
+    console.error('[getPostReply Failed]');
+    return error;
+  }
+};
+
+// 彈出通知視窗
+export const Toast = Swal.mixin({
+  toast: true,
+  position: 'top',
+  showConfirmButton: false,
+  timer: 2000,
+  timerProgressBar: true,
+});
 
 //Get Top 10 Users
 export const getTopTenUsers = async () => {

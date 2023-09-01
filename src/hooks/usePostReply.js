@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { postReply } from '../api/reply.js'
-import { Toast } from '../api/reply.js';
+import { postReply } from '../api/tweet.js'
+import { Toast } from '../api/tweet.js';
 
 export default function usePostReply() {
   const [isUpdating, setIsUpdating] = useState(false) //確保同一時間內不會有多個回覆發送操作正在進行
@@ -11,6 +11,8 @@ export default function usePostReply() {
       setIsUpdating(true); //正在進行回覆發送操作
       //執行回覆發送postReply
       const res = await postReply(textInput, tweetId);
+
+      console.log('Response from postReply:', res);
 
       if (res.id) {
         Toast.fire({
