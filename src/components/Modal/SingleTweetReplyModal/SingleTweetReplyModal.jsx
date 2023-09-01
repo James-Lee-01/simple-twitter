@@ -19,6 +19,7 @@ export default function SingleTweetReplyModal({ handleCloseModal, props }) {
   const [show, setShow] = useState(true);
   const { isUpdating, replyPostHook } = usePostReply();
   const [avatarUrl, setAvatarUrl] = useState('');
+  const [showHeadsUp, setShowHeadsUp] = useState(false);
 
   const headsUpClassName = clsx(styles.headsUp, { [styles.active]: replyText.length === 0 });
   const bodyClassName = clsx(styles.body, { [styles.active]: replyText.length > 0 });
@@ -49,18 +50,22 @@ export default function SingleTweetReplyModal({ handleCloseModal, props }) {
   const handlePostReply = async () => {
     if (replyText.trim().length === 0) {
       setreplyText('');
+      setShowHeadsUp(true); // 送出空白回覆時設置為顯示
       Toast.fire({
         title: '內容不可空白',
         icon: 'error',
       });
       return;
 
+    } else {
+      setShowHeadsUp(false);
     }
 
     await replyPostHook(replyText, tweetId);
     await setreplyText('');
     setIsDataUpdate(!isDataUpdate);
     setShow(false);
+    // setShowHeadsUp(true);
   };
 
 
@@ -118,7 +123,7 @@ export default function SingleTweetReplyModal({ handleCloseModal, props }) {
           {/* </div> */}
 
           <div className={styles.footer}>
-            <span className={headsUpClassName}>內容不可空白</span>
+            {showHeadsUp && <span className={styles.headsUp}>內容不可空白</span>}
             <div className={styles.btnContainer}>
               <Button
                 title="回覆"
