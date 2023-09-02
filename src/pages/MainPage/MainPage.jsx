@@ -9,6 +9,8 @@ import { getAllTweet } from "../../api/tweet.js";
 import { useAuthContext } from "../../contexts/AuthContext.jsx";
 import { useNavigate, useLocation } from "react-router-dom";
 
+import { useDataChange } from "../../contexts/DataChangeContext";
+
 
 export default function MainPage() {
   //For navigation and token authentication
@@ -17,6 +19,8 @@ export default function MainPage() {
   const { pathname } = useLocation()
   // for tweet mapping
   const [tweets, setTweets] = useState([]);
+
+  const { isDataChange } = useDataChange()
 
   useEffect(() => {
     const getAllTweets = async () => {
@@ -37,7 +41,7 @@ export default function MainPage() {
       }
     };
     getAllTweets();
-  }, []);
+  }, [isDataChange]);
 
 
 

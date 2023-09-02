@@ -57,7 +57,7 @@ function AdminTweetPage() {
   //prohibited
   useEffect(() => {
     if (!isAuthenticated) {
-      navigate("/login");
+      navigate("/admin/login");
     }
   }, [pathname, navigate, isAuthenticated]);
 

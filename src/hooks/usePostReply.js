@@ -10,7 +10,7 @@ export default function usePostReply() {
       if (isUpdating) return //不允許同時進行多個回覆發送操作
       setIsUpdating(true); //正在進行回覆發送操作
       //執行回覆發送postReply
-      const res = await postReply(textInput, tweetId);
+      await postReply(textInput, tweetId);
 
       setIsUpdating(false); //回覆發送操作結束
 

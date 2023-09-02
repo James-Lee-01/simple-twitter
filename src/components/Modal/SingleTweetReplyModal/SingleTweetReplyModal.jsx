@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { Toast } from '../../../api/tweet.js';
 import { getRelativeTime } from '../../../api/tweet.js';
 import { useAuthContext } from "../../../contexts/AuthContext.jsx";
-import { useDataStatus } from '../../../contexts/DataContext.jsx';
 import { getUser } from "../../../api/auth";
 import { useDataChange } from "../../../contexts/DataChangeContext";
 import clsx from 'clsx';
@@ -18,7 +17,7 @@ export default function SingleTweetReplyModal({ handleCloseModal, props }) {
   const [replyText, setReplyText] = useState('');
   const { currentUser } = useAuthContext();
   const userId = currentUser && currentUser.id;
-  const { isDataUpdate, setIsDataUpdate } = useDataStatus();
+  const { isDataChange, setIsDataChange } = useDataChange();
   const [show, setShow] = useState(true);
   const { isUpdating, replyPostHook } = usePostReply();
 
@@ -33,10 +32,9 @@ export default function SingleTweetReplyModal({ handleCloseModal, props }) {
   const avatar = props.User.avatar;
   const description = props.description;
   const createdAt = props.createdAt;
-  const limitClassName = clsx(styles.limit, { [styles.active]: msg });
+  // const limitClassName = clsx(styles.limit, { [styles.active]: msg });
 
   /////////////
-  const { isDataChange, setIsDataChange } = useDataChange()
   useEffect(() => {
     // console.log('1',currentUser);
     const getUserInfo = async () => {
@@ -81,7 +79,7 @@ export default function SingleTweetReplyModal({ handleCloseModal, props }) {
     }
     await replyPostHook(replyText, tweetId);
     await setReplyText(''); //清空
-    setIsDataUpdate(!isDataUpdate);
+    setIsDataChange(!isDataChange);
     setShow(false);
     handleCloseModal();
   };

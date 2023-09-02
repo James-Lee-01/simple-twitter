@@ -5,6 +5,7 @@ import Button from '../../../Button/Button';
 import logo_gray from '../../../../assets/icons/logo_gray.png'
 import { Link } from 'react-router-dom';
 ///////////
+import { useDataChange } from '../../../../contexts/DataChangeContext';
 
 
 function SuggestUserItem(props) {
@@ -17,9 +18,10 @@ function SuggestUserItem(props) {
 
 		const [isClicked, setIsClicked] = useState(isFollowed)
 
-		useEffect(() => {
-			setIsClicked(isFollowed)
-		}, [isFollowed])
+    //狀態連動，使用CONTEXT解決
+    const { isDataChange, setIsDataChange } = useDataChange()
+
+		
 
 		const handleClick = async() => {
 			try {
@@ -27,7 +29,8 @@ function SuggestUserItem(props) {
 					const data = await unFollowUser(userId)
 					if (data.status === 'success') {
 						setIsClicked(false)
-						console.log(isClicked);
+            setIsDataChange(!isDataChange)
+						console.log(isDataChange);
 						
 					}
 				}
@@ -35,7 +38,8 @@ function SuggestUserItem(props) {
 					const data = await followUser(userId)
 					if (data.status === "success") {
             setIsClicked(true);
-            console.log(isClicked);
+            setIsDataChange(!isDataChange);
+            console.log(isDataChange);
           }
 				}
 				return
@@ -43,6 +47,11 @@ function SuggestUserItem(props) {
 				console.error('[Click FollowBtn Failed]', error)
 			}
 		}
+
+    useEffect(() => {
+      setIsClicked(isFollowed);
+      console.log("isFollowed", isDataChange);
+    }, [isFollowed, isDataChange]);
 
 		
 

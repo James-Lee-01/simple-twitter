@@ -10,14 +10,18 @@ import { getUserFollowing } from "../../api/tweet";
 import { useAuthContext } from "../../contexts/AuthContext.jsx";
 import { useNavigate, useLocation } from "react-router-dom";
 
+import { useDataChange } from "../../contexts/DataChangeContext";
+
 const UserFollowingPage = () => {
   const { userId } = useParams();
   const URL = useParams();
   const [usersList, setUsersList] = useState([]);
 
-      const { isAuthenticated } = useAuthContext();
-      const navigate = useNavigate();
-      const { pathname } = useLocation();
+    const { isAuthenticated } = useAuthContext();
+    const navigate = useNavigate();
+    const { pathname } = useLocation();
+
+    const { isDataChange } = useDataChange();
 
   const linkList = [
     { title: "跟隨者", link: `/user/${userId}/follower` },
@@ -42,7 +46,7 @@ const UserFollowingPage = () => {
       }
     };
     getUserFollowingList();
-  }, [URL.userId]);
+  }, [URL.userId, isDataChange]);
 
   const followingUsers = usersList.map((user) => {
     return (

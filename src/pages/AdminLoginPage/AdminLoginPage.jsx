@@ -1,5 +1,5 @@
 import styles from "./AdminLoginPage.module.scss";
-import { useState, useMemo, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AuthPageContainer from "../../components/AuthPageContainer/AuthPageContainer.jsx";
 import AuthInput from "../../components/AuthInput/AuthInput.jsx";
