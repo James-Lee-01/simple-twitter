@@ -3,22 +3,26 @@ import { Toast } from '../../../api/tweet.js';
 import { getRelativeTime } from '../../../api/tweet.js';
 import { useAuthContext } from "../../../contexts/AuthContext.jsx";
 import { useDataStatus } from '../../../contexts/DataContext.jsx';
-// import { apiFunction } from '../../../api/tweet.js';
+import { getUser } from "../../../api/auth";
+import { useDataChange } from "../../../contexts/DataChangeContext";
 import clsx from 'clsx';
 import usePostReply from '../../../hooks/usePostReply.js';
 import Button from '../../Button/Button.jsx';
 
-import CancelIcon from '../../../assets/icons/modal/modal_esc.png';
 import Modal from '../Modal'
 import styles from './SingleTweetReplyModal.module.scss';
 
 export default function SingleTweetReplyModal({ handleCloseModal, props }) {
-  const [replyText, setreplyText] = useState('');
+  const [userProfile, setUserProfile] = useState("");
+  //需對照使用者身份
+  const [replyText, setReplyText] = useState('');
   const { currentUser } = useAuthContext();
+  const userId = currentUser && currentUser.id;
   const { isDataUpdate, setIsDataUpdate } = useDataStatus();
   const [show, setShow] = useState(true);
   const { isUpdating, replyPostHook } = usePostReply();
-  const [avatarUrl, setAvatarUrl] = useState('');
+
+  const [msg, setMsg] = useState('');
 
   const headsUpClassName = clsx(styles.headsUp, { [styles.active]: replyText.length === 0 });
   const bodyClassName = clsx(styles.body, { [styles.active]: replyText.length > 0 });
@@ -29,38 +33,57 @@ export default function SingleTweetReplyModal({ handleCloseModal, props }) {
   const avatar = props.User.avatar;
   const description = props.description;
   const createdAt = props.createdAt;
+  const limitClassName = clsx(styles.limit, { [styles.active]: msg });
 
+  /////////////
+  const { isDataChange, setIsDataChange } = useDataChange()
   useEffect(() => {
-    const userId = props.User.id;
-    fetch(`/api/user/${userId}/avatar`) // 確保這個 URL 正確
-      .then(response => response.json())
-      .then(data => {
-        if (data.avatarUrl) { // 確保有正確取得 avatarUrl
-          setAvatarUrl(data.avatarUrl);
-        } else {
-          console.error('Avatar URL not found:', data);
+    // console.log('1',currentUser);
+    const getUserInfo = async () => {
+      try {
+        if (userId) {
+          const data = await getUser(userId);
+          if (data.status === "error") {
+            console.log(data.message);
+            return;
+          }
+          if (data) {
+            // update data
+            await setUserProfile(data);
+            console.log(data);
+          }
         }
-      })
-      .catch(error => {
-        console.error('Error fetching avatar URL:', error);
-      });
-  }, [props.User.id]);
+      } catch (error) {
+        console.log("getUser Failed", error);
+      }
+    };
+    getUserInfo();
+  }, [userId, isDataChange]);
+  /////////////
+
 
   const handlePostReply = async () => {
     if (replyText.trim().length === 0) {
-      setreplyText('');
+      setReplyText('');
       Toast.fire({
         title: '內容不可空白',
         icon: 'error',
       });
+      setMsg("內容不可空白");
       return;
 
-    }
+    } else {
+      setTimeout(() => {
+        handleCloseModal();
+        return;
+      }, 1500);
 
+    }
     await replyPostHook(replyText, tweetId);
-    await setreplyText('');
+    await setReplyText(''); //清空
     setIsDataUpdate(!isDataUpdate);
     setShow(false);
+    handleCloseModal();
   };
 
 
@@ -78,7 +101,7 @@ export default function SingleTweetReplyModal({ handleCloseModal, props }) {
       <Modal
         onClose={handleCloseModal}
         show={show}
-        // className={styles.modalContainer}
+      // className={styles.modalContainer}
       >
         <div className={styles.tweet}>
           <div className={styles.left}>
@@ -105,25 +128,33 @@ export default function SingleTweetReplyModal({ handleCloseModal, props }) {
         <div className={styles.positionAnchor}>
 
           <div className={styles.downAvatarContainer}>
-            <img className={styles.avatar} src={currentUser.avatar} alt="avatar" />
+            <img
+              className={styles.avatar}
+              src={userProfile.avatar}
+              alt="UserAvatar" />
           </div>
 
           {/* <div className={styles.replyTextContainer}> */}
           <textarea
             className={bodyClassName}
-            onChange={(event) => setreplyText(event.target.value)}
+            onChange={(event) => setReplyText(event.target.value)}
             placeholder="推你的回覆"
             value={replyText}
           />
           {/* </div> */}
 
-          <div className={styles.footer}>
-            <span className={headsUpClassName}>內容不可空白</span>
-            <div className={styles.btnContainer}>
+          <div
+            className={styles.footer}
+          >
+            {/* {replyText.trim().length === 0 && (
+              <div className={headsUpClassName}>内容不可為空白</div>
+            )} */}
+            <div className={styles.replyButton}>
+              <span className={headsUpClassName}>{msg}</span>
               <Button
                 title="回覆"
                 size="small"
-                isAction
+                isActive
                 onClick={handlePostReply}
               />
             </div>

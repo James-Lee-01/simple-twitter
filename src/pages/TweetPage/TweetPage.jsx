@@ -5,32 +5,30 @@ import SingleTweetCard from '../../components/Main/SingleTweetCard/SingleTweetCa
 import { useNavigate, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { getTweet, getTweetReplies } from "../../api/tweet.js";
+import { useDataStatus } from '../../contexts/DataContext.jsx'
 import ReplyItem from '../../components/Main/ReplyListCard/ReplyListCard';
 import SingleTweetReplyModal from '../../components/Modal/SingleTweetReplyModal/SingleTweetReplyModal.jsx';
 
 import { useAuthContext } from "../../contexts/AuthContext.jsx";
-import {  useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 export default function TweetPage() {
   //利用useParams的hook取得id值
   const param = useParams();
   const [tweet, setTweet] = useState("");
   const [user, setUser] = useState({});
-
   const { isAuthenticated } = useAuthContext();
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const [replies, setReplies] = useState([])
   const [isModalOpen, setIsModalOpen] = useState(false);
-  // const navigate = useNavigate();
+  const { isDataUpdate } = useDataStatus();
 
   const handleOpenModal = () => {
-    //Modal開啟
-    setIsModalOpen(true);
+    setIsModalOpen(true); //Modal開啟
   };
   const handleCloseModal = () => {
-    //Modal關閉
-    setIsModalOpen(false);
+    setIsModalOpen(false); //Modal關閉
   };
 
   //Get Single Tweet API
@@ -50,7 +48,7 @@ export default function TweetPage() {
       }
     };
     getSingleTweet();
-  }, [param.tweetId]);
+  }, [param.tweetId, isDataUpdate, replies]);
 
   //Get Reply Data API
   useEffect(() => {
@@ -65,7 +63,7 @@ export default function TweetPage() {
       }
     };
     getReplies();
-  }, [param.tweetId]);
+  }, [param.tweetId, isDataUpdate, replies]);
 
   const repliesList = replies.map((reply) => {
     return (
