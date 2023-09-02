@@ -41,3 +41,11 @@ npm install
 ```
 npm start
 ```
+
+# Development Environment
+* Node.js 14.21.
+* React 18.2.0
+* Sass 1.26.7
+* axios 0.27.2
+* clsx 1.2.1
+* jsonwebtoken 8.5.1
