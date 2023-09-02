@@ -104,7 +104,7 @@ export const followUser = async (userId) => {
     const { data } = await axiosInstance.post(`/followships`, {
       id: userId,
     });
-    console.log(data)
+    // console.log(data)
     return data
   } catch (error) {
     console.error('[followUser Failed]', error);

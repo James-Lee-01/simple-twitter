@@ -42,7 +42,6 @@ const CurrentUser = () => {
               await setUserProfile(data);
               await setIsClicked(data.isFollowed);
               setFollowerNum(data.followerCount)
-              console.log(data.userProfile);
             }
             
           }
@@ -88,6 +87,7 @@ const CurrentUser = () => {
         console.error(error);
       }
     };
+
 
 
     return (

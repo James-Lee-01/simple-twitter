@@ -82,7 +82,7 @@ function PostTweetModal({
       setShow(false);
       handleCloseModal();
     }
-    console.log(postTweetContent);
+    // console.log(postTweetContent);
   };
 ////////////////////////////////
 
