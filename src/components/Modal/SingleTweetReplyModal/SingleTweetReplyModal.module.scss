@@ -8,34 +8,6 @@
   z-index: 99;
 }
 
-.modalContainer {
-  display: flex;
-  flex-direction: column;
-  width: 634px;
-  margin: 56px auto;
-  border-radius: 14px;
-  background-color: white;
-  border: 1px solid gray;
-}
-
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 56px;
-  width: 100%;
-  border-bottom: 1px solid gray;
-
-  .modalEsc {
-    height: 20px;
-    width: 20px;
-    margin-left: 20px;
-    cursor: pointer;
-  }
-}
-
-
-
 .tweet {
   display: flex;
   margin: 15px 15px 0 15px;
@@ -48,7 +20,7 @@
     .line {
       flex: 1;
       border: 1px solid #CCD6DD;
-      margin: 5px 5px 5px 0;
+      margin: 8px 5px 8px 0px;
     }
   }
 
@@ -80,7 +52,7 @@
       }
 
       .replyAccount {
-        color: orangered; //brandcolor?
+        color: orangered;
       }
     }
   }
@@ -118,7 +90,7 @@
   display: flex;
   align-items: center;
 
-  .waring {
+  .headsUp {
     display: none;
     margin-right: 20px;
     font-size: 15px;
@@ -129,15 +101,10 @@
     }
   }
 
-  .headsUp {
-    display: none;
-    margin-right: 20px;
-    font-size: 15px;
-    color: red;
-
-    &.active {
-      display: flex;
-    }
+  .replyButton {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
   }
 }
 
