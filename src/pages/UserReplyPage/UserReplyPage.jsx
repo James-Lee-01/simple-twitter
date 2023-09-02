@@ -55,7 +55,7 @@ const UserReplyPage = () => {
     // console.log('props: ', props);
     return (
       <SingleUserReply
-        // key={props.id}
+        key={props.id}
         // tweetId={props.id}
         createdAt={props.createdAt}
         tweetAccount={props.Tweet.User.name}

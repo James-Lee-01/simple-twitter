@@ -22,6 +22,7 @@ export default function SingleUserReply(props) {
   const tweetAccount = props.tweetAccount;
   // const userId = props.userId;
   const comment = props.comment;
+  const id = props.id
 
   //////////////////////////
 
@@ -49,7 +50,7 @@ export default function SingleUserReply(props) {
   ///////////////////////////////////////////
 
   return (
-    <div className={styles.modalContainer}>
+    <div className={styles.modalContainer} key={id}>
       <div className={styles.left}>
         <Link to={`/user/${userId}/tweet`}>
           <div className={styles.avatarContainer}>

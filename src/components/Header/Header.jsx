@@ -14,7 +14,6 @@ import SignoutIcon from '../../assets/icons/nav/nav_signout.png';
 import SignoutActionIcon from '../../assets/icons/nav/nav_signout_action.png';
 import ItemContainer from './ItemContainer/ItemContainer';
 import Logo from './Logo/Logo';
-import Button from '../Button/Button';
 
 import { useState, useEffect } from 'react';
 import PostTweetModal from '../Modal/PostTweetModal/PostTweetModal'
@@ -26,20 +25,19 @@ function Header({ isAdmin }) {
   const [avatar, setAvatar] = useState(currentUser.avatar)
 
   ////////User Check///////////////
-  useEffect(
-    () => {
+    useEffect(() => {
       const getUserInfo = async () => {
         try {
-          if (userId) {
+          if (userId && !isAdmin) {
             const data = await getUser(userId);
             if (data.status === "error") {
-              console.log(data.message);
+              // console.log(data.message);
               return;
             }
             if (data) {
               // update data
               setAvatar(data.avatar);
-              console.log(data.avatar);
+              // console.log(data.avatar);
             }
           }
         } catch (error) {
@@ -47,9 +45,7 @@ function Header({ isAdmin }) {
         }
       };
       getUserInfo();
-    },
-    [userId],
-  ); ////
+    }, [userId, isAdmin]); ////
 
   ///////////Tweet Button/////////
 

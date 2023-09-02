@@ -90,7 +90,6 @@ export const getTweet = async (tweetId) => {
 export const getTweetReplies = async (tweetId) => {
   try {
     const { data } = await axiosInstance.get(`/tweets/${tweetId}/replies`);
-    console.log(data)
     return data;
   } catch (error) {
     console.error("[getTweetReplies Failed]:", error);

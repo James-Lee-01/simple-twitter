@@ -5,7 +5,7 @@ import UserInfo from "../../components/Main/Navbar/UserInfo/UserInfo";
 import CurrentUser from "../../components/Main/CurrentUser/CurrentUser";
 import UserToggleMenu from "../../components/Main/UserToggleMenu/UserToggleMenu";
 import { useParams } from "react-router-dom";
-import { useState, useEffect, useLayoutEffect } from "react";
+import { useState, useEffect } from "react";
 import { getUserTweet } from '../../api/tweet.js'
 
 // import SingleUserTweet from "../../components/Main/TweetItem/SingleUserTweet";

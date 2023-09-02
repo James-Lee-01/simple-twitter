@@ -50,7 +50,7 @@ const CurrentUser = () => {
         }
       };
       getUserInfo();
-    }, [URL.userId], isDataChange);////
+    }, [URL.userId, isDataChange]);////
 
 		const handleOpenModal = () => {
 			//Modal開啟

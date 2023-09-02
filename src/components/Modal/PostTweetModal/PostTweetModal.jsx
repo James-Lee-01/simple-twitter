@@ -4,7 +4,7 @@ import style from "../../Main/TweetInput/TweetInput.module.scss";
 import { useState } from "react";
 import { useDataChange } from "../../../contexts/DataChangeContext";
 import clsx from "clsx";
-import { useAuthContext } from "../../../contexts/AuthContext";
+
 // import { getUser } from "../../../api/auth";
 import usePost from "../../../hooks/usePost.js";
 
@@ -24,7 +24,7 @@ function PostTweetModal({
   //身份擷取
   // const [userProfile, setUserProfile] = useState("");
   //需對照使用者身份
-  const { currentUser } = useAuthContext();
+
   
   // const userId = currentUser && currentUser.id;
   // const userId = id;

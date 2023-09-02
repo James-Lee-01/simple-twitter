@@ -2,7 +2,7 @@ import Modal from "../Modal";
 import style from "./UserEditModal.module.scss";
 import CancelIcon from "../../../assets/icons/modal/modal_cancel.png";
 import UploadIcon from "../../../assets/icons/modal/modal_upload.png";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import logo_gray from "../../../assets/icons/logo_gray.png";
 import AuthInput from "../../AuthInput/AuthInput";
 import profileBG from "../../../assets/images/profileBG.jpeg";
@@ -32,8 +32,8 @@ function UserEditModal({
 
   const { isUpdating, updateUserInfo } = useUpdateChange();
 
-  const [nameMsg, setNameMsg] = useState("");
-  const [introMsg, setIntroMsg] = useState('')
+  // const [nameMsg, setNameMsg] = useState("");
+  // const [introMsg, setIntroMsg] = useState('')
 
   const { isDataChange, setIsDataChange } = useDataChange(); ////
 
@@ -97,7 +97,7 @@ function UserEditModal({
 		if (!isUpdating) {
       setShow(false);
       handleCloseModal();
-      window.location.reload()
+      // window.location.reload()
     }
     console.log(updateUserInfo);///
   };
@@ -196,7 +196,7 @@ function UserEditModal({
                   value={name}
                   placeholder='請輸入名稱'
                   onChange={(nameInput) => setName(nameInput)}
-                  notification={nameMsg}
+                  // notification={nameMsg}
                   lengthLimit={50}
                 />
               </div>
@@ -209,7 +209,7 @@ function UserEditModal({
                   value={introduction}
                   placeholder='請輸入自我介紹'
                   onChange={(infoInput) => setIntroduction(infoInput)}
-                  notification={introMsg}
+                  // notification={introMsg}
                   lengthLimit={160}
                   // className={style.textarea}
                 />
