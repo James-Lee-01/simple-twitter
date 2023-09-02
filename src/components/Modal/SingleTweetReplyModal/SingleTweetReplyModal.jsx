@@ -3,25 +3,20 @@ import { Toast } from '../../../api/tweet.js';
 import { getRelativeTime } from '../../../api/tweet.js';
 import { useAuthContext } from "../../../contexts/AuthContext.jsx";
 import { useDataStatus } from '../../../contexts/DataContext.jsx';
-// import { apiFunction } from '../../../api/tweet.js';
 import clsx from 'clsx';
 import usePostReply from '../../../hooks/usePostReply.js';
 import Button from '../../Button/Button.jsx';
 
-import CancelIcon from '../../../assets/icons/modal/modal_esc.png';
 import Modal from '../Modal'
 import styles from './SingleTweetReplyModal.module.scss';
-import { Form } from 'react-router-dom';
 
-export default function SingleTweetReplyModal({ handleCloseModal, props, onChange }) {
+export default function SingleTweetReplyModal({ handleCloseModal, props }) {
   const [replyText, setReplyText] = useState('');
   const { currentUser } = useAuthContext();
   const { isDataUpdate, setIsDataUpdate } = useDataStatus();
   const [show, setShow] = useState(true);
   const { isUpdating, replyPostHook } = usePostReply();
-  const [avatarUrl, setAvatarUrl] = useState('');
 
-  const [newRerender, setNewRerender] = useState(false);
   const [msg, setMsg] = useState('');
 
   const headsUpClassName = clsx(styles.headsUp, { [styles.active]: replyText.length === 0 });
@@ -35,22 +30,6 @@ export default function SingleTweetReplyModal({ handleCloseModal, props, onChang
   const createdAt = props.createdAt;
   const limitClassName = clsx(styles.limit, { [styles.active]: msg });
 
-  useEffect(() => {
-    const userId = props.User.id;
-    fetch(`/api/user/${userId}/avatar`) // 確保這個 URL 正確
-      .then(response => response.json())
-      .then(data => {
-        if (data.avatarUrl) { // 確保有正確取得 avatarUrl
-          setAvatarUrl(data.avatarUrl);
-        } else {
-          console.error('Avatar URL not found:', data);
-        }
-      })
-      .catch(error => {
-        console.error('Error fetching avatar URL:', error);
-      });
-  }, [props.User.id]);
-
   const handlePostReply = async () => {
     if (replyText.trim().length === 0) {
       setReplyText('');
@@ -62,15 +41,17 @@ export default function SingleTweetReplyModal({ handleCloseModal, props, onChang
       return;
 
     } else {
-      handleCloseModal()
-      setNewRerender(true);
-    }
+      setTimeout(() => {
+        handleCloseModal();
+        return;
+      }, 1500);
 
+    }
     await replyPostHook(replyText, tweetId);
     await setReplyText(''); //清空
-    await setIsDataUpdate(!isDataUpdate);
+    setIsDataUpdate(!isDataUpdate);
     setShow(false);
-    await handleCloseModal();
+    handleCloseModal();
   };
 
 
@@ -116,7 +97,7 @@ export default function SingleTweetReplyModal({ handleCloseModal, props, onChang
 
           <div className={styles.downAvatarContainer}>
             <img
-            className={styles.avatar} src={currentUser.avatar} alt="avatar" />
+              className={styles.avatar} src={currentUser.avatar} alt="avatar" />
           </div>
 
           {/* <div className={styles.replyTextContainer}> */}
