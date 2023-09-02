@@ -5,7 +5,7 @@ import UserInfo from "../../components/Main/Navbar/UserInfo/UserInfo";
 import CurrentUser from "../../components/Main/CurrentUser/CurrentUser";
 import UserToggleMenu from "../../components/Main/UserToggleMenu/UserToggleMenu";
 import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useLayoutEffect } from "react";
 import { getUserTweet } from '../../api/tweet.js'
 
 // import SingleUserTweet from "../../components/Main/TweetItem/SingleUserTweet";
@@ -39,7 +39,7 @@ const UserTweetPage = () => {
 
   // // for tweet mapping
   useEffect(() => {
-    const getAllUserTweets = async () => {
+    const getUserAllTweets = async () => {
       try {
         const data = await getUserTweet(URL.userId);
         //若狀態顯示失敗，回傳訊息
@@ -55,8 +55,10 @@ const UserTweetPage = () => {
       } catch (error) {
         console.log("推文擷取失敗", error);
       }
+      console.log("isDataChange changed:", isDataChange);
     };
-    getAllUserTweets();
+    getUserAllTweets();
+    
   }, [URL.userId, isDataChange]);
 
   const tweetsList = tweets.map((props) => {
@@ -78,12 +80,32 @@ const UserTweetPage = () => {
     );
   });
 
-  //prohibited
+  // //prohibited
+  // useLayoutEffect(() => {
+  //   if (!isAuthenticated) {
+  //     navigate("/login");
+  //   }
+  // }, [pathname, navigate, isAuthenticated]);
+
+  // //prohibited
+  // useEffect(() => {
+  //   if (!isAuthenticated) {
+  //     navigate("/login");
+  //   }
+  // }, [pathname, navigate, isAuthenticated]);
+
+  //prohibited 
   useEffect(() => {
     if (!isAuthenticated) {
-      navigate("/login");
+      const isAuthenticatedFromStorage = localStorage.getItem("authToken") !== null
+      if (!isAuthenticatedFromStorage) {
+        navigate("/login");
+      }      
     }
   }, [pathname, navigate, isAuthenticated]);
+
+
+
   // const tweetsList = tweets.map((props) => {
   //   return (
   //     <SingleUserTweet
@@ -104,7 +126,9 @@ const UserTweetPage = () => {
       </Navbar>
       <CurrentUser />
       <UserToggleMenu linkList={linkList} />
-      <div className={style.tweetList}>{tweetsList}</div>
+      <div className={style.tweetList}>
+        {tweetsList}
+      </div>
     </MainLayout>
   );
 }

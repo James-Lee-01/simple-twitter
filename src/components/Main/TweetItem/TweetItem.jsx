@@ -11,7 +11,7 @@ import { postLike, postUnlike } from '../../../api/tweet';
 
 
 function TweetItem(props) {
-  // console.log("TweetItem props:", props);
+  console.log("TweetItem props:", props);
 	const key = props.tweetId;
 	const tweetId = props.tweetId;
 	const userId = props.userId
@@ -26,7 +26,7 @@ function TweetItem(props) {
 
 
 	const [ liked, setLiked ] = useState(isLiked)
-	const likedClassName = clsx(style.likedBtn, {[style.active]: liked})
+	const likedClassName = clsx(style.likedBtn, {[style.active]: Boolean(liked)})
 	const [ likedNum, setLikedNum ] = useState(likedCount)
   
 
@@ -36,14 +36,14 @@ function TweetItem(props) {
       if (Boolean(liked) === false) {
         //false情況下，點下表示按讚
         await postLike(tweetId);
-        setLiked(true);
+        setLiked(1);
         setLikedNum(likedNum + 1);
         
       } 
       if (Boolean(liked) === true) {
         //相反的是取消讚
         await postUnlike(tweetId);
-        setLiked(false);
+        setLiked(0);
         setLikedNum(likedNum - 1);
       }
     } catch (error) {

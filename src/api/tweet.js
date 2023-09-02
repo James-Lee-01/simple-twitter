@@ -145,7 +145,7 @@ export const postLike = async (tweetId) => {
     await axiosInstance.post(`/tweets/${tweetId}/like`, {});
   } catch (error) {
     console.error('[postLike Failed]:', error);
-    // console.log('4',tweetId)
+    console.log('4',tweetId)
     return error
   }
 };
@@ -156,6 +156,7 @@ export const postUnlike = async (tweetId) => {
     await axiosInstance.post(`/tweets/${tweetId}/unlike`, {});
   } catch (error) {
     console.error('[postUnlike Failed]:', error);
+    console.log('5',tweetId)
     return error
   }
 };
