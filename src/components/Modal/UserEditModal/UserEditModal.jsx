@@ -61,7 +61,6 @@ function UserEditModal({
   const handleCancelImg = () => {
     if (isUpdating) return;
     setCoverPhoto(originCoverPhoto);
-    setUpdateCoverPhoto(null);
   };
 
   // const handleCloseIcon = (event) => {

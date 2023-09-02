@@ -4,7 +4,7 @@ import style from "../../Main/TweetInput/TweetInput.module.scss";
 import { useState } from "react";
 import { useDataChange } from "../../../contexts/DataChangeContext";
 import clsx from "clsx";
-// import { useAuthContext } from "../../../contexts/AuthContext";
+import { useAuthContext } from "../../../contexts/AuthContext";
 // import { getUser } from "../../../api/auth";
 import usePost from "../../../hooks/usePost.js";
 
@@ -24,9 +24,11 @@ function PostTweetModal({
   //身份擷取
   // const [userProfile, setUserProfile] = useState("");
   //需對照使用者身份
-  // const { currentUser } = useAuthContext();
+  const { currentUser } = useAuthContext();
+  
   // const userId = currentUser && currentUser.id;
-  const userId = id;
+  // const userId = id;
+  // const avatar = currentUser.avatar
 
   //自建hook
   const { isUpdating,postTweetContent } = usePost();
@@ -97,18 +99,10 @@ function PostTweetModal({
 
   return (
     <div className={style.modalOverlay} onClick={handleCloseModalAtBg}>
-      <Modal
-        onClose={handleCloseModal}
-        show={show}
-        
-      >
+      <Modal onClose={handleCloseModal} show={show}>
         <div className={style.post}>
           <div className={style.postAvatar}>
-            <img
-              className={style.avatar}
-              src={avatar}
-              alt='avatar'
-            />
+            <img className={style.avatar} src={avatar} alt='avatar' />
           </div>
           <div className={style.postContent}>
             <textarea
