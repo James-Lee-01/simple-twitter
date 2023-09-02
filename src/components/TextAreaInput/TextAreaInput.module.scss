@@ -6,25 +6,28 @@
   margin-bottom: 8px;
 
   //box size
-  height: 54px;
+  height: 150px;
   width: 100%;
   border-radius: 2px;
   //color
   background-color: #f5f8fa;
 }
+
 .label {
   //display
   display: flex;
   align-items: center;
   //box size
-  height: 100%;
+  height: 30px;
   padding: 0 10.5px;
   //text
   color: #696974;
   font-size: 14px;
 }
-.input {
+
+.textarea {
   //box
+  display: flex;
   border: none;
   height: 100%;
   padding: 0 10.5px;
@@ -34,20 +37,19 @@
   font-size: 16px;
   line-height: 26px;
   //color
-    background-color: #f5f8fa;
+  background-color: #f5f8fa;
 
   &.active {
     border-color: #fc5a5a;
   }
-  &:hover,&:focus {
+
+  &:hover,
+  &:focus {
     border-color: #50b5ff;
     outline: none;
   }
-  &.textarea {
-    outline: 1px solid palevioletred;
-    height: 123px;
-  }
 }
+
 .noteContainer {
   //display
   display: flex;
@@ -57,7 +59,8 @@
   height: 24px;
   padding-top: 4px;
 }
-.notification{
+
+.notification {
   //display
   align-items: center;
   visibility: hidden;
@@ -65,29 +68,33 @@
   align-items: center;
   font-size: 12px;
   color: #696974;
+
   &.activeText::after {
     visibility: visible;
     color: #fc5a5a;
     content: "字數超出上限!"
   }
-  &.active{
+
+  &.active {
     visibility: visible;
     color: #fc5a5a;
   }
 }
-.length{
+
+.length {
   //display
-    align-items: center;
-    visibility: hidden;
-    //text
-    align-items: center;
-    font-size: 12px;
-    color: #696974;
-  
-    &.active {
-      visibility: visible;
-    }
-    &.limit {
-      color: #fc5a5a;
-    }
+  align-items: center;
+  visibility: hidden;
+  //text
+  align-items: center;
+  font-size: 12px;
+  color: #696974;
+
+  &.active {
+    visibility: visible;
+  }
+
+  &.limit {
+    color: #fc5a5a;
+  }
 }

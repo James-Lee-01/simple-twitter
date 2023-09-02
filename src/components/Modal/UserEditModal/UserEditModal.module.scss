@@ -28,7 +28,8 @@
     display: flex;
     flex-direction: column;
     position: relative;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
+    
 
     .coverPhoto {
 				// position: relative;
@@ -81,7 +82,7 @@
     .userEditInfo {
         display: flex;
         flex-direction: column;
-        padding: 80px 15px 50px 15px;
+        padding: 80px 15px 0 15px;
 
         // .inputGroup {
         //     display: flex;

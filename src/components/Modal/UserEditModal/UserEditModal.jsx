@@ -5,6 +5,7 @@ import UploadIcon from "../../../assets/icons/modal/modal_upload.png";
 import { useState } from "react";
 import logo_gray from "../../../assets/icons/logo_gray.png";
 import AuthInput from "../../AuthInput/AuthInput";
+import TextAreaInput from '../../TextAreaInput/TextAreaInput'
 import profileBG from "../../../assets/images/profileBG.jpeg";
 import Button from "../../Button/Button";
 
@@ -203,7 +204,7 @@ function UserEditModal({
             </div>
             <div className={style.introductionEdit}>
               <div className={style.inputGroup}>
-                <AuthInput
+                <TextAreaInput
                   labelName='自我介紹'
                   type='text'
                   value={introduction}
@@ -211,7 +212,7 @@ function UserEditModal({
                   onChange={(infoInput) => setIntroduction(infoInput)}
                   // notification={introMsg}
                   lengthLimit={160}
-                  // className={style.textarea}
+                  textarea
                 />
               </div>
             </div>
