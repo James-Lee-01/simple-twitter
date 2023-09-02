@@ -3,6 +3,8 @@ import { Toast } from '../../../api/tweet.js';
 import { getRelativeTime } from '../../../api/tweet.js';
 import { useAuthContext } from "../../../contexts/AuthContext.jsx";
 import { useDataStatus } from '../../../contexts/DataContext.jsx';
+import { getUser } from "../../../api/auth";
+import { useDataChange } from "../../../contexts/DataChangeContext";
 import clsx from 'clsx';
 import usePostReply from '../../../hooks/usePostReply.js';
 import Button from '../../Button/Button.jsx';
@@ -11,8 +13,11 @@ import Modal from '../Modal'
 import styles from './SingleTweetReplyModal.module.scss';
 
 export default function SingleTweetReplyModal({ handleCloseModal, props }) {
+  const [userProfile, setUserProfile] = useState("");
+  //需對照使用者身份
   const [replyText, setReplyText] = useState('');
   const { currentUser } = useAuthContext();
+  const userId = currentUser && currentUser.id;
   const { isDataUpdate, setIsDataUpdate } = useDataStatus();
   const [show, setShow] = useState(true);
   const { isUpdating, replyPostHook } = usePostReply();
@@ -29,6 +34,33 @@ export default function SingleTweetReplyModal({ handleCloseModal, props }) {
   const description = props.description;
   const createdAt = props.createdAt;
   const limitClassName = clsx(styles.limit, { [styles.active]: msg });
+
+  /////////////
+  const { isDataChange, setIsDataChange } = useDataChange()
+  useEffect(() => {
+    // console.log('1',currentUser);
+    const getUserInfo = async () => {
+      try {
+        if (userId) {
+          const data = await getUser(userId);
+          if (data.status === "error") {
+            console.log(data.message);
+            return;
+          }
+          if (data) {
+            // update data
+            await setUserProfile(data);
+            console.log(data);
+          }
+        }
+      } catch (error) {
+        console.log("getUser Failed", error);
+      }
+    };
+    getUserInfo();
+  }, [userId, isDataChange]);
+  /////////////
+
 
   const handlePostReply = async () => {
     if (replyText.trim().length === 0) {
@@ -97,7 +129,9 @@ export default function SingleTweetReplyModal({ handleCloseModal, props }) {
 
           <div className={styles.downAvatarContainer}>
             <img
-              className={styles.avatar} src={currentUser.avatar} alt="avatar" />
+              className={styles.avatar}
+              src={userProfile.avatar}
+              alt="UserAvatar" />
           </div>
 
           {/* <div className={styles.replyTextContainer}> */}
