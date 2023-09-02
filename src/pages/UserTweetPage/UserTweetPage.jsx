@@ -5,7 +5,7 @@ import UserInfo from "../../components/Main/Navbar/UserInfo/UserInfo";
 import CurrentUser from "../../components/Main/CurrentUser/CurrentUser";
 import UserToggleMenu from "../../components/Main/UserToggleMenu/UserToggleMenu";
 import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useLayoutEffect } from "react";
 import { getUserTweet } from '../../api/tweet.js'
 
 // import SingleUserTweet from "../../components/Main/TweetItem/SingleUserTweet";
@@ -39,7 +39,7 @@ const UserTweetPage = () => {
 
   // // for tweet mapping
   useEffect(() => {
-    const getAllUserTweets = async () => {
+    const getUserAllTweets = async () => {
       try {
         const data = await getUserTweet(URL.userId);
         //若狀態顯示失敗，回傳訊息
@@ -57,7 +57,7 @@ const UserTweetPage = () => {
       }
       console.log("isDataChange changed:", isDataChange);
     };
-    getAllUserTweets();
+    getUserAllTweets();
     
   }, [URL.userId, isDataChange]);
 
@@ -81,20 +81,28 @@ const UserTweetPage = () => {
   });
 
   // //prohibited
+  // useLayoutEffect(() => {
+  //   if (!isAuthenticated) {
+  //     navigate("/login");
+  //   }
+  // }, [pathname, navigate, isAuthenticated]);
+
+  // //prohibited
   // useEffect(() => {
   //   if (!isAuthenticated) {
   //     navigate("/login");
   //   }
   // }, [pathname, navigate, isAuthenticated]);
 
-  // //prohibited setTimeout
-  // useEffect(() => {
-  //   if (!isAuthenticated) {
-  //     setTimeout(() => {
-  //       navigate("/login");
-  //     }, 1000); // 延遲  秒導向
-  //   }
-  // }, [pathname, navigate, isAuthenticated]);
+  //prohibited 
+  useEffect(() => {
+    if (!isAuthenticated) {
+      const isAuthenticatedFromStorage = localStorage.getItem("authToken") !== null
+      if (!isAuthenticatedFromStorage) {
+        navigate("/login");
+      }      
+    }
+  }, [pathname, navigate, isAuthenticated]);
 
 
 
