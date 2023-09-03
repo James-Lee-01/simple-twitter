@@ -1,5 +1,11 @@
 # Simple Twitter (Frontend repo)
-Simple twitter created through Create React App. This is an project developed as part of Alpha Camp's third-semester frontend curriculum. It serves as a capstone project to showcase the skills acquired in JSX, components, Sass, etc. The final version of this project was completed in September 2023.
+Simple twitter created through Create React App. This is a project developed as part of Alpha Camp's third-semester frontend curriculum. It serves as a capstone project to showcase the skills acquired in JSX, components, Sass, etc. The final version of this project was completed in September 2023.
+
+- Backend teammates：[Boxun](https://github.com/boxunw), [Jenny](https://github.com/yanyanyaa)
+- Frontend teammates：[James](https://github.com/James-Lee-01), [雅云](https://github.com/Ya-Yun-Zheng)
+- [Backend repo](https://github.com/boxunw/simple-twitter-api)
+- [Website portal](https://james-lee-01.github.io/simple-twitter)
+
 
 # Features
 ### As a user, you can perform various actions after registering:
@@ -15,7 +21,7 @@ Simple twitter created through Create React App. This is an project developed as
 > Reply to other users' tweets.<br>
 <img src="https://github.com/James-Lee-01/simple-twitter/blob/feature/README.md/public/README/Reply%20to%20other%20users'%20tweets.png" alt="image" width="900"><br>
 
-> View a specific tweet and its replies.<br>
+> View a specific tweet and replies.<br>
 <img src="https://github.com/James-Lee-01/simple-twitter/blob/feature/README.md/public/README/View%20a%20specific%20tweet%20and%20its%20replies.png" alt="image" width="900"><br>
 
 > Access your own tweets.<br>
@@ -24,16 +30,16 @@ Simple twitter created through Create React App. This is an project developed as
 > See the tweets you've replied to.<br>
 <img src="https://github.com/James-Lee-01/simple-twitter/blob/feature/README.md/public/README/See%20the%20tweets%20you've%20replied%20to..png" alt="image" width="900"><br>
 
-> Check your liked tweets.<br>
+> View content that a user has liked.<br>
 <img src="https://github.com/James-Lee-01/simple-twitter/blob/feature/README.md/public/README/Check%20your%20liked%20tweets.png" alt="image" width="900"><br>
 
 > Edit your profile information, including name, introduction, avatar, and banner.<br>
 <img src="https://github.com/James-Lee-01/simple-twitter/blob/feature/README.md/public/README/Edit%20your%20profile%20information%2C%20including%20name%2C%20introduction%2C%20avatar%2C%20and%20banner.png" alt="image" width="900"><br>
 
-> View your followers and the users you're following.<br>
+> View followers and the following.<br>
 <img src="https://github.com/James-Lee-01/simple-twitter/blob/feature/README.md/public/README/View%20your%20followers%20and%20the%20users%20you're%20following.png" alt="image" width="900"><br>
 
-### As an administrator, you have additional capabilities:
+### As an administrator, you are allowed to:
 > Browse all user information, including total tweets, likes received, followings, and followers.<br>
 <img src="https://github.com/James-Lee-01/simple-twitter/blob/feature/README.md/public/README/Browse%20all%20user%20information%2C%20including%20total%20tweets%2C%20likes%20received%2C%20followings%2C%20and%20followers%201.png" alt="image" width="900"><br>
 <img src="https://github.com/James-Lee-01/simple-twitter/blob/feature/README.md/public/README/Browse%20all%20user%20information%2C%20including%20total%20tweets%2C%20likes%20received%2C%20followings%2C%20and%20followers%202.png" alt="image" width="900"><br>
@@ -52,7 +58,7 @@ Simple twitter created through Create React App. This is an project developed as
 > **password:** 12345678
 
 # Project Installation and Launch
-1. open your terminal, and clone the project:
+1. Open your terminal, and clone the project:
 ```
 git clone https://github.com/James-Lee-01/simple-twitter.git
 ```
@@ -66,7 +72,7 @@ npm start
 ```
 
 # Development Environment
-* Node.js 14.21.
+* Node.js 14.21.3
 * React 18.2.0
 * Sass 1.26.7
 * axios 0.27.2
