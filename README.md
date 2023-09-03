@@ -3,33 +3,43 @@ Simple twitter created through Create React App. This is an project developed as
 
 # Features
 ### As a user, you can perform various actions after registering:
-> * Browse other people's tweets.
-![image](Browse other people's tweets.png)
-> * Follow other accounts.
-![image](Follow other accounts..png)
-> * Post tweets.
-![image](Post tweets.png)
-> * Reply to other users' tweets.
-![image](Reply to other users' tweets.png)
-> * View a specific tweet and its replies.
-![image](View a specific tweet and its replies.png)
-> * Access your own tweets.
-![image](Access your own tweets.)
-> * See the tweets you've replied to.
-![image](Access your own tweets.png)
-> * Check your liked tweets.
-![image](Check your liked tweets.png)
-> * Edit your profile information, including name, introduction, avatar, and banner.
-![image](Edit your profile information, including name, introduction, avatar, and banner.png)
-> * View your followers and the users you're following.
-![image](View a specific tweet and its replies.png)
+> Browse other people's tweets.<br>
+<img src="https://github.com/James-Lee-01/simple-twitter/blob/feature/README.md/public/README/Browse%20other%20people's%20tweets.png" alt="image" width="900"><br>
+
+> Follow other accounts.<br>
+<img src="https://github.com/James-Lee-01/simple-twitter/blob/feature/README.md/public/README/Follow%20other%20accounts..png" alt="image" width="380"><br>
+
+> Post tweets.<br>
+<img src="https://github.com/James-Lee-01/simple-twitter/blob/feature/README.md/public/README/Post%20tweets.png" alt="image" width="900"><br>
+
+> Reply to other users' tweets.<br>
+<img src="https://github.com/James-Lee-01/simple-twitter/blob/feature/README.md/public/README/Reply%20to%20other%20users'%20tweets.png" alt="image" width="900"><br>
+
+> View a specific tweet and its replies.<br>
+<img src="https://github.com/James-Lee-01/simple-twitter/blob/feature/README.md/public/README/View%20a%20specific%20tweet%20and%20its%20replies.png" alt="image" width="900"><br>
+
+> Access your own tweets.<br>
+<img src="https://github.com/James-Lee-01/simple-twitter/blob/feature/README.md/public/README/Access%20your%20own%20tweets.png" alt="image" width="900"><br>
+
+> See the tweets you've replied to.<br>
+<img src="https://github.com/James-Lee-01/simple-twitter/blob/feature/README.md/public/README/See%20the%20tweets%20you've%20replied%20to..png" alt="image" width="900"><br>
+
+> Check your liked tweets.<br>
+<img src="https://github.com/James-Lee-01/simple-twitter/blob/feature/README.md/public/README/Check%20your%20liked%20tweets.png" alt="image" width="900"><br>
+
+> Edit your profile information, including name, introduction, avatar, and banner.<br>
+<img src="https://github.com/James-Lee-01/simple-twitter/blob/feature/README.md/public/README/Edit%20your%20profile%20information%2C%20including%20name%2C%20introduction%2C%20avatar%2C%20and%20banner.png" alt="image" width="900"><br>
+
+> View your followers and the users you're following.<br>
+<img src="https://github.com/James-Lee-01/simple-twitter/blob/feature/README.md/public/README/View%20your%20followers%20and%20the%20users%20you're%20following.png" alt="image" width="900"><br>
 
 ### As an administrator, you have additional capabilities:
-> * Browse all user information, including total tweets, likes received, followings, and followers.
-![image](Browse all user information, including total tweets, likes received, followings, and followers 1.png)
-![image](Browse all user information, including total tweets, likes received, followings, and followers 2.png)
-> * Browse all tweets and delete them if necessary, with a confirmation prompt.
-![image](Browse all user information, including total tweets, likes received, followings, and followers 2拷貝.png)
+> Browse all user information, including total tweets, likes received, followings, and followers.<br>
+<img src="https://github.com/James-Lee-01/simple-twitter/blob/feature/README.md/public/README/Browse%20all%20user%20information%2C%20including%20total%20tweets%2C%20likes%20received%2C%20followings%2C%20and%20followers%201.png" alt="image" width="900"><br>
+<img src="https://github.com/James-Lee-01/simple-twitter/blob/feature/README.md/public/README/Browse%20all%20user%20information%2C%20including%20total%20tweets%2C%20likes%20received%2C%20followings%2C%20and%20followers%202.png" alt="image" width="900"><br>
+
+> Browse all tweets and delete them if necessary, with a confirmation prompt.<br>
+<img src="https://github.com/James-Lee-01/simple-twitter/blob/feature/README.md/public/README/Browse%20all%20user%20information%2C%20including%20total%20tweets%2C%20likes%20received%2C%20followings%2C%20and%20followers%202.png" alt="image" width="900"><br>
 
 # Test Accounts
 ### User Account:
