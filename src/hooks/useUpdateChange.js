@@ -1,22 +1,24 @@
 import { useState } from 'react';
 import { setUserProfile } from '../api/tweet'
 
+//data to server
+//using FormData
 export default function useUpdateChange () {
   const [isUpdating, setIsUpdating] = useState(false)
 
   const updateUserInfo = async (user) => {
     try {
       if (isUpdating) return
-
       setIsUpdating (true)
-      console.log('6', user)
 
       ///FormData.append(key, value)
       const formData = new FormData();
-            formData.append("cover", user.updateCoverPhoto);
-            formData.append("avatar", user.updateAvatar);
-            formData.append("name", user.name);
-            formData.append("introduction", user.introduction);
+            formData.append("cover", user.updateCoverPhoto); //new cover photo
+            formData.append("avatar", user.updateAvatar); //new avatar
+            formData.append("name", user.name); //new name
+            formData.append("introduction", user.introduction); //new introduction
+      
+      //API
       const data = await setUserProfile (formData, user.id)
       
       if (data==="error") {
@@ -25,7 +27,7 @@ export default function useUpdateChange () {
       }
       
       console.log(data.message)
-      console.log('check',data)
+      console.log('check',data) //easy for checking response
       setIsUpdating(false)
 
     } catch (error) {

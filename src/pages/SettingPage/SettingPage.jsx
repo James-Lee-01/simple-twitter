@@ -3,9 +3,8 @@ import Header from '../../components/Header/Header.jsx'
 import AuthInput from '../../components/AuthInput/AuthInput.jsx'
 import Button from '../../components/Button/Button.jsx'
 import Navbar from '../../components/Main/Navbar/Navbar.jsx'
-import { useState, useMemo, useEffect } from 'react'
 import Swal from 'sweetalert2'
-///以下要修改處ＡＰＩ
+import { useState, useMemo, useEffect } from 'react'
 import { getUser, setUserAccount } from '../../api/auth.js'
 import { useAuthContext } from '../../contexts/AuthContext'
 import { useNavigate, useLocation } from "react-router-dom";
@@ -17,17 +16,15 @@ export default function SettingPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [checkPassword, setCheckPassword] = useState("");
-  const navigate = useNavigate();
   const [msg, setMsg] = useState("");
-
-
-    const { pathname } = useLocation();
-
   const { currentUser, isAuthenticated } = useAuthContext();
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
+  
   //取目前使用者的id
   const userId = currentUser && currentUser.id;
 
-  //權限限制與跳轉
+  //權限限制與重新導向
   useEffect(() => {
     if (!isAuthenticated) {
       navigate("/login");
@@ -49,7 +46,6 @@ export default function SettingPage() {
             await setAccount(data.account);
             await setName(data.name);
             await setEmail(data.email);
-            console.log(data);
           }
         }
       } catch (error) {
@@ -91,11 +87,10 @@ export default function SettingPage() {
         showConfirmButton: false,
       });
       // setMsg("請填入正確資料!");
-      // console.log('Check your info again')
       return;
     }
 
-    //data
+    //data API
     const data = await setUserAccount({
       account,
       name,
@@ -115,12 +110,10 @@ export default function SettingPage() {
         timer: 1000,
         showConfirmButton: false,
       });
-      // console.log('success')
-
       return;
     }
 
-    //failed
+    //failed 後端驗證來的資訊
     Swal.fire({
       toast: true,
       position: "top",
@@ -130,10 +123,9 @@ export default function SettingPage() {
       showConfirmButton: false,
     });
     setMsg(data.response.data.message);
-    // console.log('signup failed')
   };
 
-  //prohibited
+  //prohibited, redirection
   useEffect(() => {
     if (!isAuthenticated) {
       navigate("/login");

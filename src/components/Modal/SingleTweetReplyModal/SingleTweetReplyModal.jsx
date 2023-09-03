@@ -1,15 +1,14 @@
-import { useState, useEffect } from 'react';
+import usePostReply from '../../../hooks/usePostReply.js';
+import Button from '../../Button/Button.jsx';
+import Modal from '../Modal'
+import styles from './SingleTweetReplyModal.module.scss';
+import clsx from 'clsx';import { useState, useEffect } from 'react';
 import { Toast } from '../../../api/tweet.js';
 import { getRelativeTime } from '../../../api/tweet.js';
 import { useAuthContext } from "../../../contexts/AuthContext.jsx";
 import { getUser } from "../../../api/auth";
 import { useDataChange } from "../../../contexts/DataChangeContext";
-import clsx from 'clsx';
-import usePostReply from '../../../hooks/usePostReply.js';
-import Button from '../../Button/Button.jsx';
 
-import Modal from '../Modal'
-import styles from './SingleTweetReplyModal.module.scss';
 
 export default function SingleTweetReplyModal({ handleCloseModal, props }) {
   const [userProfile, setUserProfile] = useState("");
@@ -32,11 +31,9 @@ export default function SingleTweetReplyModal({ handleCloseModal, props }) {
   const avatar = props.User.avatar;
   const description = props.description;
   const createdAt = props.createdAt;
-  // const limitClassName = clsx(styles.limit, { [styles.active]: msg });
 
-  /////////////
+  //get user info
   useEffect(() => {
-    // console.log('1',currentUser);
     const getUserInfo = async () => {
       try {
         if (userId) {
@@ -57,9 +54,8 @@ export default function SingleTweetReplyModal({ handleCloseModal, props }) {
     };
     getUserInfo();
   }, [userId, isDataChange]);
-  /////////////
-
-
+  
+  //click post
   const handlePostReply = async () => {
     if (replyText.trim().length === 0) {
       setReplyText('');
@@ -84,7 +80,7 @@ export default function SingleTweetReplyModal({ handleCloseModal, props }) {
     handleCloseModal();
   };
 
-
+  //click close
   const handleCloseBtn = (e) => {
     if (!isUpdating) {
       if (e.target.classList.contains(styles.modalOverlay)) {
@@ -99,7 +95,6 @@ export default function SingleTweetReplyModal({ handleCloseModal, props }) {
       <Modal
         onClose={handleCloseModal}
         show={show}
-      // className={styles.modalContainer}
       >
         <div className={styles.tweet}>
           <div className={styles.left}>
@@ -131,22 +126,17 @@ export default function SingleTweetReplyModal({ handleCloseModal, props }) {
               src={userProfile.avatar}
               alt="UserAvatar" />
           </div>
-
-          {/* <div className={styles.replyTextContainer}> */}
           <textarea
             className={bodyClassName}
             onChange={(event) => setReplyText(event.target.value)}
             placeholder="推你的回覆"
             value={replyText}
           />
-          {/* </div> */}
+
 
           <div
             className={styles.footer}
           >
-            {/* {replyText.trim().length === 0 && (
-              <div className={headsUpClassName}>内容不可為空白</div>
-            )} */}
             <div className={styles.replyButton}>
               <span className={headsUpClassName}>{msg}</span>
               <Button

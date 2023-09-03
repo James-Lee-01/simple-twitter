@@ -1,11 +1,12 @@
 import styles from './SignUpPage.module.scss'
-import { useMemo, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import AuthPageContainer from "../../components/AuthPageContainer/AuthPageContainer.jsx";
 import AuthInput from "../../components/AuthInput/AuthInput.jsx";
 import Button from "../../components/Button/Button.jsx";
-import { userSignUp } from '../../api/auth';
 import Swal from 'sweetalert2';
+import AuthPageContainer from "../../components/AuthPageContainer/AuthPageContainer.jsx";
+import { useMemo, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { userSignUp } from '../../api/auth';
+
 
 
 export default function SignUpPage() {
@@ -14,9 +15,8 @@ export default function SignUpPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [checkPassword, setCheckPassword] = useState('')
-  const navigate = useNavigate()
-
   const [msg, setMsg] = useState('')
+  const navigate = useNavigate()
 
   //確認註冊規範是否符合
   const isValid = useMemo(() => {
@@ -50,7 +50,6 @@ export default function SignUpPage() {
         showConfirmButton: false,
       });
       // setMsg("請填入正確資料!");
-      // console.log('Check your info again')
       return
     }
 
@@ -68,15 +67,13 @@ export default function SignUpPage() {
         icon: "success",
         timer: 1000,
         showConfirmButton: false,
-      });
-      // console.log('success')
-      
+      });      
       //註冊成功則導回登入頁
       navigate('/login')
       return
     }
 
-    //failed
+    //failed message from server
     Swal.fire({
       toast: true,
       position: "top",
@@ -86,7 +83,6 @@ export default function SignUpPage() {
       showConfirmButton: false,
     });
     setMsg(data.response.data.message)
-    // console.log('signup failed')
   }
 
   return (

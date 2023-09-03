@@ -1,7 +1,7 @@
 import { postTweet } from "../api/tweet";
 import { useState } from "react";
 
-///////////推文發布////////////
+//推文發布
 export default function usePost () {
   	//狀態
 	const [isUpdating, setIsUpdating] = useState(false)
