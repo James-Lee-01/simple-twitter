@@ -1,9 +1,5 @@
 import style from './Header.module.scss';
 import HeaderLink from './HeaderLink/HeaderLink';
-import { useLocation } from 'react-router-dom';
-import { useAuthContext } from "../../contexts/AuthContext.jsx";
-
-
 import HomeIcon from '../../assets/icons/nav/nav_home.png';
 import HomeActionIcon from '../../assets/icons/nav/nav_home_action.png';
 import UserIcon from '../../assets/icons/nav/nav_user.png';
@@ -14,27 +10,61 @@ import SignoutIcon from '../../assets/icons/nav/nav_signout.png';
 import SignoutActionIcon from '../../assets/icons/nav/nav_signout_action.png';
 import ItemContainer from './ItemContainer/ItemContainer';
 import Logo from './Logo/Logo';
-import Button from '../Button/Button';
-import { currentUser } from "../../contexts/AuthContext.jsx";
-
-import { useState } from 'react';
 import PostTweetModal from '../Modal/PostTweetModal/PostTweetModal'
+import { useState, useEffect } from 'react';
+import { getUser } from '../../api/auth';
+import { useLocation } from 'react-router-dom';
+import { useAuthContext } from "../../contexts/AuthContext.jsx";
 
 function Header({ isAdmin }) {
+<<<<<<< HEAD
   const { currentUser } = useAuthContext()
   const userId = currentUser.id
 
   ///////////Tweet Button/////////
   const avatar = currentUser.avatar
 
+=======
+  const { currentUser } = useAuthContext();
+  const userId = currentUser.id;
+  const [avatar, setAvatar] = useState(currentUser.avatar)
+
+  //User Check
+    useEffect(() => {
+      const getUserInfo = async () => {
+        try {
+          if (userId && !isAdmin) {
+            const data = await getUser(userId);
+            if (data.status === "error") {
+              return;
+            }
+            if (data) {
+              // update data
+              setAvatar(data.avatar);
+            }
+          }
+        } catch (error) {
+          console.log("getUser Failed", error);
+        }
+      };
+      getUserInfo();
+    }, [userId, isAdmin]); 
+
+  //Tweet Button
+>>>>>>> 99f3c0f7f80f0d070b5d9e51390c619d7142ee69
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleOpenModal = () => {
     //Modal開啟
     setIsModalOpen(true);
+<<<<<<< HEAD
+=======
+    console.log("current", currentUser);
+>>>>>>> 99f3c0f7f80f0d070b5d9e51390c619d7142ee69
   };
   const handleCloseModal = () => {
     //Modal關閉
     setIsModalOpen(false);
+<<<<<<< HEAD
 
   };
 
@@ -84,6 +114,53 @@ function Header({ isAdmin }) {
       {/* Modal Control */}
       {isModalOpen && (
         <PostTweetModal className={style.postTweetModal}
+=======
+  };
+
+  const links = [
+    {
+      path: "/main",
+      text: "首頁",
+      icon: HomeIcon,
+      actionIcon: HomeActionIcon,
+    },
+    {
+      path: `/user/${userId}/tweet`,
+      text: "個人資料",
+      icon: UserIcon,
+      actionIcon: UserActionIcon,
+    },
+    {
+      path: "/setting",
+      text: "設定",
+      icon: SetIcon,
+      actionIcon: SetActionIcon,
+    },
+  ];
+
+  const adminLinks = [
+    {
+      path: "/admin/tweet",
+      text: "推文清單",
+      icon: HomeIcon,
+      actionIcon: HomeActionIcon,
+    },
+    {
+      path: "/admin/user",
+      text: "使用者列表",
+      icon: UserIcon,
+      actionIcon: UserActionIcon,
+    },
+  ];
+
+  const location = useLocation();
+  const { logout } = useAuthContext();
+
+  return (
+    <div className={style.headerContainer}>
+      {isModalOpen && (
+        <PostTweetModal
+>>>>>>> 99f3c0f7f80f0d070b5d9e51390c619d7142ee69
           handleCloseModal={handleCloseModal}
           id={userId}
           // show={show}

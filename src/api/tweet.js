@@ -57,8 +57,6 @@ export const getDetailedTime = (createdAt) => {
   const formattedDate = `${period} ${hours}:${minutes} · ${year}年${month}月${day}日 `;
   return formattedDate;
 }
-
-
 /////////////////////////////////
 
 
@@ -66,7 +64,6 @@ export const getDetailedTime = (createdAt) => {
 export const getAllTweet = async () => {
   try {
     const { data } = await axiosInstance.get('/tweets')
-    // console.log(data)
     return data
   } catch (error) {
     console.error('[getAllTweet Failed]', error)
@@ -78,7 +75,6 @@ export const getAllTweet = async () => {
 export const getTweet = async (tweetId) => {
   try {
     const { data } = await axiosInstance.get(`/tweets/${tweetId}`);
-    // console.log(data)
     return data;
   } catch (error) {
     console.error('[getTweet Failed]:', error);
@@ -90,7 +86,6 @@ export const getTweet = async (tweetId) => {
 export const getTweetReplies = async (tweetId) => {
   try {
     const { data } = await axiosInstance.get(`/tweets/${tweetId}/replies`);
-    console.log(data)
     return data;
   } catch (error) {
     console.error("[getTweetReplies Failed]:", error);
@@ -104,11 +99,9 @@ export const followUser = async (userId) => {
     const { data } = await axiosInstance.post(`/followships`, {
       id: userId,
     });
-    console.log(data)
     return data
   } catch (error) {
     console.error('[followUser Failed]', error);
-    // console.log(userId)
     return error;
   }
 };
@@ -118,7 +111,6 @@ export const followUser = async (userId) => {
 export const unFollowUser = async (followingId) => {
   try {
     const { data } = await axiosInstance.delete(`/followships/${followingId}`);
-    // console.log(data)
     return data
   } catch (error) {
     console.error('[unFollowUser Failed]', error);
@@ -145,7 +137,6 @@ export const postLike = async (tweetId) => {
     await axiosInstance.post(`/tweets/${tweetId}/like`, {});
   } catch (error) {
     console.error('[postLike Failed]:', error);
-    console.log('4',tweetId)
     return error
   }
 };
@@ -156,7 +147,6 @@ export const postUnlike = async (tweetId) => {
     await axiosInstance.post(`/tweets/${tweetId}/unlike`, {});
   } catch (error) {
     console.error('[postUnlike Failed]:', error);
-    console.log('5',tweetId)
     return error
   }
 };

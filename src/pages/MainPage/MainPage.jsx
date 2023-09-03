@@ -5,9 +5,9 @@ import TweetItem from "../../components/Main/TweetItem/TweetItem";
 import MainLayout from "../../components/Main/MainLayout/MainLayout";
 import { useEffect, useState } from "react";
 import { getAllTweet } from "../../api/tweet.js";
-
 import { useAuthContext } from "../../contexts/AuthContext.jsx";
 import { useNavigate, useLocation } from "react-router-dom";
+import { useDataChange } from "../../contexts/DataChangeContext";
 
 
 export default function MainPage() {
@@ -17,6 +17,7 @@ export default function MainPage() {
   const { pathname } = useLocation()
   // for tweet mapping
   const [tweets, setTweets] = useState([]);
+  const { isDataChange } = useDataChange()
 
   useEffect(() => {
     const getAllTweets = async () => {
@@ -24,32 +25,30 @@ export default function MainPage() {
         const data = await getAllTweet();
         //若狀態顯示失敗，回傳訊息
         if (!data) {
-          // console.log("data failed");
           return;
         }
         //若狀態顯示成功則直接擷取資料
         if (data) {
           setTweets(data); //回傳資料格式
-          // console.log('data get!');
         }
       } catch (error) {
         console.log("推文擷取失敗", error);
       }
     };
     getAllTweets();
-  }, []);
+  }, [isDataChange]);
 
 
 
 
-  //prohibited
+  //prohibited and redirection
   useEffect(() => {
     if (!isAuthenticated) {
       navigate("/login");
     }
   }, [pathname, navigate, isAuthenticated]);
 
-
+  //tweets mapping
   const tweetsList = tweets.map((props) => {
     return (
       <TweetItem

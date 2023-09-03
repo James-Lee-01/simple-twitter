@@ -2,7 +2,6 @@ import style from "./AdminUserPage.module.scss";
 import MainLayout from "../../components/Main/MainLayout/MainLayout";
 import Navbar from "../../components/Main/Navbar/Navbar";
 import UserCard from "../../components/AdminUserCard/AdminUserCard";
-
 import { getAdminUsers } from '../../api/auth.js'
 import { useEffect, useState } from "react";
 import { useAuthContext } from "../../contexts/AuthContext.jsx";
@@ -15,10 +14,10 @@ function AdminUserPage() {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
-  //prohibited
+  //prohibited and redirection
   useEffect(() => {
     if (!isAuthenticated) {
-      navigate("/login");
+      navigate("/admin/login");
     }
   }, [pathname, navigate, isAuthenticated]);
 
@@ -43,6 +42,7 @@ function AdminUserPage() {
     adminGetUsers();
   }, []);
 
+  //data list mapping
   const userCardList = users.map((user) => {
     return (
       <UserCard
@@ -63,7 +63,6 @@ function AdminUserPage() {
     <MainLayout extendMainContainer={true} isAdmin={true}>
       <Navbar title='使用者列表' />
       <div className={style.userList}>
-        {/* { Array.from(Array(16)).map((_, index) => <UserCard user={userList[index % 2]} />)} */}
         {userCardList}
       </div>
     </MainLayout>

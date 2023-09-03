@@ -14,8 +14,6 @@ export default function AdminTweetItem (props) {
     onClick:handleDelete,
   } = props;
 
-  
-
   return (
     <div className={styles.itemContainer} key={tweetId}>
       <div className={styles.itemWrapper}>

@@ -3,8 +3,6 @@ import defaultAdminBG from "../../assets/images/defaultAdminBG.png";
 import admin_reply from "../../assets/icons/admin/admin_reply.png";
 import admin_like from "../../assets/icons/admin/admin_like.png";
 import logo_gray from "../../assets/icons/logo_gray.png";
-// import backIcon from "../../../assets//icons/arrow.png";
-
 
 export default function AdminUserCard(props) {
 const key = props.userId

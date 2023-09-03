@@ -6,32 +6,32 @@ import UserToggleMenu from "../../components/Main/UserToggleMenu/UserToggleMenu"
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getUserFollowing } from "../../api/tweet";
-
 import { useAuthContext } from "../../contexts/AuthContext.jsx";
 import { useNavigate, useLocation } from "react-router-dom";
+import { useDataChange } from "../../contexts/DataChangeContext";
 
 const UserFollowingPage = () => {
   const { userId } = useParams();
   const URL = useParams();
   const [usersList, setUsersList] = useState([]);
+  const { isAuthenticated } = useAuthContext();
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
+  const { isDataChange } = useDataChange();
 
-      const { isAuthenticated } = useAuthContext();
-      const navigate = useNavigate();
-      const { pathname } = useLocation();
-
+  //for headers
   const linkList = [
     { title: "跟隨者", link: `/user/${userId}/follower` },
     { title: "正在跟隨", link: `/user/${userId}/following` },
   ];
 
-  ///////Get Following Data API//////
+  //Get Following Data API
   useEffect(() => {
     const getUserFollowingList = async () => {
       try {
         const data = await getUserFollowing(URL.userId);
         if (data) {
           setUsersList(data);
-          // console.log("7", data);
         }
         if (!data) {
           console.log("No data");
@@ -42,8 +42,9 @@ const UserFollowingPage = () => {
       }
     };
     getUserFollowingList();
-  }, [URL.userId]);
+  }, [URL.userId, isDataChange]);
 
+  //data list mapping
   const followingUsers = usersList.map((user) => {
     return (
       <FollowTypeCard

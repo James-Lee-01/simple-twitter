@@ -47,7 +47,11 @@
   .tweetContent {
     margin: 9px 0;
     line-height: 26px;
+<<<<<<< HEAD
     max-width: 500px; //超過500px要換行
+=======
+    max-width: 500px;
+>>>>>>> 99f3c0f7f80f0d070b5d9e51390c619d7142ee69
     word-wrap: break-word;
     overflow-wrap: break-word; //
   }

@@ -1,9 +1,9 @@
-///本Context旨在確認全域環境下資料有無變動，觸發重新渲染。
+///本Context旨在確認全域環境下資料有無變動，跨階層的hook，觸發重新渲染。
 import { createContext, useState, useContext } from "react";
 
 const defaultDataContext = {
   ///Default Context
-  isDataUpdate: false,
+  isDataChange: false,
 };
 
 //export 

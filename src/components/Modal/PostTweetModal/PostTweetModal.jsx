@@ -1,14 +1,9 @@
 import Modal from "../Modal";
 import style from "../../Main/TweetInput/TweetInput.module.scss";
-
+import clsx from "clsx";
 import { useState } from "react";
 import { useDataChange } from "../../../contexts/DataChangeContext";
-import clsx from "clsx";
-// import { useAuthContext } from "../../../contexts/AuthContext";
-// import { getUser } from "../../../api/auth";
 import usePost from "../../../hooks/usePost.js";
-
-// import { useDataChange } from "../../../contexts/DataChangeContext";
 
 function PostTweetModal({
   handleCloseModal,
@@ -16,51 +11,17 @@ function PostTweetModal({
   avatar,
 }) {
   const [show, setShow] = useState(true);
-  ////////////////////////////////////
   //Message
   const [msg, setMsg] = useState("");
   //文字變化
   const [textInput, setTextInput] = useState("");
-  //身份擷取
-  // const [userProfile, setUserProfile] = useState("");
-  //需對照使用者身份
-  // const { currentUser } = useAuthContext();
-  // const userId = currentUser && currentUser.id;
-  const userId = id;
-
   //自建hook
   const { isUpdating,postTweetContent } = usePost();
-
   const { isDataChange, setIsDataChange } = useDataChange();
 
   //CSS styles switch
   const limitClassName = clsx(style.limit, { [style.active]: msg });
-  ////////////////////////////////////
-
-  // useEffect(() => {
-  //   // console.log('1',currentUser);
-  //   const getUserInfo = async () => {
-  //     try {
-  //       if (userId) {
-  //         const data = await getUser(userId);
-  //         if (data.status === "error") {
-  //           console.log(data.message);
-  //           return;
-  //         }
-  //         if (data) {
-  //           // update data
-  //           await setUserProfile(data);
-  //           console.log(data);
-  //         }
-  //       }
-  //     } catch (error) {
-  //       console.log("getUser Failed", error);
-  //     }
-  //   };
-  //   getUserInfo();
-  // }, [userId, isDataChange]); ////
-
-  ////////////////////////////
+  
   ///////////推文按鈕發送////////////
   const handleSubmitTweet = async () => {
     if (textInput.trim().length === 0) {
@@ -80,9 +41,7 @@ function PostTweetModal({
       setShow(false);
       handleCloseModal();
     }
-    console.log(postTweetContent);
   };
-////////////////////////////////
 
   const handleCloseModalAtBg = (event) => {
     if (!isUpdating) return;
@@ -91,24 +50,12 @@ function PostTweetModal({
     }
   };
 
-  /////////////////////
-
-  /////////////////////
-
   return (
     <div className={style.modalOverlay} onClick={handleCloseModalAtBg}>
-      <Modal
-        onClose={handleCloseModal}
-        show={show}
-        
-      >
+      <Modal onClose={handleCloseModal} show={show}>
         <div className={style.post}>
           <div className={style.postAvatar}>
-            <img
-              className={style.avatar}
-              src={avatar}
-              alt='avatar'
-            />
+            <img className={style.avatar} src={avatar} alt='avatar' />
           </div>
           <div className={style.postContent}>
             <textarea
@@ -121,7 +68,6 @@ function PostTweetModal({
 
             <div className={style.postButton}>
               <span className={limitClassName}>{msg}</span>
-
               <button onClick={handleSubmitTweet}>推文</button>
             </div>
           </div>

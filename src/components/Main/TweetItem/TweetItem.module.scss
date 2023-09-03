@@ -4,6 +4,7 @@
     display: flex;
     border-bottom: 1px solid #E6ECF0;
 
+
     .tweetAvatar {
         .avatar .avatarImg {
             width: 50px;
@@ -42,8 +43,16 @@
             margin-right: 15px;
             margin-bottom: 10px;
 
+            width: 450px;
+            display: -webkit-box;
+            overflow: hidden;
+            word-break: break-all;
+            text-overflow: ellipsis;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+
             p {
-							color: #171725;
+				color: #171725;
             }
         }
 

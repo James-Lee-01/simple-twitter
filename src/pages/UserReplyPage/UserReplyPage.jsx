@@ -4,11 +4,10 @@ import MainLayout from "../../components/Main/MainLayout/MainLayout";
 import UserInfo from "../../components/Main/Navbar/UserInfo/UserInfo";
 import CurrentUser from "../../components/Main/CurrentUser/CurrentUser";
 import UserToggleMenu from "../../components/Main/UserToggleMenu/UserToggleMenu";
-import { useParams } from "react-router-dom";
 import SingleUserReply from "../../components/Main/ReplyListCard/SingleUserReply";
+import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { getUserReply } from "../../api/tweet";
-
 import { useAuthContext } from "../../contexts/AuthContext.jsx";
 import { useNavigate, useLocation } from "react-router-dom";
 
@@ -29,7 +28,6 @@ const UserReplyPage = () => {
   ];
 
   // for tweet mapping
-
   useEffect(() => {
     const getUserReplyTweets = async () => {
       try {
@@ -42,7 +40,6 @@ const UserReplyPage = () => {
         //若狀態顯示成功則直接擷取資料
         if (data) {
           setUserReply(data); //回傳資料格式
-          // console.log('data get!');
         }
       } catch (error) {
         console.log("喜愛推文擷取失敗", error);
@@ -51,12 +48,11 @@ const UserReplyPage = () => {
     getUserReplyTweets();
   }, [URL.userId]);
 
+  //tweets mapping
   const replyTweetsList = userReply.map((props) => {
-    // console.log('props: ', props);
     return (
       <SingleUserReply
-        // key={props.id}
-        // tweetId={props.id}
+        key={props.id}
         createdAt={props.createdAt}
         tweetAccount={props.Tweet.User.name}
         const
@@ -65,7 +61,7 @@ const UserReplyPage = () => {
     );
   });
 
-  //prohibited
+  //prohibited and redirection
   useEffect(() => {
     if (!isAuthenticated) {
       navigate("/login");
