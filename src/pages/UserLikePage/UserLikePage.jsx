@@ -8,30 +8,26 @@ import UserToggleMenu from "../../components/Main/UserToggleMenu/UserToggleMenu"
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { getUserLike } from "../../api/tweet";
-
 import { useAuthContext } from "../../contexts/AuthContext.jsx";
 import { useNavigate, useLocation } from "react-router-dom";
 
 
 const UserLikePage = () => {
   const { userId } = useParams();
-
   const URL = useParams();
   const [userLike, setUserLike] = useState([]);
-
   const { isAuthenticated } = useAuthContext();
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
+  //for headers
   const linkList = [
     { title: "推文", link: `/user/${userId}/tweet` },
     { title: "推文與回覆", link: `/user/${userId}/reply` },
     { title: "喜歡的內容", link: `/user/${userId}/like` },
   ];
 
-  //////////////////////
   // for tweet mapping
-
   useEffect(() => {
     const getUserLikeTweets = async () => {
       try {
@@ -44,7 +40,6 @@ const UserLikePage = () => {
         //若狀態顯示成功則直接擷取資料
         if (data) {
           setUserLike(data); //回傳資料格式
-          // console.log("data get!", data);
         }
       } catch (error) {
         console.log("喜愛推文擷取失敗", error);
@@ -54,7 +49,6 @@ const UserLikePage = () => {
   }, [URL.userId]);
 
   const likeTweetsList = userLike.map((props) => {
-    // console.log(" get!", props);
     return (
       <TweetItem
         key={props.id}
@@ -72,7 +66,7 @@ const UserLikePage = () => {
     );
   });
 
-  //prohibited
+  //prohibited and redirection
   useEffect(() => {
     if (!isAuthenticated) {
       navigate("/login");
@@ -88,9 +82,6 @@ const UserLikePage = () => {
       <UserToggleMenu linkList={linkList} />
       <div className={style.tweetList}>
         {likeTweetsList}
-        {/* {
-        Array.from(Array(16)).map((_, index) => <TweetItem user={TweetList[0]} />)
-      } */}
       </div>
     </MainLayout>
   );

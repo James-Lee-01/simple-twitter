@@ -2,13 +2,12 @@ import styles from './TweetPage.module.scss'
 import Navbar from "../../components/Main/Navbar/Navbar";
 import MainLayout from "../../components/Main/MainLayout/MainLayout";
 import SingleTweetCard from '../../components/Main/SingleTweetCard/SingleTweetCard';
+import ReplyItem from '../../components/Main/ReplyListCard/ReplyListCard';
+import SingleTweetReplyModal from '../../components/Modal/SingleTweetReplyModal/SingleTweetReplyModal.jsx';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { getTweet, getTweetReplies } from "../../api/tweet.js";
 import { useDataChange } from '../../contexts/DataChangeContext';
-import ReplyItem from '../../components/Main/ReplyListCard/ReplyListCard';
-import SingleTweetReplyModal from '../../components/Modal/SingleTweetReplyModal/SingleTweetReplyModal.jsx';
-
 import { useAuthContext } from "../../contexts/AuthContext.jsx";
 import { useLocation } from "react-router-dom";
 
@@ -41,7 +40,6 @@ export default function TweetPage() {
           setTweet(data);
           setUser(data.User);
         }
-        // console.log(data.User.name)
         setTweet(data);
       } catch (error) {
         throw new Error(error);
@@ -65,6 +63,7 @@ export default function TweetPage() {
     getReplies();
   }, [param.tweetId, isDataChange, replies]);
 
+  //data list mapping
   const repliesList = replies.map((reply) => {
     return (
       <ReplyItem

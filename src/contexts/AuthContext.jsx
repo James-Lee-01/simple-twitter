@@ -1,7 +1,7 @@
+import * as jwt from "jsonwebtoken";
 import { userLogin, adminLogin } from "../api/auth.js";
-import * as jwt from 'jsonwebtoken'
 import { useState, useEffect, createContext, useContext } from "react";
-import { useLocation } from 'react-router-dom'
+import { useLocation } from "react-router-dom";
 
 //先設定default狀態
 const defaultAuthContext = {
@@ -9,9 +9,9 @@ const defaultAuthContext = {
   logout: null,
   currentUser: null,
   isAuthenticated: false,
-}
+};
 
-const AuthContext = createContext(defaultAuthContext)
+const AuthContext = createContext(defaultAuthContext);
 export const useAuthContext = () => useContext(AuthContext);
 
 export function AuthProvider({ children }) {
@@ -62,12 +62,12 @@ export function AuthProvider({ children }) {
   }
 
   //針對登入的驗證（判斷是否為前台或後台人員）
-  async function login({account, password, role}) {
-    const loginRole = role === 'admin' ? adminLogin : userLogin
+  async function login({ account, password, role }) {
+    const loginRole = role === "admin" ? adminLogin : userLogin;
 
     const { success, authToken } = await loginRole({
       account,
-      password
+      password,
     });
 
     const tempPayload = jwt.decode(authToken);
@@ -90,10 +90,10 @@ export function AuthProvider({ children }) {
         isAuthenticated,
         currentUser: payload,
         login,
-        logout
+        logout,
       }}
     >
       {children}
     </AuthContext.Provider>
   );
-};
+}

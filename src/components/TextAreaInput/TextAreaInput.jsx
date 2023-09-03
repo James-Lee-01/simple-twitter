@@ -39,9 +39,7 @@ export default function AuthInput({
   return (
     <>
       <div className={styles.container}>
-        {/* label */}
         <label className={styles.label}>{labelName}</label>
-        {/* input text */}
         <textarea
           className={textareaClassName}
           type={type}
@@ -50,7 +48,6 @@ export default function AuthInput({
           onChange={(event) => onChange?.(event.target.value)}
         />
       </div>
-      {/* notification bar and text limit */}
       <div className={styles.noteContainer}>
         <div className={notiClassName}>{notification}</div>
         <span className={lengthClassName}>

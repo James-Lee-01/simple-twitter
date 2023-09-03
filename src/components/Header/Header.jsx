@@ -1,9 +1,5 @@
 import style from './Header.module.scss';
 import HeaderLink from './HeaderLink/HeaderLink';
-import { useLocation } from 'react-router-dom';
-import { useAuthContext } from "../../contexts/AuthContext.jsx";
-
-
 import HomeIcon from '../../assets/icons/nav/nav_home.png';
 import HomeActionIcon from '../../assets/icons/nav/nav_home_action.png';
 import UserIcon from '../../assets/icons/nav/nav_user.png';
@@ -14,30 +10,29 @@ import SignoutIcon from '../../assets/icons/nav/nav_signout.png';
 import SignoutActionIcon from '../../assets/icons/nav/nav_signout_action.png';
 import ItemContainer from './ItemContainer/ItemContainer';
 import Logo from './Logo/Logo';
-
-import { useState, useEffect } from 'react';
 import PostTweetModal from '../Modal/PostTweetModal/PostTweetModal'
+import { useState, useEffect } from 'react';
 import { getUser } from '../../api/auth';
+import { useLocation } from 'react-router-dom';
+import { useAuthContext } from "../../contexts/AuthContext.jsx";
 
 function Header({ isAdmin }) {
   const { currentUser } = useAuthContext();
   const userId = currentUser.id;
   const [avatar, setAvatar] = useState(currentUser.avatar)
 
-  ////////User Check///////////////
+  //User Check
     useEffect(() => {
       const getUserInfo = async () => {
         try {
           if (userId && !isAdmin) {
             const data = await getUser(userId);
             if (data.status === "error") {
-              // console.log(data.message);
               return;
             }
             if (data) {
               // update data
               setAvatar(data.avatar);
-              // console.log(data.avatar);
             }
           }
         } catch (error) {
@@ -45,10 +40,9 @@ function Header({ isAdmin }) {
         }
       };
       getUserInfo();
-    }, [userId, isAdmin]); ////
+    }, [userId, isAdmin]); 
 
-  ///////////Tweet Button/////////
-
+  //Tweet Button
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleOpenModal = () => {
     //Modal開啟
@@ -60,7 +54,6 @@ function Header({ isAdmin }) {
     setIsModalOpen(false);
   };
 
-  //////////////////////////////////////
   const links = [
     {
       path: "/main",
@@ -102,7 +95,6 @@ function Header({ isAdmin }) {
 
   return (
     <div className={style.headerContainer}>
-      {/* Modal Control */}
       {isModalOpen && (
         <PostTweetModal
           handleCloseModal={handleCloseModal}

@@ -2,15 +2,13 @@ import Modal from "../Modal";
 import style from "./UserEditModal.module.scss";
 import CancelIcon from "../../../assets/icons/modal/modal_cancel.png";
 import UploadIcon from "../../../assets/icons/modal/modal_upload.png";
-import { useState } from "react";
 import logo_gray from "../../../assets/icons/logo_gray.png";
 import AuthInput from "../../AuthInput/AuthInput";
 import TextAreaInput from '../../TextAreaInput/TextAreaInput'
 import profileBG from "../../../assets/images/profileBG.jpeg";
 import Button from "../../Button/Button";
-
 import useUpdateChange from "../../../hooks/useUpdateChange";
-
+import { useState } from "react";
 import { useDataChange } from "../../../contexts/DataChangeContext";
 
 
@@ -28,14 +26,9 @@ function UserEditModal({
   const [updateAvatar, setUpdateAvatar] = useState(avatar);
   const [name, setName] = useState(originName);
   const [introduction, setIntroduction] = useState(originIntroduction || "");
-
   const [show, setShow] = useState(true);
 
   const { isUpdating, updateUserInfo } = useUpdateChange();
-
-  // const [nameMsg, setNameMsg] = useState("");
-  // const [introMsg, setIntroMsg] = useState('')
-
   const { isDataChange, setIsDataChange } = useDataChange(); ////
 
 
@@ -58,21 +51,13 @@ function UserEditModal({
     }
   };
 
-  /////////////////////////////
+  //click cancel button
   const handleCancelImg = () => {
     if (isUpdating) return;
     setCoverPhoto(originCoverPhoto);
   };
 
-  // const handleCloseIcon = (event) => {
-  //   if (isUpdating) {
-  // 		setShow(false)
-  // 		return;
-  // 	}
-
-  //   onClose(); ////pause
-  // };
-
+  //click submit button
   const handleSubmit = async () => {
     if (!name) {
       // setNameMsg("請輸入名稱");
@@ -109,11 +94,6 @@ function UserEditModal({
       handleCloseModal();
     }
   };
-
-  /////////////////////
-
-  /////////////////////
-
   
   return (
     <div className={style.modalOverlay} onClick={handleCloseBtn}>
@@ -124,7 +104,6 @@ function UserEditModal({
           <div className={style.headerContainer}>
             <div className={style.title}>編輯個人資料</div>
             <Button
-              // className={style.saveButton}
               title='儲存'
               size='small'
               isActive
@@ -149,8 +128,6 @@ function UserEditModal({
                 onChange={(event) => handleImgChange(event, "cover")}
               />
             </label>
-
-            {/* Cancel icon */}
             <div className={style.cancel} onClick={handleCancelImg}>
               <img
                 src={CancelIcon}
@@ -168,9 +145,7 @@ function UserEditModal({
             />
           </div>
           <div className={style.userAvatar}>
-            {/* <div className={style.avatar}> */}
             <img className={style.avatar} src={avatar} alt='avatar' />
-            {/* </div> */}
             <label className={style.avatarUpload} htmlFor='avatar'>
               <img
                 className={style.uploadIcon}
@@ -189,15 +164,12 @@ function UserEditModal({
           <div className={style.userEditInfo}>
             <div className={style.nameEdit}>
               <div className={style.inputGroup}>
-                {/* <label>名稱</label>
-                <input type='text' value='John Doe' /> */}
                 <AuthInput
                   labelName='名稱'
                   type='text'
                   value={name}
                   placeholder='請輸入名稱'
                   onChange={(nameInput) => setName(nameInput)}
-                  // notification={nameMsg}
                   lengthLimit={50}
                 />
               </div>
@@ -210,7 +182,6 @@ function UserEditModal({
                   value={introduction}
                   placeholder='請輸入自我介紹'
                   onChange={(infoInput) => setIntroduction(infoInput)}
-                  // notification={introMsg}
                   lengthLimit={160}
                   textarea
                 />

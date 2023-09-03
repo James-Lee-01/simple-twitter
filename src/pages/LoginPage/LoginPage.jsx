@@ -7,18 +7,16 @@ import Button from '../../components/Button/Button.jsx'
 import { useAuthContext } from '../../contexts/AuthContext.jsx'
 import Swal from 'sweetalert2'
 
-//{ labelName, type, value, placeholder, onChange, notification, lengthLimit }
-
 export default function LoginPage() {
   const [account, setAccount] = useState('')
   const [password, setPassword] = useState('')
   const navigate = useNavigate()
   const { login, isAuthenticated } = useAuthContext()
-
   const [msg, setMsg] = useState('')
 
-  //handleClick行為
+  //handleClick按下後的行為
   const handleClick = async () => {
+    //CCheck if the account and password have been entered.
     if (!account || !password) {
       Swal.fire({
         toast: true,
@@ -30,12 +28,13 @@ export default function LoginPage() {
       });
 
       setMsg("請填入正確資料");
-      // console.log('Check user info')
-      return
+      return;
     }
 
-    const success = await login({ account, password })
-    if(success) {
+    //Account and password have been entered
+    const success = await login({ account, password });
+    if (success) {
+      //response: success
       Swal.fire({
         toast: true,
         position: "top",
@@ -44,8 +43,7 @@ export default function LoginPage() {
         timer: 1000,
         showConfirmButton: false,
       });
-      // console.log('Login success')
-      return
+      return;
     }
     //login failed
     Swal.fire({
@@ -57,10 +55,9 @@ export default function LoginPage() {
       showConfirmButton: false,
     });
     setMsg("帳號不存在!");
-    // console.log('LoginError')
   }
 
-  // useEffect
+  // redirection
   useEffect(() => {
     //確認後導向主頁面
     if(isAuthenticated) {

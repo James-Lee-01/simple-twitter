@@ -1,13 +1,10 @@
 import style from "./AdminTweetPage.module.scss";
 import MainLayout from "../../components/Main/MainLayout/MainLayout";
 import Navbar from "../../components/Main/Navbar/Navbar";
-// import TweetItem from "../../components/Main/TweetItem/TweetItem";
 import AdminContainer from "./AdminContainer/AdminContainer";
-// import tweetCancelImage from "../../assets/icons/tweet/tweet_cancel.png";
 import AdminTweetItem from "../../components/AdminTweetItem/AdminTweetItem.jsx";
 import { useState, useEffect } from "react";
 import { adminGetAllTweets, deleteAdminTweet } from "../../api/tweet";
-
 import { useAuthContext } from "../../contexts/AuthContext.jsx";
 import { useNavigate, useLocation } from "react-router-dom";
 
@@ -15,14 +12,12 @@ function AdminTweetPage() {
   const { isAuthenticated } = useAuthContext();
   const navigate = useNavigate();
   const { pathname } = useLocation();
-
   const [tweets, setTweets] = useState([]);
 
   ////// for DeleteTweets
   const handleDelete = async (tweetId) => {
-    // console.log(tweetId)
     try {
-      const confirmed = window.confirm("Are you sure you want to delete?");
+      const confirmed = window.confirm("您確定要刪除此篇推文嗎?");
       if (confirmed) {
         await deleteAdminTweet(tweetId);
         setTweets((tweets) => {
@@ -54,13 +49,14 @@ function AdminTweetPage() {
     adminAllTweets();
   }, []);
 
-  //prohibited
+  //prohibited and redirection
   useEffect(() => {
     if (!isAuthenticated) {
       navigate("/admin/login");
     }
   }, [pathname, navigate, isAuthenticated]);
 
+  //data list mapping
   const tweetListAll = tweets.map((props) => {
     return (
       <AdminTweetItem
@@ -87,14 +83,3 @@ function AdminTweetPage() {
 }
 
 export default AdminTweetPage;
-
-
-/* {tweetList.map((user, index) => (
-<div className={style.tweetItem} key={index}>
-  <div className={style.tweetContent}>
-    <TweetItem user={user} />
-    <button className={style.deleteButton} onClick={() => handleDeleteTweet(index)}>
-      <img src={tweetCancelImage} alt="Delete" style={{ width: '24px', height: '24px' }} />
-    </button>
-  </div>
-</div> */

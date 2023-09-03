@@ -1,32 +1,19 @@
 import styles from "./AdminLoginPage.module.scss";
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuthContext } from "../../contexts/AuthContext.jsx";
 import AuthPageContainer from "../../components/AuthPageContainer/AuthPageContainer.jsx";
 import AuthInput from "../../components/AuthInput/AuthInput.jsx";
 import Button from "../../components/Button/Button.jsx";
-import { useAuthContext } from "../../contexts/AuthContext.jsx";
 import Swal from "sweetalert2";
 
-//{ labelName, type, value, placeholder, onChange, notification, lengthLimit }
 
 export default function AdminLoginPage() {
   const [account, setAccount] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const { login, isAuthenticated } = useAuthContext();
-
   const [msg, setMsg] = useState('')
-
-  //透過useMemo來保存驗證結果與確認
-  // const isValid = useMemo(() => {
-  //   if(!account) {
-  //     return false
-  //   }
-  //   if(!password) {
-  //     return false
-  //   }
-  //   return true
-  // }, [account, password])
 
   //handleClick行為
   const handleClick = async () => {
@@ -40,13 +27,9 @@ export default function AdminLoginPage() {
         showConfirmButton: false,
       });
       setMsg("請填入正確資料");
-      // console.log("Check user info");
       return;
     }
-    // if(!isValid) {
-    //   console.log('Check your user info')
-    //   return
-    // }
+
     const success = await login({ 
       account, 
       password,
@@ -61,10 +44,9 @@ export default function AdminLoginPage() {
         timer: 1000,
         showConfirmButton: false,
       });
-      // console.log("Login success");
       return;
     }
-    //login failed
+    //login failed form server
     Swal.fire({
       toast: true,
       position: "top",
@@ -74,10 +56,9 @@ export default function AdminLoginPage() {
       showConfirmButton: false,
     });
     setMsg("帳號不存在!");
-    // console.log("LoginError");
   };
 
-  // useEffect
+  // prohibited and redirection
   useEffect(() => {
     //確認後導向主頁面
     if (isAuthenticated) {
@@ -109,7 +90,6 @@ export default function AdminLoginPage() {
       />
       <Button size='extraLarge' title='登入' onClick={handleClick} />
 
-      {/* switch link */}
       <div className={styles.linkContainer}>
         <Link to='/login'>
           <span className={styles.link}>前台登入</span>

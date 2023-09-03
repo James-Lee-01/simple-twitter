@@ -2,6 +2,7 @@ import style from "./UserCard.module.scss";
 import ReplyIcon from "../../../assets/icons/tweet/tweet_reply.png";
 import LikeIcon from "../../../assets/icons/tweet/tweet_like.png";
 
+//USer info card
 function UserCard({user}) {
     return <div className={style.cardWrapper}>
         <div className={style.coverPhoto}></div>
