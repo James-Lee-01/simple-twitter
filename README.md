@@ -4,19 +4,32 @@ Simple twitter created through Create React App. This is an project developed as
 # Features
 ### As a user, you can perform various actions after registering:
 > * Browse other people's tweets.
+![image](Browse other people's tweets.png)
 > * Follow other accounts.
+![image](Follow other accounts..png)
 > * Post tweets.
+![image](Post tweets.png)
 > * Reply to other users' tweets.
+![image](Reply to other users' tweets.png)
 > * View a specific tweet and its replies.
+![image](View a specific tweet and its replies.png)
 > * Access your own tweets.
+![image](Access your own tweets.)
 > * See the tweets you've replied to.
+![image](Access your own tweets.png)
 > * Check your liked tweets.
+![image](Check your liked tweets.png)
 > * Edit your profile information, including name, introduction, avatar, and banner.
+![image](Edit your profile information, including name, introduction, avatar, and banner.png)
 > * View your followers and the users you're following.
+![image](View a specific tweet and its replies.png)
 
 ### As an administrator, you have additional capabilities:
 > * Browse all user information, including total tweets, likes received, followings, and followers.
+![image](Browse all user information, including total tweets, likes received, followings, and followers 1.png)
+![image](Browse all user information, including total tweets, likes received, followings, and followers 2.png)
 > * Browse all tweets and delete them if necessary, with a confirmation prompt.
+![image](Browse all user information, including total tweets, likes received, followings, and followers 2拷貝.png)
 
 # Test Accounts
 ### User Account:
