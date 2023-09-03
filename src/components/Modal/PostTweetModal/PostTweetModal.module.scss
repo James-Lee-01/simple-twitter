@@ -1,0 +1,79 @@
+.post {
+  position: relative;
+  height: 120px;
+  display: flex;
+  border-top: 1px solid #E6ECF0;
+  border-bottom: 10px solid #E6ECF0;
+  z-index: 100;
+
+  .postAvatar {
+    .avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: #c4c4c4;
+      margin: 10px 0 0 15px;
+    }
+  }
+
+  .postContent {
+    width: 510px;
+    display: flex;
+    flex-direction: column;
+
+    .textarea {
+      height: 100%;
+      margin: 20px 0 5px 10px;
+      border: none;
+      outline: none;
+      resize: none;
+      // overflow-y: scroll;
+
+    }
+
+    .postButton {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 10px;
+
+      button {
+        width: 66px;
+        height: 38px;
+        background-color: #FF6600;
+        border-radius: 100px;
+        color: #fff;
+        font-size: 18px;
+        line-height: 18px;
+        font-weight: 500;
+        padding: 10px 15px 10px 15px;
+        border: none;
+        outline: none;
+        cursor: pointer;
+      }
+
+      .limit {
+        visibility: hidden;
+
+        &.active {
+          visibility: visible;
+          color: #FC5A5A;
+          margin-right: 20px;
+          padding-top: 8px;
+        }
+      }
+
+
+    }
+  }
+
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 99;
+}

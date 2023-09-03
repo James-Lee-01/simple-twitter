@@ -1,5 +1,5 @@
 import Modal from "../Modal";
-import style from "../../Main/TweetInput/TweetInput.module.scss";
+import style from "./PostTweetModal.module.scss"
 import clsx from "clsx";
 import { useState } from "react";
 import { useDataChange } from "../../../contexts/DataChangeContext";
