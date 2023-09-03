@@ -22,25 +22,25 @@ function Header({ isAdmin }) {
   const [avatar, setAvatar] = useState(currentUser.avatar)
 
   //User Check
-    useEffect(() => {
-      const getUserInfo = async () => {
-        try {
-          if (userId && !isAdmin) {
-            const data = await getUser(userId);
-            if (data.status === "error") {
-              return;
-            }
-            if (data) {
-              // update data
-              setAvatar(data.avatar);
-            }
+  useEffect(() => {
+    const getUserInfo = async () => {
+      try {
+        if (userId && !isAdmin) {
+          const data = await getUser(userId);
+          if (data.status === "error") {
+            return;
           }
-        } catch (error) {
-          console.log("getUser Failed", error);
+          if (data) {
+            // update data
+            setAvatar(data.avatar);
+          }
         }
-      };
-      getUserInfo();
-    }, [userId, isAdmin]); 
+      } catch (error) {
+        console.log("getUser Failed", error);
+      }
+    };
+    getUserInfo();
+  }, [userId, isAdmin]);
 
   //Tweet Button
   const [isModalOpen, setIsModalOpen] = useState(false);
