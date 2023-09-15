@@ -2,6 +2,8 @@ import style from './Header.module.scss';
 import HeaderLink from './HeaderLink/HeaderLink';
 import HomeIcon from '../../assets/icons/nav/nav_home.png';
 import HomeActionIcon from '../../assets/icons/nav/nav_home_action.png';
+import GroupIcon from '../../assets/icons/nav/nav_group.png';
+import GroupActionIcon from '../../assets/icons/nav/nav_group_action.png';
 import UserIcon from '../../assets/icons/nav/nav_user.png';
 import UserActionIcon from '../../assets/icons/nav/nav_user_action.png';
 import SetIcon from '../../assets/icons/nav/nav_set.png';
@@ -60,6 +62,12 @@ function Header({ isAdmin }) {
       text: "首頁",
       icon: HomeIcon,
       actionIcon: HomeActionIcon,
+    },
+    {
+      path: `/user/${userId}/message`,
+      text: "公開聊天室",
+      icon: GroupIcon,
+      actionIcon: GroupActionIcon,
     },
     {
       path: `/user/${userId}/tweet`,

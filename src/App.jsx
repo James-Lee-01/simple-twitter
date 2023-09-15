@@ -12,6 +12,7 @@ import UserFollowingPage from "./pages/UserFollowingPage/UserFollowingPage.jsx";
 import UserLikePage from "./pages/UserLikePage/UserLikePage.jsx";
 import UserReplyPage from "./pages/UserReplyPage/UserReplyPage.jsx";
 import UserTweetPage from "./pages/UserTweetPage/UserTweetPage.jsx";
+import ChatRoomPage from "./pages/ChatRoomPage/ChatRoomPage.jsx";
 import AdminLoginPage from "./pages/AdminLoginPage/AdminLoginPage.jsx";
 import AdminTweetPage from "./pages/AdminTweetPage/AdminTweetPage.jsx";
 import AdminUserPage from "./pages/AdminUserPage/AdminUserPage.jsx";
@@ -44,6 +45,7 @@ function App() {
               <Route path='user/:userId/like' element={<UserLikePage />} />
               <Route path='user/:userId/reply' element={<UserReplyPage />} />
               <Route path='user/:userId/tweet' element={<UserTweetPage />} />
+              <Route path='user/:userId/message' element={<ChatRoomPage />} />
               <Route path='admin/login' element={<AdminLoginPage />} />
               <Route path='admin/tweet' element={<AdminTweetPage />} />
               <Route path='admin/user' element={<AdminUserPage />} />
