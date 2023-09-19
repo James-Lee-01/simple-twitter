@@ -15,6 +15,7 @@ import UserTweetPage from "./pages/UserTweetPage/UserTweetPage.jsx";
 import AdminLoginPage from "./pages/AdminLoginPage/AdminLoginPage.jsx";
 import AdminTweetPage from "./pages/AdminTweetPage/AdminTweetPage.jsx";
 import AdminUserPage from "./pages/AdminUserPage/AdminUserPage.jsx";
+import ChatRoomPage from "./pages/ChatRoomPage/ChatRoomPage.jsx";
 import { AuthProvider } from "./contexts/AuthContext.jsx";
 import { DataChangeProvider } from './contexts/DataChangeContext.jsx'
 
@@ -47,6 +48,7 @@ function App() {
               <Route path='admin/login' element={<AdminLoginPage />} />
               <Route path='admin/tweet' element={<AdminTweetPage />} />
               <Route path='admin/user' element={<AdminUserPage />} />
+              <Route path='user/:userId/chat' element={<ChatRoomPage />} />
             </Routes>
           </DataChangeProvider>
         </AuthProvider>

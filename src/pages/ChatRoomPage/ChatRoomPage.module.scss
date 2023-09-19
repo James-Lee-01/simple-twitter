@@ -1,0 +1,49 @@
+.chatRoomContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 713px;
+  height: 100vh;
+  outline: 1px solid green;
+
+
+  .chatRoomNavBar {
+    padding: 24px;
+    border: 1px solid #E6ECF0;
+    .navBarTitle {
+      font-size: 24px;
+      font-weight: 700;
+      color: #171725;
+    }
+  }
+
+  .chatWrapper {
+    
+    .chatContent {
+    outline: 1px solid red;
+    }
+
+    .inputWrapper {
+      display: flex;
+      align-items: center;
+      border: 1px solid #E6ECF0;
+      height: 64px;
+      margin-bottom: 0;
+      .input {
+        margin: 16px;
+        padding: 0 16px;
+        width: 100%;
+        height: 32px;
+        border: none;
+        background-color: #E6ECF0;
+        border-radius: 50px;
+
+      }
+      .submit {
+        margin-right: 20px;
+        width: 24px;
+        aspect-ratio: 1;
+      }
+    }
+  }
+}
