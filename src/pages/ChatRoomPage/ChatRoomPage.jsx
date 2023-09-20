@@ -1,5 +1,5 @@
 import styles from './ChatRoomPage.module.scss'
-import SubmitBtn from '../../assets/icons/symbol/icon_send.png'
+import ChatRoom from '../../components/Main/ChatRoom/ChatRoom';
 
 import Header from '../../components/Header/Header.jsx'
 import OnlineUser from '../../components/Main/OnlineUser/OnlineUser';
@@ -41,28 +41,7 @@ export default function ChatRoomPage() {
         <Navbar title='上線使用者' />
         <div className={styles.onlineUserContainer}>{/* <OnlineUser /> */}</div>
       </div>
-      <div className={styles.chatRoomContainer}>
-        <div className={styles.chatRoomNavBar}>
-          {/* <p className={styles.navBarTitle}>公開聊天室</p> */}
-          <Navbar title='公開聊天室' />
-        </div>
-        <div className={styles.chatWrapper}>
-          <div className={styles.chatContent}>
-            <p className={styles.onlineNotify}>John Doe 上線</p>
-            <p className={styles.otherMsg}>test</p>
-            <p className={styles.userMsg}>test by John Doe</p>
-            <p className={styles.offlineNotify}>John Doe 離線</p>
-          </div>
-          <div className={styles.inputWrapper}>
-            <input
-              type='text'
-              className={styles.input}
-              placeholder='輸入訊息...'
-            />
-            <img src={SubmitBtn} alt='submit' className={styles.submit} />
-          </div>
-        </div>
-      </div>
+      <ChatRoom />
     </div>
   );
 }
