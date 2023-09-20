@@ -12,20 +12,21 @@ import UserFollowingPage from "./pages/UserFollowingPage/UserFollowingPage.jsx";
 import UserLikePage from "./pages/UserLikePage/UserLikePage.jsx";
 import UserReplyPage from "./pages/UserReplyPage/UserReplyPage.jsx";
 import UserTweetPage from "./pages/UserTweetPage/UserTweetPage.jsx";
+import ChatRoomPage from "./pages/ChatRoomPage/ChatRoomPage.jsx";
 import AdminLoginPage from "./pages/AdminLoginPage/AdminLoginPage.jsx";
 import AdminTweetPage from "./pages/AdminTweetPage/AdminTweetPage.jsx";
 import AdminUserPage from "./pages/AdminUserPage/AdminUserPage.jsx";
-import ChatRoomPage from "./pages/ChatRoomPage/ChatRoomPage.jsx";
 import { AuthProvider } from "./contexts/AuthContext.jsx";
 import { DataChangeProvider } from './contexts/DataChangeContext.jsx'
 
+// const basename = process.env.PUBLIC_URL;
 const basename = process.env.PUBLIC_URL;
 
 function App() {
   return (
     <div className='App'>
       <BrowserRouter basename={basename}>
-        <AuthProvider>
+        {/* <AuthProvider> */}
           <DataChangeProvider>
             <Routes>
               <Route path='*' element={<HomePage />} />
@@ -45,13 +46,15 @@ function App() {
               <Route path='user/:userId/like' element={<UserLikePage />} />
               <Route path='user/:userId/reply' element={<UserReplyPage />} />
               <Route path='user/:userId/tweet' element={<UserTweetPage />} />
+              <Route path='user/:userId/message' element={<ChatRoomPage />} />
               <Route path='admin/login' element={<AdminLoginPage />} />
               <Route path='admin/tweet' element={<AdminTweetPage />} />
               <Route path='admin/user' element={<AdminUserPage />} />
-              <Route path='user/:userId/chat' element={<ChatRoomPage />} />
+              {/* <Route path='user/:userId/chat' element={<ChatRoomPage />} /> */}
+              <Route path='user/chat' element={<ChatRoomPage />} />
             </Routes>
           </DataChangeProvider>
-        </AuthProvider>
+        {/* </AuthProvider> */}
       </BrowserRouter>
     </div>
   );
