@@ -106,7 +106,7 @@ function Header({ isAdmin }) {
       <div className={style.header}>
         <div>
           <ItemContainer>
-            <Logo />
+            <Logo isAdmin={isAdmin}/>
           </ItemContainer>
           <div>
             {(isAdmin ? adminLinks : links).map((link, index) => (
