@@ -1,24 +1,24 @@
 {
   "files": {
     "main.css": "/simple-twitter/static/css/main.db30b830.chunk.css",
-    "main.js": "/simple-twitter/static/js/main.35612d1c.chunk.js",
-    "main.js.map": "/simple-twitter/static/js/main.35612d1c.chunk.js.map",
+    "main.js": "/simple-twitter/static/js/main.0e0cc664.chunk.js",
+    "main.js.map": "/simple-twitter/static/js/main.0e0cc664.chunk.js.map",
     "runtime-main.js": "/simple-twitter/static/js/runtime-main.7a73817d.js",
     "runtime-main.js.map": "/simple-twitter/static/js/runtime-main.7a73817d.js.map",
-    "static/js/2.6b148280.chunk.js": "/simple-twitter/static/js/2.6b148280.chunk.js",
-    "static/js/2.6b148280.chunk.js.map": "/simple-twitter/static/js/2.6b148280.chunk.js.map",
+    "static/js/2.c5bad271.chunk.js": "/simple-twitter/static/js/2.c5bad271.chunk.js",
+    "static/js/2.c5bad271.chunk.js.map": "/simple-twitter/static/js/2.c5bad271.chunk.js.map",
     "static/js/3.6a08066d.chunk.js": "/simple-twitter/static/js/3.6a08066d.chunk.js",
     "static/js/3.6a08066d.chunk.js.map": "/simple-twitter/static/js/3.6a08066d.chunk.js.map",
     "index.html": "/simple-twitter/index.html",
     "static/css/main.db30b830.chunk.css.map": "/simple-twitter/static/css/main.db30b830.chunk.css.map",
-    "static/js/2.6b148280.chunk.js.LICENSE.txt": "/simple-twitter/static/js/2.6b148280.chunk.js.LICENSE.txt",
+    "static/js/2.c5bad271.chunk.js.LICENSE.txt": "/simple-twitter/static/js/2.c5bad271.chunk.js.LICENSE.txt",
     "static/media/defaultAdminBG.8b916832.png": "/simple-twitter/static/media/defaultAdminBG.8b916832.png",
     "static/media/profileBG.a5e71e88.jpeg": "/simple-twitter/static/media/profileBG.a5e71e88.jpeg"
   },
   "entrypoints": [
     "static/js/runtime-main.7a73817d.js",
-    "static/js/2.6b148280.chunk.js",
+    "static/js/2.c5bad271.chunk.js",
     "static/css/main.db30b830.chunk.css",
-    "static/js/main.35612d1c.chunk.js"
+    "static/js/main.0e0cc664.chunk.js"
   ]
 }
