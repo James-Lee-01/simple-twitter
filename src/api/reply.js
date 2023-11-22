@@ -1,7 +1,7 @@
 import Swal from 'sweetalert2';
 import { apiFunction } from '../api/tweet.js';
 
-export const baseUrl = "https://young-waters-15158-8b230f0b0919.herokuapp.com/api"
+export const baseUrl = 'http://simple-twitter-api-dev.ap-northeast-1.elasticbeanstalk.com/api'
 
 // 發布回覆
 export const postReply = async (comment, tweetId) => {

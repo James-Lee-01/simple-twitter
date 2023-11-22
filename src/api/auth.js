@@ -1,6 +1,7 @@
 import axios from 'axios'
 //baseUrl
-const baseUrl = 'https://young-waters-15158-8b230f0b0919.herokuapp.com/api'
+const baseUrl = 'http://simple-twitter-api-dev.ap-northeast-1.elasticbeanstalk.com/api'
+
 
 //////////axiosInstance/////////////
 const axiosInstance = axios.create({

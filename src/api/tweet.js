@@ -1,7 +1,7 @@
 import axios from "axios";
 import Swal from 'sweetalert2';
 
-export const baseUrl = "https://young-waters-15158-8b230f0b0919.herokuapp.com/api"
+export const baseUrl = 'http://simple-twitter-api-dev.ap-northeast-1.elasticbeanstalk.com/api'
 
 //////////////////////////////////
 const axiosInstance = axios.create({
