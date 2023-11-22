@@ -1,7 +1,7 @@
 import axios from "axios";
 import Swal from 'sweetalert2';
 
-export const baseUrl = 'http://simple-twitter-api-dev.ap-northeast-1.elasticbeanstalk.com/api'
+export const baseUrl = '/api';
 
 //////////////////////////////////
 const axiosInstance = axios.create({

@@ -1,0 +1,9 @@
+{
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "http://simple-twitter-api-dev.ap-northeast-1.elasticbeanstalk.com/api/$1",
+      "methods": ["GET", "POST", "PUT", "DELETE"]
+    }
+  ]
+}

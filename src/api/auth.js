@@ -1,6 +1,6 @@
 import axios from 'axios'
 //baseUrl
-const baseUrl = 'http://simple-twitter-api-dev.ap-northeast-1.elasticbeanstalk.com/api'
+const baseUrl = '/api';
 
 
 //////////axiosInstance/////////////
