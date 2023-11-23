@@ -62,6 +62,7 @@ export function AuthProvider({ children }) {
       }
     };
     checkTokenIsValid();
+    console.log('role', role)
   }, [pathname]);
 
   //針對登出的狀態

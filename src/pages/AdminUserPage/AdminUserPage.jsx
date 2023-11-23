@@ -22,7 +22,7 @@ function AdminUserPage() {
     } else if (role === null) {
       navigate("/login");
     }
-    
+    console.log("page role", role);
   }, [pathname, navigate, role]);
 
   useEffect(() => {
