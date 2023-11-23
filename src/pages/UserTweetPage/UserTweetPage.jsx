@@ -84,20 +84,8 @@ const UserTweetPage = () => {
       } else if (!isAuthenticated) {
         navigate("/login");
       }
-    } else if (!isAuthenticated) {
-      navigate("/login");
     }
   }, [pathname, navigate, isAuthenticated, identified, role]);
-
-  // //prohibited 
-  // useEffect(() => {
-  //   if (!isAuthenticated) {
-  //     const isAuthenticatedFromStorage = localStorage.getItem("authToken") !== null
-  //     if (!isAuthenticatedFromStorage) {
-  //       navigate("/login");
-  //     }      
-  //   }
-  // }, [pathname, navigate, isAuthenticated]);
 
   return (
     <MainLayout>

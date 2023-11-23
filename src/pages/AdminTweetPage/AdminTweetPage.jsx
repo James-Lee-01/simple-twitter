@@ -61,8 +61,6 @@ function AdminTweetPage() {
       } else if (!isAuthenticated) {
         navigate("/admin/login");
       }
-    } else if (!isAuthenticated) {
-      navigate("/login");
     }
   }, [pathname, navigate, isAuthenticated, identified, role]);
 
