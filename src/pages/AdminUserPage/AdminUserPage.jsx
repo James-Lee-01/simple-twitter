@@ -10,26 +10,20 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 function AdminUserPage() {
   const [users, setUsers] = useState([]);
-  const { isAuthenticated, identified, role } = useAuthContext();
+  const { role } = useAuthContext();
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
   //prohibited and redirection
   useEffect(() => {
-    if (identified) {
-      if (role === "user") {
-        if (!isAuthenticated) {
-          navigate("/login");
-        } else {
-          navigate("/");
-        }
-      } else if (!isAuthenticated) {
-        navigate("/admin/login");
-      }
-    } else if (!isAuthenticated) {
+
+    if (role === "user") {
+      navigate("/");
+    } else if (role === null) {
       navigate("/login");
     }
-  }, [pathname, navigate, isAuthenticated, identified, role]);
+    
+  }, [pathname, navigate, role]);
 
   useEffect(() => {
     const adminGetUsers = async () => {
