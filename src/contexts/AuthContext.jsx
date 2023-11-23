@@ -9,6 +9,8 @@ const defaultAuthContext = {
   logout: null,
   currentUser: null,
   isAuthenticated: false,
+  identified: false,
+  role: null,
 };
 
 const AuthContext = createContext(defaultAuthContext);
@@ -17,6 +19,10 @@ export const useAuthContext = () => useContext(AuthContext);
 export function AuthProvider({ children }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [payload, setPayload] = useState(false);
+  const [identified, setIdentified] = useState(false);
+  const [role, setRole] = useState(null);
+
+
   const { pathname } = useLocation();
 
   //換路由時驗證token攜帶正確與否
@@ -29,6 +35,8 @@ export function AuthProvider({ children }) {
       if (!authToken) {
         setIsAuthenticated(false);
         setPayload(null);
+        setIdentified(true);
+        setRole(null);
         return;
       }
 
@@ -40,12 +48,16 @@ export function AuthProvider({ children }) {
         if (!tempPayload) {
           setIsAuthenticated(false);
           setPayload(null);
+          setIdentified(true);
+          setRole(null);
           return;
         }
         //若許可，認證
         if (tempPayload) {
           setIsAuthenticated(true);
           setPayload(tempPayload);
+          setIdentified(true);
+          setRole(tempPayload.role);
         }
       }
     };
@@ -59,6 +71,8 @@ export function AuthProvider({ children }) {
     //reset state
     setIsAuthenticated(false);
     setPayload(null);
+    setIdentified(false);
+    setRole(null);
   }
 
   //針對登入的驗證（判斷是否為前台或後台人員）
@@ -74,12 +88,15 @@ export function AuthProvider({ children }) {
     if (tempPayload) {
       setIsAuthenticated(true);
       setPayload(tempPayload);
-
+      setIdentified(true);
+      setRole(tempPayload.role);
       localStorage.setItem("authToken", authToken);
       return success;
     } else {
       setIsAuthenticated(false);
       setPayload(null);
+      setIdentified(true);
+      setRole(null);
     }
   }
 
@@ -91,6 +108,8 @@ export function AuthProvider({ children }) {
         currentUser: payload,
         login,
         logout,
+        identified,
+        role,
       }}
     >
       {children}

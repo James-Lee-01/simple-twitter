@@ -9,7 +9,7 @@ import { useAuthContext } from "../../contexts/AuthContext.jsx";
 import { useNavigate, useLocation } from "react-router-dom";
 
 function AdminTweetPage() {
-  const { isAuthenticated } = useAuthContext();
+  const { isAuthenticated, identified, role } = useAuthContext();
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const [tweets, setTweets] = useState([]);
@@ -51,10 +51,14 @@ function AdminTweetPage() {
 
   //prohibited and redirection
   useEffect(() => {
-    if (!isAuthenticated) {
-      navigate("/admin/login");
+    if (identified) {
+      if (role === "user") {
+        navigate("/");
+      } else if (!isAuthenticated) {
+        navigate("/admin/login");
+      }
     }
-  }, [pathname, navigate, isAuthenticated]);
+  }, [pathname, navigate, isAuthenticated, identified, role]);
 
   //data list mapping
   const tweetListAll = tweets.map((props) => {
