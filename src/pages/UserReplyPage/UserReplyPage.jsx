@@ -73,6 +73,8 @@ const UserReplyPage = () => {
       } else if (!isAuthenticated) {
         navigate("/login");
       }
+    } else if (!isAuthenticated) {
+      navigate("/login");
     }
   }, [pathname, navigate, isAuthenticated, identified, role]);
 
