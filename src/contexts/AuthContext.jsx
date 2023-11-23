@@ -62,6 +62,7 @@ export function AuthProvider({ children }) {
       }
     };
     checkTokenIsValid();
+    console.log("identified", identified, "role", role, 'isAuthenticated', isAuthenticated);
   }, [pathname]);
 
   //針對登出的狀態

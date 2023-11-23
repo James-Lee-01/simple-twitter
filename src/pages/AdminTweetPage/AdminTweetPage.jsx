@@ -53,10 +53,16 @@ function AdminTweetPage() {
   useEffect(() => {
     if (identified) {
       if (role === "user") {
-        navigate("/");
+        if (!isAuthenticated) {
+          navigate("/login");
+        } else {
+          navigate("/");
+        }
       } else if (!isAuthenticated) {
         navigate("/admin/login");
       }
+    } else if (!isAuthenticated) {
+      navigate("/login");
     }
   }, [pathname, navigate, isAuthenticated, identified, role]);
 
