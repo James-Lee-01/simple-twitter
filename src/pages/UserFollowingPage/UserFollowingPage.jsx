@@ -14,7 +14,7 @@ const UserFollowingPage = () => {
   const { userId } = useParams();
   const URL = useParams();
   const [usersList, setUsersList] = useState([]);
-  const { isAuthenticated } = useAuthContext();
+  const { isAuthenticated, identified, role } = useAuthContext();
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const { isDataChange } = useDataChange();
@@ -60,10 +60,20 @@ const UserFollowingPage = () => {
 
   //頁面導向限制
   useEffect(() => {
-    if (!isAuthenticated) {
+    if (identified) {
+      if (role === "admin") {
+        if (!isAuthenticated) {
+          navigate("/admin/login");
+        } else {
+          navigate("/admin/tweet");
+        }
+      } else if (!isAuthenticated) {
+        navigate("/login");
+      }
+    } else if (!isAuthenticated) {
       navigate("/login");
     }
-  }, [pathname, navigate, isAuthenticated]);
+  }, [pathname, navigate, isAuthenticated, identified, role]);
 
   return (
     <MainLayout>

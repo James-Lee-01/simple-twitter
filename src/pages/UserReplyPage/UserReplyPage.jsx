@@ -17,7 +17,7 @@ const UserReplyPage = () => {
   const URL = useParams();
   const [userReply, setUserReply] = useState([]);
 
-  const { isAuthenticated } = useAuthContext();
+  const { isAuthenticated, identified, role } = useAuthContext();
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
@@ -63,10 +63,20 @@ const UserReplyPage = () => {
 
   //prohibited and redirection
   useEffect(() => {
-    if (!isAuthenticated) {
+    if (identified) {
+      if (role === "admin") {
+        if (!isAuthenticated) {
+          navigate("/admin/login");
+        } else {
+          navigate("/admin/tweet");
+        }
+      } else if (!isAuthenticated) {
+        navigate("/login");
+      }
+    } else if (!isAuthenticated) {
       navigate("/login");
     }
-  }, [pathname, navigate, isAuthenticated]);
+  }, [pathname, navigate, isAuthenticated, identified, role]);
 
   return (
     <MainLayout>
