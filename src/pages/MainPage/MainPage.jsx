@@ -12,7 +12,7 @@ import { useDataChange } from "../../contexts/DataChangeContext";
 
 export default function MainPage() {
   //For navigation and token authentication
-  const { isAuthenticated } = useAuthContext();
+  const { isAuthenticated, identified, role } = useAuthContext();
   const navigate = useNavigate()
   const { pathname } = useLocation()
   // for tweet mapping
@@ -43,10 +43,18 @@ export default function MainPage() {
 
   //prohibited and redirection
   useEffect(() => {
-    if (!isAuthenticated) {
-      navigate("/login");
+    if (identified) {
+      if (role === "admin") {
+        if (!isAuthenticated) {
+          navigate("/admin/login");
+        } else {
+          navigate("/admin/tweet");
+        }
+      } else if (!isAuthenticated) {
+        navigate("/login");
+      }
     }
-  }, [pathname, navigate, isAuthenticated]);
+  }, [pathname, navigate, isAuthenticated, identified, role]);
 
   //tweets mapping
   const tweetsList = tweets.map((props) => {
