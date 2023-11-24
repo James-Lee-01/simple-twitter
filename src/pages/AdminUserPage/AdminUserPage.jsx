@@ -4,26 +4,15 @@ import Navbar from "../../components/Main/Navbar/Navbar";
 import UserCard from "../../components/AdminUserCard/AdminUserCard";
 import { getAdminUsers } from '../../api/auth.js'
 import { useEffect, useState } from "react";
-import { useAuthContext } from "../../contexts/AuthContext.jsx";
 import { useNavigate, useLocation } from "react-router-dom";
 
 
 function AdminUserPage() {
   const [users, setUsers] = useState([]);
-  const { role } = useAuthContext();
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
   //prohibited and redirection
-  // useEffect(() => {
-
-  //   if (role === "user") {
-  //     navigate("/");
-  //   } else if (role === null) {
-  //     navigate("/login");
-  //   }
-  //   console.log("page role", role);
-  // }, [pathname, navigate, role]);
   useEffect(() => {
     const userRole = localStorage.getItem("userRole");
 
@@ -32,7 +21,6 @@ function AdminUserPage() {
     } else if (userRole === null) {
       navigate("/login");
     }
-    console.log("page role", userRole);
   }, [pathname, navigate]);
 
   useEffect(() => {

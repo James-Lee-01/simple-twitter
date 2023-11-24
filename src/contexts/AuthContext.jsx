@@ -62,13 +62,13 @@ export function AuthProvider({ children }) {
       }
     };
     checkTokenIsValid();
-    console.log('role', role)
   }, [pathname]);
 
   //針對登出的狀態
   function logout() {
     //remove token
     localStorage.removeItem("authToken");
+    localStorage.removeItem("userRole");
     //reset state
     setIsAuthenticated(false);
     setPayload(null);

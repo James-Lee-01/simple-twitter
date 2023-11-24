@@ -8,7 +8,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { getTweet, getTweetReplies } from "../../api/tweet.js";
 import { useDataChange } from '../../contexts/DataChangeContext';
-import { useAuthContext } from "../../contexts/AuthContext.jsx";
 import { useLocation } from "react-router-dom";
 
 export default function TweetPage() {
@@ -16,7 +15,6 @@ export default function TweetPage() {
   const param = useParams();
   const [tweet, setTweet] = useState("");
   const [user, setUser] = useState({});
-  const { isAuthenticated, identified, role } = useAuthContext();
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const [replies, setReplies] = useState([])
@@ -82,20 +80,14 @@ export default function TweetPage() {
 
   //頁面導向限制
   useEffect(() => {
-    if (identified) {
-      if (role === "admin") {
-        if (!isAuthenticated) {
-          navigate("/admin/login");
-        } else {
-          navigate("/admin/tweet");
-        }
-      } else if (!isAuthenticated) {
-        navigate("/login");
-      }
-    } else if (!isAuthenticated) {
+    const userRole = localStorage.getItem("userRole");
+
+    if (userRole === "admin") {
+      navigate("/admin/tweet");
+    } else if (userRole === null) {
       navigate("/login");
     }
-  }, [pathname, navigate, isAuthenticated, identified, role]);
+  }, [pathname, navigate]);
 
 
   return (

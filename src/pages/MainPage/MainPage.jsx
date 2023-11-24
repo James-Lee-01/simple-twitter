@@ -5,14 +5,12 @@ import TweetItem from "../../components/Main/TweetItem/TweetItem";
 import MainLayout from "../../components/Main/MainLayout/MainLayout";
 import { useEffect, useState } from "react";
 import { getAllTweet } from "../../api/tweet.js";
-import { useAuthContext } from "../../contexts/AuthContext.jsx";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useDataChange } from "../../contexts/DataChangeContext";
 
 
 export default function MainPage() {
   //For navigation and token authentication
-  const { isAuthenticated, identified, role } = useAuthContext();
   const navigate = useNavigate()
   const { pathname } = useLocation()
   // for tweet mapping
@@ -43,20 +41,14 @@ export default function MainPage() {
 
   //prohibited and redirection
   useEffect(() => {
-    if (identified) {
-      if (role === "admin") {
-        if (!isAuthenticated) {
-          navigate("/admin/login");
-        } else {
-          navigate("/admin/tweet");
-        }
-      } else if (!isAuthenticated) {
-        navigate("/login");
-      }
-    } else if (!isAuthenticated) {
+    const userRole = localStorage.getItem("userRole");
+
+    if (userRole === "admin") {
+      navigate("/admin/tweet");
+    } else if (userRole === null) {
       navigate("/login");
     }
-  }, [pathname, navigate, isAuthenticated, identified, role]);
+  }, [pathname, navigate]);
 
   //tweets mapping
   const tweetsList = tweets.map((props) => {

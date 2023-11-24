@@ -17,7 +17,7 @@ export default function SettingPage() {
   const [password, setPassword] = useState("");
   const [checkPassword, setCheckPassword] = useState("");
   const [msg, setMsg] = useState("");
-  const { currentUser, isAuthenticated, identified, role } = useAuthContext();
+  const { currentUser, isAuthenticated } = useAuthContext();
   const { pathname } = useLocation();
   const navigate = useNavigate();
   
@@ -127,20 +127,14 @@ export default function SettingPage() {
 
   //prohibited, redirection
   useEffect(() => {
-    if (identified) {
-      if (role === "admin") {
-        if (!isAuthenticated) {
-          navigate("/admin/login");
-        } else {
-          navigate("/admin/tweet");
-        }
-      } else if (!isAuthenticated) {
-        navigate("/login");
-      }
-    } else if (!isAuthenticated) {
+    const userRole = localStorage.getItem("userRole");
+
+    if (userRole === "admin") {
+      navigate("/admin/tweet");
+    } else if (userRole === null) {
       navigate("/login");
     }
-  }, [pathname, navigate, isAuthenticated, identified, role]);
+  }, [pathname, navigate]);
 
   //畫面渲染
   return (

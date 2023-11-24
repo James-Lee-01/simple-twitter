@@ -8,7 +8,6 @@ import TweetItem from "../../components/Main/TweetItem/TweetItem";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { getUserTweet } from '../../api/tweet.js'
-import { useAuthContext } from "../../contexts/AuthContext.jsx";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useDataChange } from "../../contexts/DataChangeContext";
 
@@ -17,7 +16,6 @@ const UserTweetPage = () => {
   const { userId } = useParams();
   const [tweets, setTweets] = useState([]);
   const URL = useParams();
-  const { isAuthenticated, identified, role } = useAuthContext();
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const { isDataChange } = useDataChange(); 
@@ -74,20 +72,14 @@ const UserTweetPage = () => {
 
   //prohibited and redirection
   useEffect(() => {
-    if (identified) {
-      if (role === "admin") {
-        if (!isAuthenticated) {
-          navigate("/admin/login");
-        } else {
-          navigate("/admin/tweet");
-        }
-      } else if (!isAuthenticated) {
-        navigate("/login");
-      }
-    } else if (!isAuthenticated) {
+    const userRole = localStorage.getItem("userRole");
+
+    if (userRole === "admin") {
+      navigate("/admin/tweet");
+    } else if (userRole === null) {
       navigate("/login");
     }
-  }, [pathname, navigate, isAuthenticated, identified, role]);
+  }, [pathname, navigate]);
 
   return (
     <MainLayout>

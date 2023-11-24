@@ -5,11 +5,9 @@ import AdminContainer from "./AdminContainer/AdminContainer";
 import AdminTweetItem from "../../components/AdminTweetItem/AdminTweetItem.jsx";
 import { useState, useEffect } from "react";
 import { adminGetAllTweets, deleteAdminTweet } from "../../api/tweet";
-import { useAuthContext } from "../../contexts/AuthContext.jsx";
 import { useNavigate, useLocation } from "react-router-dom";
 
 function AdminTweetPage() {
-  const { role } = useAuthContext();
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const [tweets, setTweets] = useState([]);
@@ -50,14 +48,6 @@ function AdminTweetPage() {
   }, []);
 
   //prohibited and redirection
-  // useEffect(() => {
-  //   if (role === "user") {
-  //     navigate("/");
-  //   } else if (role === null) {
-  //     navigate("/login");
-  //   }
-  //   console.log("page role", role);
-  // }, [pathname, navigate, role]);
   useEffect(() => {
     const userRole = localStorage.getItem("userRole");
 
@@ -66,7 +56,6 @@ function AdminTweetPage() {
     } else if (userRole === null) {
       navigate("/login");
     }
-    console.log("page role", userRole);
   }, [pathname, navigate]);
 
   //data list mapping
