@@ -63,7 +63,7 @@ export function AuthProvider({ children }) {
     };
     checkTokenIsValid();
     console.log('role', role)
-  }, [pathname]);
+  }, [role]);
 
   //針對登出的狀態
   function logout() {
