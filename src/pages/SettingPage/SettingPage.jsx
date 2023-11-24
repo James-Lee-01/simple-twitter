@@ -17,19 +17,12 @@ export default function SettingPage() {
   const [password, setPassword] = useState("");
   const [checkPassword, setCheckPassword] = useState("");
   const [msg, setMsg] = useState("");
-  const { currentUser, isAuthenticated } = useAuthContext();
+  const { currentUser } = useAuthContext();
   const { pathname } = useLocation();
   const navigate = useNavigate();
   
   //取目前使用者的id
   const userId = currentUser && currentUser.id;
-
-  //權限限制與重新導向
-  useEffect(() => {
-    if (!isAuthenticated) {
-      navigate("/login");
-    }
-  }, [navigate, isAuthenticated]);
 
   //先取得使用者自身資訊
   useEffect(() => {
