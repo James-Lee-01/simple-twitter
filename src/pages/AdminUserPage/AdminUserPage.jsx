@@ -15,15 +15,25 @@ function AdminUserPage() {
   const { pathname } = useLocation();
 
   //prohibited and redirection
-  useEffect(() => {
+  // useEffect(() => {
 
-    if (role === "user") {
+  //   if (role === "user") {
+  //     navigate("/");
+  //   } else if (role === null) {
+  //     navigate("/login");
+  //   }
+  //   console.log("page role", role);
+  // }, [pathname, navigate, role]);
+  useEffect(() => {
+    const userRole = localStorage.getItem("userRole");
+
+    if (userRole === "user") {
       navigate("/");
-    } else if (role === null) {
+    } else if (userRole === null) {
       navigate("/login");
     }
-    console.log("page role", role);
-  }, [pathname, navigate, role]);
+    console.log("page role", userRole);
+  }, [pathname, navigate]);
 
   useEffect(() => {
     const adminGetUsers = async () => {

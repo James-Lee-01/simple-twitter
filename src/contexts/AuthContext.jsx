@@ -63,7 +63,7 @@ export function AuthProvider({ children }) {
     };
     checkTokenIsValid();
     console.log('role', role)
-  }, [role]);
+  }, [pathname]);
 
   //針對登出的狀態
   function logout() {
@@ -92,6 +92,7 @@ export function AuthProvider({ children }) {
       setIdentified(true);
       setRole(tempPayload.role);
       localStorage.setItem("authToken", authToken);
+      localStorage.setItem("userRole", tempPayload.role);
       return success;
     } else {
       setIsAuthenticated(false);

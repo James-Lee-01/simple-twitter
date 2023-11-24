@@ -50,14 +50,24 @@ function AdminTweetPage() {
   }, []);
 
   //prohibited and redirection
+  // useEffect(() => {
+  //   if (role === "user") {
+  //     navigate("/");
+  //   } else if (role === null) {
+  //     navigate("/login");
+  //   }
+  //   console.log("page role", role);
+  // }, [pathname, navigate, role]);
   useEffect(() => {
-    if (role === "user") {
+    const userRole = localStorage.getItem("userRole");
+
+    if (userRole === "user") {
       navigate("/");
-    } else if (role === null) {
+    } else if (userRole === null) {
       navigate("/login");
     }
-    console.log("page role", role);
-  }, [pathname, navigate, role]);
+    console.log("page role", userRole);
+  }, [pathname, navigate]);
 
   //data list mapping
   const tweetListAll = tweets.map((props) => {
